@@ -8,7 +8,7 @@ const Header = () => {
         <div class="mx-auto d-flex flex-lg-row flex-column hero">
           {/* <!-- Left Column --> */}
           <div class="left-column d-flex flex-lg-grow-1 flex-column align-items-lg-start text-lg-start align-items-center text-center">
-            <p class="text-caption-up">Selamat datang di,</p>
+            <p class="text-caption">Selamat datang di,</p>
             <h1 class="title-text-big">
               Postpartum
               <br class="d-lg-block d-none" />

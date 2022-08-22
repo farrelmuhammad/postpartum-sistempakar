@@ -8,13 +8,13 @@ const Header = () => {
         <div class="mx-auto d-flex flex-lg-row flex-column hero">
           {/* <!-- Left Column --> */}
           <div class="left-column d-flex flex-lg-grow-1 flex-column align-items-lg-start text-lg-start align-items-center text-center">
-            <p class="text-caption-up">Selamat datang di,</p>
+            <p class="text-caption">Selamat datang di,</p>
             <h1 class="title-text-big">
               Postpartum
               <br class="d-lg-block d-none" />
               Depression Screening
             </h1>
-            <p class="text-caption-down">
+            <p class="text-caption font-weight-bold">
               Postpartum Depression Screening merupakan layanan dukungan
               kesehatan mental dan pengembangan diri khususnya pasca melahirkan
               pasangan suami-istri dari Universitas 17 Agustus 1945 Surabaya

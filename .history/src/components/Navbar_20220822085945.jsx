@@ -1,5 +1,4 @@
 import React from "react";
-import { FiLogIn } from "react-icons/fi";
 
 const Navbar = () => {
   return (
@@ -60,10 +59,7 @@ const Navbar = () => {
               </div>
               <div className="modal-footer border-0 gap-3">
                 {/* <button className="btn btn-default btn-no-fill">Log In</button> */}
-                <button className="btn btn-fill text-white">
-                  <FiLogIn />
-                  Masuk
-                </button>
+                <button className="btn btn-fill text-white">Try Now</button>
               </div>
             </div>
           </div>
@@ -89,10 +85,7 @@ const Navbar = () => {
           </ul>
           <div className="gap-3">
             {/* <button className="btn btn-default btn-no-fill">Log In</button> */}
-            <button className="btn btn-fill text-white">
-              <FiLogIn className='me-2' />
-              Masuk
-            </button>
+            <button className="btn btn-fill text-white">Try Now</button>
           </div>
         </div>
       </nav>

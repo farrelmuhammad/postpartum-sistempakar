@@ -89,10 +89,7 @@ const Navbar = () => {
           </ul>
           <div className="gap-3">
             {/* <button className="btn btn-default btn-no-fill">Log In</button> */}
-            <button className="btn btn-fill text-white">
-              <FiLogIn className='me-2' />
-              Masuk
-            </button>
+            <button className="btn btn-fill text-white">Masuk</button>
           </div>
         </div>
       </nav>

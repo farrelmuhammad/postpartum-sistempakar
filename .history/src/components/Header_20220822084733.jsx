@@ -1,5 +1,4 @@
 import React from "react";
-import Banner1 from '../assets/image/banner1.svg'
 
 const Header = () => {
   return (
@@ -8,17 +7,16 @@ const Header = () => {
         <div class="mx-auto d-flex flex-lg-row flex-column hero">
           {/* <!-- Left Column --> */}
           <div class="left-column d-flex flex-lg-grow-1 flex-column align-items-lg-start text-lg-start align-items-center text-center">
-            <p class="text-caption-up">Selamat datang di,</p>
+            <p class="text-caption">
+              Selamat datang di,
+            </p>
             <h1 class="title-text-big">
               Postpartum
               <br class="d-lg-block d-none" />
-              Depression Screening
+              Safe Space
             </h1>
-            <p class="text-caption-down">
-              Postpartum Depression Screening merupakan layanan dukungan
-              kesehatan mental dan pengembangan diri khususnya pasca melahirkan
-              pasangan suami-istri dari Universitas 17 Agustus 1945 Surabaya
-              untuk masyarakat Indonesia
+            <p class="text-caption">
+            Airlangga Safe Space merupakan layanan dukungan kesehatan mental dan pengembangan diri dari Departemen Branding BEM KM Fakultas Psikologi Universitas Airlangga untuk masyarakat Indonesia
             </p>
             <div class="d-flex flex-sm-row flex-column align-items-center mx-lg-0 mx-auto justify-content-center gap-3">
               <button class="btn d-inline-flex mb-md-0 btn-try text-white">
@@ -49,7 +47,7 @@ const Header = () => {
             <img
               id="img-fluid"
               class="h-auto mw-100"
-              src={Banner1}
+              src="http://api.elements.buildwithangga.com/storage/files/2/assets/Header/Header2/Header-2-1.png"
               alt=""
             />
           </div>

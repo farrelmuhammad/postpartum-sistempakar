@@ -90,7 +90,7 @@ const Navbar = () => {
           <div className="gap-3">
             {/* <button className="btn btn-default btn-no-fill">Log In</button> */}
             <button className="btn btn-fill text-white">
-              <FiLogIn className='me-2' />
+              <FiLogIn className='ms-1' />
               Masuk
             </button>
           </div>

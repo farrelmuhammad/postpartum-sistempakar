@@ -14,7 +14,7 @@ const Header = () => {
               <br class="d-lg-block d-none" />
               Depression Screening
             </h1>
-            <p class="text-caption-down">
+            <p class="text-caption">
               Postpartum Depression Screening merupakan layanan dukungan
               kesehatan mental dan pengembangan diri khususnya pasca melahirkan
               pasangan suami-istri dari Universitas 17 Agustus 1945 Surabaya

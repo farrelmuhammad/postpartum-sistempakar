@@ -81,15 +81,15 @@
 }
 
 .header-2-1 .text-caption-up {
-    font: 600 1.4rem/1 Poppins, sans-serif;
+    font: 600 1.4rem/1.6 Poppins, sans-serif;
     /* margin-bottom: 2rem; */
     color: #02256A;
 }
 
 .header-2-1 .text-caption-down {
-    font: 300 1rem/1.5rem Poppins, sans-serif;
-    color: #121212;
-    font-weight: 300;
+    font: 300 1.2rem/1.625 Poppins, sans-serif;
+    margin-bottom: 2rem;
+    color: #02256A;
 }
 
 .header-2-1 .left-column {
@@ -105,7 +105,7 @@
 
 .header-2-1 .title-text-big {
     font: 600 2.25rem/2.5rem Poppins, sans-serif;
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
     color: #02256A;
     font-weight: 600;
 }
