@@ -1,6 +1,7 @@
 import './App.css';
 import Home from './pages/Home';
 import Navbar from "./components/Navbar";
+import RouteApp from './routes';
 
 
 function App() {
@@ -9,7 +10,7 @@ function App() {
       <div class="container-xxl mx-auto p-0  position-relative header-2-1">
         <Navbar />
       </div>
-      <Home />
+      <RouteApp />
     </>
   );
 }
