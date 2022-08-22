@@ -59,16 +59,7 @@
 .header-2-1 .btn-no-fill {
     font: 300 18px/1.75rem Poppins, sans-serif;
     color: #1d1e3c;
-    border-radius: 12px;
     padding: 12px 32px;
-    transition: 0.3s;
-}
-
-.header-2-1 .btn-no-fill:hover {
-    --tw-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
-        0 4px 6px -2px rgba(0, 0, 0, 0.05);
-    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
-        var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
     transition: 0.3s;
 }
 
