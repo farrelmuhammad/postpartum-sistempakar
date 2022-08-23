@@ -23,7 +23,7 @@ const Header = () => {
               untuk masyarakat Indonesia
             </p>
             <div class="d-flex flex-sm-row flex-column align-items-center mx-lg-0 mx-auto justify-content-center gap-3">
-            <Link to="/test" className="text-decoration-none">
+            <Link to="/" className="text-decoration-none">
               <button class="btn d-inline-flex mb-md-0 btn-try text-white">
                 Coba Sekarang
               </button>
