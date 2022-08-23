@@ -24,7 +24,7 @@ const Header = () => {
             </p>
             <div className="d-flex flex-sm-row flex-column align-items-center mx-lg-0 mx-auto justify-content-center gap-3">
             <Link to="/test" classNameName="text-decoration-none">
-              <button className="btn d-inline-flex mb-md-0 btn-try text-white">
+              <button className="btn d-inline-flex mb-md-0 btn-try text-white text-decoration-none">
                 Coba Sekarang
               </button>
             </Link>
