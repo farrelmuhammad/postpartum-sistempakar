@@ -60,6 +60,7 @@
     font: 300 18px/1.75rem Poppins, sans-serif;
     color: #1d1e3c;
     border-radius: 12px;
+    margin-bottom: 1rem;
     padding: 12px 32px;
     transition: 0.3s;
 }
