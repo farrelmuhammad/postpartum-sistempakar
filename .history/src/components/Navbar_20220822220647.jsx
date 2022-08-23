@@ -69,7 +69,7 @@ const Navbar = () => {
               <div className="modal-footer border-0 gap-3">
                 {/* <button className="btn btn-default btn-no-fill">Log In</button> */}
                 <Link to="/login">
-                  <button className="btn btn-fill text-white">
+                  <button className="btn btn-fill text-center text-white">
                     <FiLogIn className="me-2" />
                     Masuk
                   </button>

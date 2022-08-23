@@ -70,7 +70,7 @@ const Navbar = () => {
                 {/* <button className="btn btn-default btn-no-fill">Log In</button> */}
                 <Link to="/login">
                   <button className="btn btn-fill text-white">
-                    <FiLogIn className="me-2" />
+                    <FiLogIn />
                     Masuk
                   </button>
                 </Link>

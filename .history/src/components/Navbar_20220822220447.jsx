@@ -56,11 +56,6 @@ const Navbar = () => {
                   </Link>
                   <li className="nav-item">
                     <a className="nav-link" href="#">
-                      About Us
-                    </a>
-                  </li>
-                  <li className="nav-item">
-                    <a className="nav-link" href="#">
                       Contact
                     </a>
                   </li>
@@ -68,9 +63,9 @@ const Navbar = () => {
               </div>
               <div className="modal-footer border-0 gap-3">
                 {/* <button className="btn btn-default btn-no-fill">Log In</button> */}
-                <Link to="/login">
+                <Link to="/">
                   <button className="btn btn-fill text-white">
-                    <FiLogIn className="me-2" />
+                    <FiLogIn />
                     Masuk
                   </button>
                 </Link>
@@ -81,7 +76,7 @@ const Navbar = () => {
 
         <div className="collapse navbar-collapse" id="navbarTogglerDemo">
           <ul className="navbar-nav me-auto mt-2 mt-lg-0">
-            <Link to="/" className="text-decoration-none">
+            <Link to="/login" className="text-decoration-none">
               <li className="nav-item active">
                 <a className="nav-link" href="#">
                   Home

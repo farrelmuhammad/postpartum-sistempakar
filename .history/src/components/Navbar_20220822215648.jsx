@@ -47,16 +47,9 @@ const Navbar = () => {
               </div>
               <div className="modal-body">
                 <ul className="navbar-nav responsive me-auto mt-2 mt-lg-0">
-                  <Link to="/" className="text-decoration-none">
-                    <li className="nav-item active">
-                      <a className="nav-link" href="#">
-                        Home
-                      </a>
-                    </li>
-                  </Link>
-                  <li className="nav-item">
+                  <li className="nav-item active">
                     <a className="nav-link" href="#">
-                      About Us
+                      Home
                     </a>
                   </li>
                   <li className="nav-item">
@@ -68,12 +61,10 @@ const Navbar = () => {
               </div>
               <div className="modal-footer border-0 gap-3">
                 {/* <button className="btn btn-default btn-no-fill">Log In</button> */}
-                <Link to="/login">
-                  <button className="btn btn-fill text-white">
-                    <FiLogIn className="me-2" />
-                    Masuk
-                  </button>
-                </Link>
+                <button className="btn btn-fill text-white">
+                  <FiLogIn />
+                  Masuk
+                </button>
               </div>
             </div>
           </div>
@@ -81,13 +72,11 @@ const Navbar = () => {
 
         <div className="collapse navbar-collapse" id="navbarTogglerDemo">
           <ul className="navbar-nav me-auto mt-2 mt-lg-0">
-            <Link to="/" className="text-decoration-none">
-              <li className="nav-item active">
-                <a className="nav-link" href="#">
-                  Home
-                </a>
-              </li>
-            </Link>
+            <li className="nav-item active">
+              <a className="nav-link" href="#">
+                Home
+              </a>
+            </li>
             <li className="nav-item">
               <a className="nav-link" href="#">
                 About Us
