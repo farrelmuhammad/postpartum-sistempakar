@@ -7,31 +7,31 @@ const Header = () => {
   return (
     <>
       <div>
-        <div class="mx-auto d-flex flex-lg-row flex-column hero">
+        <div className="mx-auto d-flex flex-lg-row flex-column hero">
           {/* <!-- Left Column --> */}
-          <div class="left-column d-flex flex-lg-grow-1 flex-column align-items-lg-start text-lg-start align-items-center text-center">
-            <p class="text-caption-up">Selamat datang di,</p>
-            <h1 class="title-text-big">
+          <div className="left-column d-flex flex-lg-grow-1 flex-column align-items-lg-start text-lg-start align-items-center text-center">
+            <p className="text-caption-up">Selamat datang di,</p>
+            <h1 className="title-text-big">
               Postpartum
-              <br class="d-lg-block d-none" />
+              <br className="d-lg-block d-none" />
               Depression Screening
             </h1>
-            <p class="text-caption-down">
+            <p className="text-caption-down">
               Postpartum Depression Screening merupakan layanan dukungan
               kesehatan mental dan pengembangan diri khususnya pasca melahirkan
               pasangan suami-istri dari Universitas 17 Agustus 1945 Surabaya
               untuk masyarakat Indonesia
             </p>
-            <div class="d-flex flex-sm-row flex-column align-items-center mx-lg-0 mx-auto justify-content-center gap-3">
-            <Link to="/test" className="text-decoration-none">
-              <button class="btn d-inline-flex mb-md-0 btn-try text-white">
+            <div className="d-flex flex-sm-row flex-column align-items-center mx-lg-0 mx-auto justify-content-center gap-3">
+            <Link to="/test" classNameName="text-decoration-none">
+              <button className="btn d-inline-flex mb-md-0 btn-try text-white">
                 Coba Sekarang
               </button>
             </Link>
-              <button class="btn btn-outline-dark" onClick={()=> window.open("https://www.youtube.com/watch?v=2ocA-zS3SoI&ab_channel=MedicalCentric")}>
-                <div class="d-flex align-items-center">
+              <button className="btn btn-outline-dark" onClick={()=> window.open("https://www.youtube.com/watch?v=2ocA-zS3SoI&ab_channel=MedicalCentric")}>
+                <div className="d-flex align-items-center">
                   {/* <svg
-                    class="me-2"
+                    className="me-2"
                     width="13"
                     height="12"
                     viewBox="0 0 13 13"
@@ -50,10 +50,10 @@ const Header = () => {
             </div>
           </div>
           {/* <!-- Right Column --> */}
-          <div class="right-column text-center d-flex justify-content-center pe-0">
+          <div className="right-column text-center d-flex justify-content-center pe-0">
             <img
               id="img-fluid"
-              class="h-auto mw-100"
+              className="h-auto mw-100"
               src={Banner1}
               alt=""
             />

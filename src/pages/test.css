@@ -1,0 +1,16 @@
+.btn-test {
+    font: 600 16px/normal Poppins, sans-serif;
+    /* padding: 0.5rem 1rem; */
+    border-radius: 0.75rem;
+    background-color: #ff7c57;
+    transition: 0.3s;
+}
+
+.btn-test:hover {
+    background-color: #ff7c57;
+    --tw-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+      0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
+        var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+    transition: 0.3s;
+}

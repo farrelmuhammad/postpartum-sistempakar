@@ -1,8 +1,12 @@
 import React from 'react'
 import ImgLogin from '../assets/image/login.svg'
+import { FiArrowLeft } from "react-icons/fi";
+import { useNavigate } from 'react-router-dom';
+
 
 const Login = () => {
-    
+    const navigate = useNavigate();
+
     return (
         <>
             <div className="content-3-5 d-flex flex-column align-items-center h-100 flex-lg-row">
@@ -13,6 +17,9 @@ const Login = () => {
                 </div>
                 <div className="d-flex mx-auto align-items-left justify-content-left width-right mx-lg-0">
                     <div className="right mx-lg-0 mx-auto">
+                        <button className='btn btn-light' onClick={() => navigate(-1)}>
+                            <FiArrowLeft className="m-1" />
+                        </button>
                         <div className="align-items-center justify-content-center d-lg-none d-flex">
                             <img className="img-fluid"
                                 src={ImgLogin}
