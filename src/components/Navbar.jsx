@@ -1,6 +1,7 @@
 import React from "react";
 import { FiLogIn } from "react-icons/fi";
 import { Link } from "react-router-dom";
+import Logo from "../assets/image/Logo.svg"
 
 const Navbar = () => {
   return (
@@ -8,7 +9,7 @@ const Navbar = () => {
       <nav className="navbar navbar-expand-lg navbar-light">
         <a href="#">
           <img
-            src="http://api.elements.buildwithangga.com/storage/files/2/assets/Header/Header2/Header-2-2.png"
+            src={Logo}
             alt=""
           />
         </a>
