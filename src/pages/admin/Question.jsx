@@ -4,12 +4,14 @@ import Footer from "../../components/Footer";
 import {
     AppstoreOutlined,
     BarChartOutlined,
+    BulbFilled,
     CloudOutlined,
     DatabaseOutlined,
     FileOutlined,
     LogoutOutlined,
     MailOutlined,
     PieChartOutlined,
+    PlusOutlined,
     SettingOutlined,
     ShopOutlined,
     TeamOutlined,
@@ -17,10 +19,10 @@ import {
     UserOutlined,
     VideoCameraOutlined,
 } from '@ant-design/icons';
-import { Layout, Menu, Space } from 'antd';
+import { Button, Input, Layout, Menu, message, Modal, notification, Space } from 'antd';
 import Search from 'antd/lib/transfer/search';
 import { Link } from 'react-router-dom';
-import RouteApp from '../../routes';
+import QuestionTable from '../../components/admin/QuestionTable';
 
 const { Header, Content, Sider } = Layout;
 const items = [
@@ -38,10 +40,33 @@ const items = [
     label: `nav ${index + 1}`,
 }));
 
-const Dashboard = () => {
+const Question = () => {
     const [collapsed, setCollapsed] = useState(false);
 
+    const [visible, setVisible] = useState(false);
+    const [confirmLoading, setConfirmLoading] = useState(false);
 
+
+    const showModal = () => {
+        setVisible(true);
+    };
+
+    const handleOk = () => {
+        setConfirmLoading(true);
+        setTimeout(() => {
+            setVisible(false);
+            setConfirmLoading(false);
+            // message.success('This is a success message');
+        }, 2000);
+        message
+            .loading('Added question in progress..', 2.5)
+            .then(() => message.success('Successfully Added', 2.5))
+    };
+
+    const handleCancel = () => {
+        alert('Clicked cancel button');
+        setVisible(false);
+    };
 
     return (
         <>
@@ -50,7 +75,8 @@ const Dashboard = () => {
                     breakpoint="lg"
                     collapsedWidth="0"
                     style={{
-                        height: '100vh  ',
+                        height: 'auto',
+                        // position: 'fixed',
                     }}
                     onBreakpoint={(broken) => {
                         console.log(broken);
@@ -63,7 +89,7 @@ const Dashboard = () => {
                     <Menu
                         mode="inline"
                         theme="dark"
-                        defaultSelectedKeys={['1']}
+                        defaultSelectedKeys={['2']}
                     // selectedKeys={[location.pathname]}
                     >
                         <Menu.Item key="1" icon={<PieChartOutlined />}>
@@ -135,18 +161,59 @@ const Dashboard = () => {
                                 minHeight: 360,
                             }}
                         >
-                            NDA TAU CARANYA ROUTE DISINI ADUCH...
+                            <div className="container p-3 mb-1 bg-body rounded d-flex flex-column">
+                                <div className="row">
+                                    <div className="col text-title text-start">
+                                        <h4 className="title fw-bold">Question</h4>
+                                    </div>
+                                    <div className="col button-add text-end me-3">
+                                        <Button
+                                            type="primary"
+                                            icon={<PlusOutlined />}
+                                            onClick={showModal}
+                                        />
+                                    </div>
+                                    <QuestionTable />
+                                </div>
+                                <Modal
+                                    title="Tambah Question"
+                                    centered
+                                    visible={visible}
+                                    onOk={handleOk}
+                                    confirmLoading={confirmLoading}
+                                    onCancel={handleCancel}
+                                >
+                                    <div className="text-title text-start">
+                                        <div className="row mb-3">
+                                            <label htmlFor="inputNama3" className="col-sm-3 col-form-label">Kode</label>
+                                            <div className="col-sm-9">
+                                                <Input
+                                                    placeholder="Question Code"
+                                                />
+                                            </div>
+                                        </div>
+                                        <div className="row">
+                                            <label htmlFor="inputNama3" className="col-sm-3 col-form-label">Pertanyaan</label>
+                                            <div className="col-sm-9">
+                                                <Input
+                                                    placeholder="Type Question"
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </Modal>
+                            </div>
                         </div>
-                    </Content>
+                    </Content >
                     <Footer
                         style={{
                             textAlign: 'center',
                         }}
                     />
-                </Layout>
-            </Layout>
+                </Layout >
+            </Layout >
         </>
     )
 }
 
-export default Dashboard
+export default Question
