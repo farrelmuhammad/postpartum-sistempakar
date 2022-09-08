@@ -7,7 +7,6 @@ import Swal from "sweetalert2";
 import { setData } from "../redux/slices/authSlice";
 import axios from "axios";
 import Url from "../Config";
-import Home from "./Home";
 
 const Login = () => {
   const [username, setUsername] = useState();
@@ -34,7 +33,7 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const userData = new URLSearchParams();
+    const userData = new FormData();
     userData.append("username", username);
     userData.append("password", password);
     axios({
@@ -65,7 +64,7 @@ const Login = () => {
         }
       })
       .catch((err) => {
-        console.log(err);
+        console.log(err.response);
         toastMixin.fire({
           icon: "error",
           animation: true,
@@ -75,7 +74,7 @@ const Login = () => {
   };
 
   if (isLoggedIn) {
-    return <Home />
+    navigate("/");
   }
 
   return (

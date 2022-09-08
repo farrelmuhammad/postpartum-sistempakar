@@ -7,7 +7,6 @@ import Swal from "sweetalert2";
 import { setData } from "../redux/slices/authSlice";
 import axios from "axios";
 import Url from "../Config";
-import Home from "./Home";
 
 const Login = () => {
   const [username, setUsername] = useState();
@@ -17,24 +16,23 @@ const Login = () => {
   const isLoggedIn = !!useSelector((state) => state.auth.token);
   const dispatch = useDispatch();
 
-  var toastMixin = Swal.mixin({
-    toast: true,
-    icon: "success",
-    title: "General Title",
-    animation: false,
-    position: "top-right",
-    showConfirmButton: false,
-    timer: 800,
-    timerProgressBar: true,
-    didOpen: (toast) => {
-      toast.addEventListener("mouseenter", Swal.stopTimer);
-      toast.addEventListener("mouseleave", Swal.resumeTimer);
-    },
-  });
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const userData = new URLSearchParams();
+    var toastMixin = Swal.mixin({
+      toast: true,
+      icon: "success",
+      title: "General Title",
+      animation: false,
+      position: "top-right",
+      showConfirmButton: false,
+      timer: 800,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.addEventListener("mouseenter", Swal.stopTimer);
+        toast.addEventListener("mouseleave", Swal.resumeTimer);
+      },
+    });
+    const userData = new FormData();
     userData.append("username", username);
     userData.append("password", password);
     axios({
@@ -47,7 +45,7 @@ const Login = () => {
           // jsCookie.set('auth', res.data)
           dispatch(
             setData({
-              token: res.accessToken,
+              token: res.data,
               // username: res.data.profileData.name,
               // password: res.data.profileData.profile_picture_url,
               // cityId: res.data.profileData.city_id,
@@ -75,7 +73,7 @@ const Login = () => {
   };
 
   if (isLoggedIn) {
-    return <Home />
+    navigate("/");
   }
 
   return (
@@ -102,7 +100,7 @@ const Login = () => {
               <br />
               registered on the website.
             </p>
-            <form action="" method="post" onSubmit={handleSubmit}>
+            <form action="" method="post">
               <div>
                 <label for="" className="d-block input-label">
                   Email Address
@@ -125,7 +123,7 @@ const Login = () => {
                   </svg>
                   <input
                     className="input-field border-0"
-                    type="text"
+                    type="email"
                     name=""
                     id=""
                     placeholder="Your Email Address"
@@ -192,6 +190,7 @@ const Login = () => {
               <button
                 className="btn btn-fill text-white d-block w-100"
                 type="submit"
+                onClick={handleSubmit}
               >
                 Log In To My Account
               </button>

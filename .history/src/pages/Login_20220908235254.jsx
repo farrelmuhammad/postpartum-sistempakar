@@ -7,7 +7,6 @@ import Swal from "sweetalert2";
 import { setData } from "../redux/slices/authSlice";
 import axios from "axios";
 import Url from "../Config";
-import Home from "./Home";
 
 const Login = () => {
   const [username, setUsername] = useState();
@@ -75,7 +74,7 @@ const Login = () => {
   };
 
   if (isLoggedIn) {
-    return <Home />
+    navigate("/");
   }
 
   return (

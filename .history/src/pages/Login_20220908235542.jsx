@@ -47,7 +47,7 @@ const Login = () => {
           // jsCookie.set('auth', res.data)
           dispatch(
             setData({
-              token: res.accessToken,
+              token: res.data,
               // username: res.data.profileData.name,
               // password: res.data.profileData.profile_picture_url,
               // cityId: res.data.profileData.city_id,

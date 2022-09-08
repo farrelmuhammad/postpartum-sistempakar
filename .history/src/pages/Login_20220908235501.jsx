@@ -7,7 +7,6 @@ import Swal from "sweetalert2";
 import { setData } from "../redux/slices/authSlice";
 import axios from "axios";
 import Url from "../Config";
-import Home from "./Home";
 
 const Login = () => {
   const [username, setUsername] = useState();
@@ -47,7 +46,7 @@ const Login = () => {
           // jsCookie.set('auth', res.data)
           dispatch(
             setData({
-              token: res.accessToken,
+              token: res.data,
               // username: res.data.profileData.name,
               // password: res.data.profileData.profile_picture_url,
               // cityId: res.data.profileData.city_id,
@@ -75,7 +74,7 @@ const Login = () => {
   };
 
   if (isLoggedIn) {
-    return <Home />
+    navigate("/");
   }
 
   return (

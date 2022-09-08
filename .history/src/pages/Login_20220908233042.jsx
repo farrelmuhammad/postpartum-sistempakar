@@ -7,7 +7,6 @@ import Swal from "sweetalert2";
 import { setData } from "../redux/slices/authSlice";
 import axios from "axios";
 import Url from "../Config";
-import Home from "./Home";
 
 const Login = () => {
   const [username, setUsername] = useState();
@@ -17,24 +16,23 @@ const Login = () => {
   const isLoggedIn = !!useSelector((state) => state.auth.token);
   const dispatch = useDispatch();
 
-  var toastMixin = Swal.mixin({
-    toast: true,
-    icon: "success",
-    title: "General Title",
-    animation: false,
-    position: "top-right",
-    showConfirmButton: false,
-    timer: 800,
-    timerProgressBar: true,
-    didOpen: (toast) => {
-      toast.addEventListener("mouseenter", Swal.stopTimer);
-      toast.addEventListener("mouseleave", Swal.resumeTimer);
-    },
-  });
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const userData = new URLSearchParams();
+    var toastMixin = Swal.mixin({
+      toast: true,
+      icon: "success",
+      title: "General Title",
+      animation: false,
+      position: "top-right",
+      showConfirmButton: false,
+      timer: 800,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.addEventListener("mouseenter", Swal.stopTimer);
+        toast.addEventListener("mouseleave", Swal.resumeTimer);
+      },
+    });
+    const userData = new FormData();
     userData.append("username", username);
     userData.append("password", password);
     axios({
@@ -75,7 +73,7 @@ const Login = () => {
   };
 
   if (isLoggedIn) {
-    return <Home />
+    navigate("/");
   }
 
   return (
