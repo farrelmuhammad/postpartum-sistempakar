@@ -69,7 +69,7 @@ const Login = () => {
           if (res.status === 200) {
             dispatch(
               setData({
-                token: res.accessToken,
+                token: res.data,
               })
             );
             navigate("/");

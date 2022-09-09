@@ -35,60 +35,60 @@ const Login = () => {
     },
   });
 
-//   const handleLogin = (formValue) => {
-//     const { username, password } = formValue;
-//     setLoading(true);
-//     dispatch(login({ username, password }))
-//       .unwrap()
-//       .then(() => {
-//         // props.history.push("/profile");
-//         navigate("/");
-//         window.location.reload();
-//       })
-//       .catch(() => {
-//         setLoading(false);
-//       });
-//   };
-
-    const handleSubmit = async (e) => {
-      e.preventDefault();
-      const userData = new URLSearchParams();
-      userData.append("username", username);
-      userData.append("password", password);
-
-      // for (var pair of userData.entries()) {
-      //   console.log(pair[0] + ", " + pair[1]);
-      // }
-
-      axios({
-        method: "post",
-        url: `${Url}/auth/signin`,
-        data: userData,
+  const handleLogin = (formValue) => {
+    const { username, password } = formValue;
+    setLoading(true);
+    dispatch(login({ username, password }))
+      .unwrap()
+      .then(() => {
+        // props.history.push("/profile");
+        navigate("/");
+        window.location.reload();
       })
-        .then((res) => {
-          if (res.status === 200) {
-            dispatch(
-              setData({
-                token: res.accessToken,
-              })
-            );
-            navigate("/");
-            setTimeout(window.location.reload.bind(window.location), 300);
-            toastMixin.fire({
-              animation: true,
-              title: "Signed in Successfully",
-            });
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-          toastMixin.fire({
-            icon: "error",
-            animation: true,
-            title: "Not match!",
-          });
-        });
-    };
+      .catch(() => {
+        setLoading(false);
+      });
+  };
+
+  //   const handleSubmit = async (e) => {
+  //     e.preventDefault();
+  //     const userData = new URLSearchParams();
+  //     userData.append("username", username);
+  //     userData.append("password", password);
+
+  //     // for (var pair of userData.entries()) {
+  //     //   console.log(pair[0] + ", " + pair[1]);
+  //     // }
+
+  //     axios({
+  //       method: "post",
+  //       url: `${Url}/auth/signin`,
+  //       data: userData,
+  //     })
+  //       .then((res) => {
+  //         if (res.status === 200) {
+  //           dispatch(
+  //             setData({
+  //               token: res.data,
+  //             })
+  //           );
+  //           navigate("/");
+  //           setTimeout(window.location.reload.bind(window.location), 300);
+  //           toastMixin.fire({
+  //             animation: true,
+  //             title: "Signed in Successfully",
+  //           });
+  //         }
+  //       })
+  //       .catch((err) => {
+  //         console.log(err);
+  //         toastMixin.fire({
+  //           icon: "error",
+  //           animation: true,
+  //           title: "Not match!",
+  //         });
+  //       });
+  //   };
 
   if (isLoggedIn) {
     return <Home />;
@@ -118,7 +118,7 @@ const Login = () => {
               <br />
               registered on the website.
             </p>
-            <form action="" method="post" onSubmit={handleSubmit}>
+            <form action="" method="post" onSubmit={handleLogin}>
               <div>
                 <label for="" className="d-block input-label">
                   Username

@@ -8,17 +8,15 @@ import { setData } from "../redux/slices/authSlice";
 import axios from "axios";
 import Url from "../Config";
 import Home from "./Home";
-import { login } from "../redux/slices/auth";
 
 const Login = () => {
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
   const navigate = useNavigate();
-  const [loading, setLoading] = useState(false);
-//   const isLoggedIn = !!useSelector((state) => state.auth.token);
+  // const isLoggedIn = jsCookie.get('auth')
+  const isLoggedIn = !!useSelector((state) => state.auth.token);
   const dispatch = useDispatch();
-  const { isLoggedIn } = useSelector((state) => state.auth);
-  //   dispatch(setData({ token: localStorage.getItem("token") }));
+  dispatch(setData({token: localStorage.getItem("token")}));
 
   var toastMixin = Swal.mixin({
     toast: true,
@@ -35,63 +33,49 @@ const Login = () => {
     },
   });
 
-//   const handleLogin = (formValue) => {
-//     const { username, password } = formValue;
-//     setLoading(true);
-//     dispatch(login({ username, password }))
-//       .unwrap()
-//       .then(() => {
-//         // props.history.push("/profile");
-//         navigate("/");
-//         window.location.reload();
-//       })
-//       .catch(() => {
-//         setLoading(false);
-//       });
-//   };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const userData = new URLSearchParams();
+    userData.append("username", username);
+    userData.append("password", password);
+    axios({
+      method: "post",
+      url: `${Url}/auth/signin`,
+      data: userData,
+    })
+      .then((res) => {
+        if (res.status === 200) {
+          dispatch(
+            setData({
+              token: res.accessToken,
+              // username: res.data.profileData.name,
+              // password: res.data.profileData.profile_picture_url,
+              // cityId: res.data.profileData.city_id,
+              // address: res.data.profileData.address,
+              // phone: res.data.profileData.phone_number,
+            })
+          );
 
-    const handleSubmit = async (e) => {
-      e.preventDefault();
-      const userData = new URLSearchParams();
-      userData.append("username", username);
-      userData.append("password", password);
-
-      // for (var pair of userData.entries()) {
-      //   console.log(pair[0] + ", " + pair[1]);
-      // }
-
-      axios({
-        method: "post",
-        url: `${Url}/auth/signin`,
-        data: userData,
-      })
-        .then((res) => {
-          if (res.status === 200) {
-            dispatch(
-              setData({
-                token: res.accessToken,
-              })
-            );
-            navigate("/");
-            setTimeout(window.location.reload.bind(window.location), 300);
-            toastMixin.fire({
-              animation: true,
-              title: "Signed in Successfully",
-            });
-          }
-        })
-        .catch((err) => {
-          console.log(err);
+          navigate("/");
+          setTimeout(window.location.reload.bind(window.location), 300);
           toastMixin.fire({
-            icon: "error",
             animation: true,
-            title: "Not match!",
+            title: "Signed in Successfully",
           });
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        toastMixin.fire({
+          icon: "error",
+          animation: true,
+          title: "Not match!",
         });
-    };
+      });
+  };
 
   if (isLoggedIn) {
-    return <Home />;
+    return <Home />
   }
 
   return (
@@ -124,6 +108,7 @@ const Login = () => {
                   Username
                 </label>
                 <div className="d-flex w-100 div-input">
+                  
                   <input
                     className="input-field border-0"
                     type="text"
@@ -141,6 +126,7 @@ const Login = () => {
                   Password
                 </label>
                 <div className="d-flex w-100 div-input">
+                  
                   <input
                     className="input-field border-0"
                     type="password"
