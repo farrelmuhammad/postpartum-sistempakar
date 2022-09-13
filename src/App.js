@@ -8,15 +8,11 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   // const isLoggedIn = !!useSelector(state => state.auth.token);
-  const { isLoggedIn } = useSelector((state) => state.auth);
 
   return (
     <>
-      {isLoggedIn ? (
         <RouteApp />
-      ) : (
-        <Login />
-      )}
+        {/* <Login /> */}
     </>
   );
 }

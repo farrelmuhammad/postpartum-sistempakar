@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Banner1 from '../assets/image/banner1.svg'
 import { FiPlay } from "react-icons/fi";
+import { Modal } from "antd";
+import ModalYoutube from "./ModalYoutube";
 
 const Header = () => {
+  const [modal2Open, setModal2Open] = useState(false);
+
   return (
     <>
       <div>
@@ -23,12 +27,12 @@ const Header = () => {
               untuk masyarakat Indonesia
             </p>
             <div className="d-flex flex-sm-row flex-column align-items-center mx-lg-0 mx-auto justify-content-center gap-3">
-            <Link to="/test" classNameName="text-decoration-none">
-              <button className="btn d-inline-flex mb-md-0 btn-try text-white">
-                Coba Sekarang
-              </button>
-            </Link>
-              <button className="btn btn-outline-dark" onClick={()=> window.open("https://www.youtube.com/watch?v=2ocA-zS3SoI&ab_channel=MedicalCentric")}>
+              <Link to="/test" classNameName="text-decoration-none">
+                <button className="btn d-inline-flex mb-md-0 btn-try text-white">
+                  Coba Sekarang
+                </button>
+              </Link>
+              <button className="btn btn-outline-dark" onClick={() => setModal2Open(true)}>
                 <div className="d-flex align-items-center">
                   {/* <svg
                     className="me-2"
@@ -47,6 +51,18 @@ const Header = () => {
                   Tonton Video
                 </div>
               </button>
+              <Modal
+                // title="Vertically centered modal dialog"
+                centered
+                bordered
+                visible={modal2Open}
+                onOk={() => setModal2Open(false)}
+                onCancel={() => setModal2Open(false)}
+                footer={null}
+                width={610}
+              >
+                <ModalYoutube />
+              </Modal>
             </div>
           </div>
           {/* <!-- Right Column --> */}

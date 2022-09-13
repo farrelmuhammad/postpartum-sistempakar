@@ -8,7 +8,7 @@ import 'antd/dist/antd.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
-import { store } from './redux/storeeee';
+import { store } from './redux/store';
 import persistStore from 'redux-persist/es/persistStore';
 
 const persistor = persistStore(store)

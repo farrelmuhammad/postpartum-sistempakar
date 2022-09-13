@@ -41,8 +41,6 @@ const items = [
 const Dashboard = () => {
     const [collapsed, setCollapsed] = useState(false);
 
-
-
     return (
         <>
             <Layout>

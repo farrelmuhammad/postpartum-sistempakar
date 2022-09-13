@@ -5,16 +5,32 @@ import Home from './pages/Home'
 import Test from './pages/Test'
 import Dashboard from './pages/admin/Dashboard'
 import Question from './pages/admin/Question'
+import { useSelector } from 'react-redux'
+import NotFound from './pages/NotFound'
 
 const RouteApp = () => {
+    const { isLoggedIn } = useSelector((state) => state.auth);
+
+    const protectedRoutes = <>
+        <Route path="/admin" exact element={<Dashboard />} />
+        <Route path="/admin/question" exact element={<Question />} />
+    </>
+
+    const guestRoutes = <>
+        <Route path="/login" exact element={<Login />} />
+        <Route path="/test" exact element={<Test />} />
+        <Route path="*" exact element={<NotFound />} />
+
+    </>
+
     return (
         <>
             <Routes>
-                <Route path="/login" exact element={<Login />} />
+                {
+                    isLoggedIn ? protectedRoutes : guestRoutes
+                }
+
                 <Route path="/" exact element={<Home />} />
-                <Route path="/test" exact element={<Test />} />
-                <Route path="/admin" exact element={<Dashboard />} />
-                <Route path="/admin/question" exact element={<Question />} />
             </Routes>
         </>
     )
