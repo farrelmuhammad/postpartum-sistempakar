@@ -4,7 +4,7 @@ import Navbar from "../components/Navbar";
 const Test = () => {
   return (
     <>
-      <div class="container-xxl mx-auto p-0  position-relative header-2-1">
+      <div className="container-xxl mx-auto p-0  position-relative header-2-1">
         <Navbar />
       </div>
       <div className="test">
