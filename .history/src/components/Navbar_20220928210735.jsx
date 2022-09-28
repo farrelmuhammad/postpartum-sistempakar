@@ -111,7 +111,7 @@ const Navbar = () => {
                   </li>
                   <li className="nav-item">
                     <Link to="/admin" className="nav-link">
-                      Dashboard
+                      Contact
                     </Link>
                   </li>
                 </ul>
@@ -162,7 +162,7 @@ const Navbar = () => {
             </li>
             <li className="nav-item">
               <Link to="/admin" className="nav-link">
-                Dashboard
+                Contact
               </Link>
             </li>
           </ul>

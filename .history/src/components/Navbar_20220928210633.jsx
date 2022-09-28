@@ -23,28 +23,28 @@ const Navbar = () => {
 
   const handleLogout = () => {
     // jsCookie.remove('auth')
-    localStorage.removeItem("persist:auth");
+    localStorage.removeItem('persist:auth')
     var toastMixin = Swal.mixin({
       toast: true,
-      icon: "success",
-      title: "General Title",
+      icon: 'success',
+      title: 'General Title',
       animation: false,
-      position: "top-right",
+      position: 'top-right',
       showConfirmButton: false,
       timer: 800,
       timerProgressBar: true,
       didOpen: (toast) => {
-        toast.addEventListener("mouseenter", Swal.stopTimer);
-        toast.addEventListener("mouseleave", Swal.resumeTimer);
-      },
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+      }
     });
     toastMixin.fire({
       animation: true,
-      title: "Logout Successfully",
+      title: 'Logout Successfully'
     });
-    navigate("/");
+    navigate('/')
     setTimeout(window.location.reload.bind(window.location), 500);
-  };
+  }
 
   return (
     <>
@@ -109,11 +109,6 @@ const Navbar = () => {
                       Contact
                     </a>
                   </li>
-                  <li className="nav-item">
-                    <Link to="/admin" className="nav-link">
-                      Dashboard
-                    </Link>
-                  </li>
                 </ul>
               </div>
               {isLoggedIn ? (
@@ -161,9 +156,9 @@ const Navbar = () => {
               </a>
             </li>
             <li className="nav-item">
-              <Link to="/admin" className="nav-link">
+              <a className="nav-link" href="#">
                 Dashboard
-              </Link>
+              </a>
             </li>
           </ul>
           {isLoggedIn ? (

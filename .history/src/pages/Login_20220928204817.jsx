@@ -14,7 +14,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   // const isLoggedIn = jsCookie.get('auth')
-  const isLoggedIn = !!useSelector((state) => state.auth.accessToken);
+  const isLoggedIn = !!useSelector((state) => state.auth.token);
   const dispatch = useDispatch();
 
   var toastMixin = Swal.mixin({
@@ -68,7 +68,6 @@ const Login = () => {
       dispatch(
         setData({
           accessToken: res.data.accessToken,
-          isAdmin: res.data.isAdmin
         })
       );
       navigate("/");

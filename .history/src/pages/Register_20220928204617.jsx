@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import ImgLogin from "../assets/image/login.svg";
 import { FiArrowLeft } from "react-icons/fi";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
 import { setData } from "../redux/slices/authSlice";
@@ -9,12 +9,12 @@ import axios from "axios";
 import Url from "../Config";
 import Home from "./Home";
 
-const Login = () => {
+const Register = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   // const isLoggedIn = jsCookie.get('auth')
-  const isLoggedIn = !!useSelector((state) => state.auth.accessToken);
+  const isLoggedIn = !!useSelector((state) => state.auth.token);
   const dispatch = useDispatch();
 
   var toastMixin = Swal.mixin({
@@ -68,7 +68,6 @@ const Login = () => {
       dispatch(
         setData({
           accessToken: res.data.accessToken,
-          isAdmin: res.data.isAdmin
         })
       );
       navigate("/");
@@ -164,7 +163,7 @@ const Login = () => {
                     onChange={(e) => setPassword(e.target.value)}
                     required
                   />
-                  {/* <div onclick="togglePassword()">
+                  <div onclick="togglePassword()">
                     <svg
                       width="20"
                       height="14"
@@ -180,14 +179,14 @@ const Login = () => {
                         fill="#CACBCE"
                       />
                     </svg>
-                  </div> */}
+                  </div>
                 </div>
               </div>
-              {/* <div className="d-flex mt-1 justify-content-end">
+              <div className="d-flex mt-1 justify-content-end">
                 <a href="#" className="forgot-password fst-italic">
                   Lupa Password?
                 </a>
-              </div> */}
+              </div>
               <button
                 className="btn btn-fill text-white d-block w-100"
                 type="submit"
@@ -197,9 +196,7 @@ const Login = () => {
             </form>
             <p className="text-center bottom-caption">
               Don't have an account yet?
-              <Link to="/register">
-                <span className="green-bottom-caption">Register Here</span>
-              </Link>
+              <span className="green-bottom-caption">Register Here</span>
             </p>
           </div>
         </div>
@@ -208,4 +205,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;

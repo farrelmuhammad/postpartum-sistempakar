@@ -12,6 +12,9 @@ export const authSlice = createSlice({
         setAccessToken: (state, action) => {
             state.accessToken = action.payload;
         },
+        setIsAdmin: (state, action) => {
+            state.isAdmin = action.payload;
+        },
         setData: (state, action) => {
             return {
                 ...state,
@@ -24,6 +27,6 @@ export const authSlice = createSlice({
     }
 });
 
-export const { setAccessToken, setUsername, setPassword, setData, clearData } = authSlice.actions;
+export const { setAccessToken, setIsAdmin, setPassword, setData, clearData } = authSlice.actions;
 
 export default authSlice.reducer;

@@ -33,6 +33,7 @@ const RouteApp = () => {
                 {/* {
                     isLoggedIn ? protectedRoutes : guestRoutes
                 } */}
+                
 
                 <Route path="/" exact element={<Home />} />
                 <Route path="/login" exact element={<Login />} />
