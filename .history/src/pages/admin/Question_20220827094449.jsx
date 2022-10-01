@@ -23,7 +23,6 @@ import { Button, Input, Layout, Menu, message, Modal, notification, Space } from
 import Search from 'antd/lib/transfer/search';
 import { Link } from 'react-router-dom';
 import QuestionTable from '../../components/admin/QuestionTable';
-import Url from '../../Config';
 
 const { Header, Content, Sider } = Layout;
 const items = [
@@ -68,10 +67,6 @@ const Question = () => {
         alert('Clicked cancel button');
         setVisible(false);
     };
-
-    const getSymptoms = async () => {
-        await axios.get(`${Url}`)
-    }
 
     return (
         <>
