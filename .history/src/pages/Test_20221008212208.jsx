@@ -17,9 +17,9 @@ const Test = () => {
 
 
   useEffect(() => {
-    getSymptoms();
-    getAnswer();
-  }, []);
+    getSymptoms(!loading);
+    getAnswer(!loading);
+  }, [loading]);
 
   const getSymptoms = async () => {
     await axios
@@ -30,7 +30,7 @@ const Test = () => {
         },
       })
       .then((res) => {
-        setLoading(true);
+        // setLoading(true);
         setSymptoms(res.data);
         console.log(res.data);
       });
@@ -45,7 +45,7 @@ const Test = () => {
         },
       })
       .then((res) => {
-        setLoading(true);
+        // setLoading(true);
         setAnswers(res.data);
         console.log(res.data);
       });

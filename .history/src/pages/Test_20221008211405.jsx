@@ -13,7 +13,7 @@ const Test = () => {
   const auth = useSelector((state) => state.auth);
   const [symptoms, setSymptoms] = useState([]);
   const [answers, setAnswers] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
 
   useEffect(() => {

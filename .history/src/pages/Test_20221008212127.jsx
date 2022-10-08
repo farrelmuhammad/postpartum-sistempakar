@@ -17,9 +17,9 @@ const Test = () => {
 
 
   useEffect(() => {
-    getSymptoms();
-    getAnswer();
-  }, []);
+    getSymptoms(!loading);
+    getAnswer(!loading);
+  }, [loading]);
 
   const getSymptoms = async () => {
     await axios

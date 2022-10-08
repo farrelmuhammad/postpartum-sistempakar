@@ -17,8 +17,8 @@ const Test = () => {
 
 
   useEffect(() => {
-    getSymptoms();
-    getAnswer();
+    getSymptoms(!loading);
+    getAnswer(!loading);
   }, []);
 
   const getSymptoms = async () => {
