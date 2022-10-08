@@ -13,7 +13,7 @@ const Test = () => {
   const auth = useSelector((state) => state.auth);
   const [symptoms, setSymptoms] = useState([]);
   const [answers, setAnswers] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
 
   useEffect(() => {
@@ -30,7 +30,7 @@ const Test = () => {
         },
       })
       .then((res) => {
-        setLoading(false);
+        setLoading(true);
         setSymptoms(res.data);
         console.log(res.data);
       });
@@ -45,7 +45,7 @@ const Test = () => {
         },
       })
       .then((res) => {
-        setLoading(false);
+        setLoading(true);
         setAnswers(res.data);
         console.log(res.data);
       });

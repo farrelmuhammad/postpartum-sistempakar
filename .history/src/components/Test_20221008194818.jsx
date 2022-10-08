@@ -10,18 +10,10 @@ const TestCard = ({symptoms, answers, loading}) => {
   
   console.log(symptoms)
 
-  const onChange = (e) => {
-    // setLoading(!checked);
-    e.preventDefault();
-    console.log(e.target.checked);
-  };
+  // const onChange = (checked) => {
+  //   setLoading(!checked);
+  // };
 
-  // if (loading) {
-  //   return (
-  //     <Skeleton active />
-  //   )
-  // }
-  
   return (
     <>
       {symptoms?.map((sym) => (

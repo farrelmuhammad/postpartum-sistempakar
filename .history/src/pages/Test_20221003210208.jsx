@@ -1,4 +1,4 @@
-import { Card, Divider, Radio } from "antd";
+import { Divider } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
@@ -11,8 +11,8 @@ const Test = () => {
   const [value1, setValue1] = useState([]);
   const [value2, setValue2] = useState([]);
   const auth = useSelector((state) => state.auth);
-  const [symptoms, setSymptoms] = useState([]);
-  const [answers, setAnswers] = useState([]);
+  const [symptom, setSymptom] = useState([]);
+  const [answer, setAnswers] = useState([]);
   const [loading, setLoading] = useState(true);
 
 
@@ -30,8 +30,8 @@ const Test = () => {
         },
       })
       .then((res) => {
+        setSymptom(res.data);
         setLoading(false);
-        setSymptoms(res.data);
         console.log(res.data);
       });
   };
@@ -45,7 +45,6 @@ const Test = () => {
         },
       })
       .then((res) => {
-        setLoading(false);
         setAnswers(res.data);
         console.log(res.data);
       });
@@ -61,7 +60,6 @@ const Test = () => {
       console.log(pair[0] + ", " + pair[1]);
     }
   };
-
   return (
     <>
       <div className="container-xxl mx-auto p-0  position-relative header-2-1">
@@ -73,9 +71,9 @@ const Test = () => {
             <h4 className="text-caption-up">Test Postpartum Depression</h4>
           </div>
           <div className="mt-3">
-            <TestCard symptoms={symptoms} answers={answers} loading={loading} />
+            <TestCard value />
           </div>
-          <div className="d-flex justify-content-center">
+          <div class="d-flex justify-content-center">
             <button
               className="btn btn-primary text-white d-block w-100 mt-3 mb-5"
               type="submit"

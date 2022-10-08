@@ -1,4 +1,4 @@
-import { Card, Divider, Radio } from "antd";
+import { Divider } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
@@ -30,8 +30,8 @@ const Test = () => {
         },
       })
       .then((res) => {
-        setLoading(false);
         setSymptoms(res.data);
+        setLoading(false);
         console.log(res.data);
       });
   };
@@ -45,7 +45,6 @@ const Test = () => {
         },
       })
       .then((res) => {
-        setLoading(false);
         setAnswers(res.data);
         console.log(res.data);
       });
@@ -61,7 +60,6 @@ const Test = () => {
       console.log(pair[0] + ", " + pair[1]);
     }
   };
-
   return (
     <>
       <div className="container-xxl mx-auto p-0  position-relative header-2-1">
@@ -73,7 +71,7 @@ const Test = () => {
             <h4 className="text-caption-up">Test Postpartum Depression</h4>
           </div>
           <div className="mt-3">
-            <TestCard symptoms={symptoms} answers={answers} loading={loading} />
+            <TestCard symptoms={symptoms} answer={answers} />
           </div>
           <div className="d-flex justify-content-center">
             <button

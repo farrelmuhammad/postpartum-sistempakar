@@ -4,24 +4,16 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import Url from "../Config";
 
-const TestCard = ({symptoms, answers, loading}) => {
+const TestCard = ({ symptoms, answers, loading }) => {
   // const [loading, setLoading] = useState(true);
   const auth = useSelector((state) => state.auth);
-  
-  console.log(symptoms)
 
-  const onChange = (e) => {
-    // setLoading(!checked);
-    e.preventDefault();
-    console.log(e.target.checked);
-  };
+  console.log(symptoms);
 
-  // if (loading) {
-  //   return (
-  //     <Skeleton active />
-  //   )
-  // }
-  
+  // const onChange = (checked) => {
+  //   setLoading(!checked);
+  // };
+
   return (
     <>
       {symptoms?.map((sym) => (
@@ -36,7 +28,9 @@ const TestCard = ({symptoms, answers, loading}) => {
             <div className="col-12">
               <h5 className="text-caption-down">{sym.symptoms_name}</h5>
             </div>
-            <Radio.Group onChange={onChange}>
+            <Radio.Group
+            // onChange={onChange}
+            >
               {answers?.map((ans) => (
                 <Radio value={ans.answer_value}>{ans.answer_name}</Radio>
               ))}

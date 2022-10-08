@@ -13,7 +13,7 @@ const Test = () => {
   const auth = useSelector((state) => state.auth);
   const [symptoms, setSymptoms] = useState([]);
   const [answers, setAnswers] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
 
   useEffect(() => {
@@ -29,9 +29,12 @@ const Test = () => {
           Authorization: `Bearer ${auth.accessToken}`,
         },
       })
+      .then(()=> {
+        setLoading(true)
+      })
       .then((res) => {
-        setLoading(false);
         setSymptoms(res.data);
+        setLoading(false);
         console.log(res.data);
       });
   };
@@ -44,9 +47,12 @@ const Test = () => {
           Authorization: `Bearer ${auth.accessToken}`,
         },
       })
+      .then(()=> {
+        setLoading(true)
+      })
       .then((res) => {
-        setLoading(false);
         setAnswers(res.data);
+        setLoading(false);
         console.log(res.data);
       });
   };

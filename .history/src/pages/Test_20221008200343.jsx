@@ -30,8 +30,8 @@ const Test = () => {
         },
       })
       .then((res) => {
-        setLoading(false);
         setSymptoms(res.data);
+        setLoading(false);
         console.log(res.data);
       });
   };
@@ -45,8 +45,8 @@ const Test = () => {
         },
       })
       .then((res) => {
-        setLoading(false);
         setAnswers(res.data);
+        setLoading(false);
         console.log(res.data);
       });
   };
@@ -62,6 +62,12 @@ const Test = () => {
     }
   };
 
+  const onChange = (e) => {
+    // setLoading(!checked);
+    e.preventDefault();
+    console.log(e.target.checked);
+  };
+
   return (
     <>
       <div className="container-xxl mx-auto p-0  position-relative header-2-1">
@@ -73,7 +79,27 @@ const Test = () => {
             <h4 className="text-caption-up">Test Postpartum Depression</h4>
           </div>
           <div className="mt-3">
-            <TestCard symptoms={symptoms} answers={answers} loading={loading} />
+          {symptoms?.map((sym) => (
+              <Card
+                style={{
+                  // width: 300,
+                  marginTop: 10,
+                }}
+                loading={symptoms.count() < 1}
+              >
+                <div className="row content">
+                  <div className="col-12">
+                    <h5 className="text-caption-down">{sym.symptoms_name}</h5>
+                  </div>
+                  <Radio.Group onChange={onChange}>
+                    {answers?.map((ans) => (
+                      <Radio value={ans.answer_value}>{ans.answer_name}</Radio>
+                    ))}
+                  </Radio.Group>
+                </div>
+              </Card>
+            ))}
+            {/* <TestCard symptoms={symptoms} answers={answers} loading={loading} /> */}
           </div>
           <div className="d-flex justify-content-center">
             <button

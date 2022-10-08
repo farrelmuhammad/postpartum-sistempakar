@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import Url from "../Config";
 
-const TestCard = ({symptoms, answers, loading}) => {
+const TestCard = ({symptoms, answers}) => {
   // const [loading, setLoading] = useState(true);
   const auth = useSelector((state) => state.auth);
   
@@ -15,12 +15,6 @@ const TestCard = ({symptoms, answers, loading}) => {
     e.preventDefault();
     console.log(e.target.checked);
   };
-
-  // if (loading) {
-  //   return (
-  //     <Skeleton active />
-  //   )
-  // }
   
   return (
     <>
@@ -30,7 +24,7 @@ const TestCard = ({symptoms, answers, loading}) => {
             // width: 300,
             marginTop: 10,
           }}
-          loading={loading}
+          // loading={loading}
         >
           <div className="row content">
             <div className="col-12">

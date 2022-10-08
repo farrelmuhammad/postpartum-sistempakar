@@ -5,23 +5,15 @@ import { useSelector } from "react-redux";
 import Url from "../Config";
 
 const TestCard = ({symptoms, answers, loading}) => {
-  // const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
   const auth = useSelector((state) => state.auth);
   
   console.log(symptoms)
 
-  const onChange = (e) => {
-    // setLoading(!checked);
-    e.preventDefault();
-    console.log(e.target.checked);
+  const onChange = (checked) => {
+    setLoading(!checked);
   };
 
-  // if (loading) {
-  //   return (
-  //     <Skeleton active />
-  //   )
-  // }
-  
   return (
     <>
       {symptoms?.map((sym) => (

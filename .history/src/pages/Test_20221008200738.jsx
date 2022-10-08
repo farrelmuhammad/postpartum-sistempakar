@@ -30,8 +30,8 @@ const Test = () => {
         },
       })
       .then((res) => {
-        setLoading(false);
         setSymptoms(res.data);
+        setLoading(false);
         console.log(res.data);
       });
   };
@@ -45,8 +45,8 @@ const Test = () => {
         },
       })
       .then((res) => {
-        setLoading(false);
         setAnswers(res.data);
+        setLoading(false);
         console.log(res.data);
       });
   };

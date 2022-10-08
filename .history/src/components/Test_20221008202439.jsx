@@ -30,7 +30,10 @@ const TestCard = ({symptoms, answers, loading}) => {
             // width: 300,
             marginTop: 10,
           }}
-          loading={loading}
+          loading={
+            loading
+            .then(() =>!loading)
+          }
         >
           <div className="row content">
             <div className="col-12">

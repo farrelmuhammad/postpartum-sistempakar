@@ -1,4 +1,4 @@
-import { Card, Divider, Radio } from "antd";
+import { Divider } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
@@ -30,8 +30,8 @@ const Test = () => {
         },
       })
       .then((res) => {
-        setLoading(false);
         setSymptoms(res.data);
+        setLoading(false);
         console.log(res.data);
       });
   };
@@ -45,8 +45,8 @@ const Test = () => {
         },
       })
       .then((res) => {
-        setLoading(false);
         setAnswers(res.data);
+        setLoading(false);
         console.log(res.data);
       });
   };
