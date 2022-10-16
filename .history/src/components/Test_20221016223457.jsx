@@ -4,15 +4,16 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import Url from "../Config";
 
-const TestCard = ({ symptoms, answers, loading, value }) => {
+const TestCard = ({symptoms, answers, loading, value}) => {
   // const [loading, setLoading] = useState(true);
   const auth = useSelector((state) => state.auth);
-
-  console.log(symptoms);
+  
+  console.log(symptoms)
 
   const onChange = (e) => {
     // setLoading(!checked);
     e.preventDefault();
+    console.log(e.target.value);
     value(e.target.value)
   };
 
@@ -21,7 +22,7 @@ const TestCard = ({ symptoms, answers, loading, value }) => {
   //     <Skeleton active />
   //   )
   // }
-
+  
   return (
     <>
       {symptoms?.map((sym) => (

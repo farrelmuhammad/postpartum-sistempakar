@@ -31,7 +31,7 @@ const QuestionTable = ({data, deleteSymptoms}) => {
       title: "CF Gejala",
       dataIndex: "CF_symptom",
       key: "CF_symptom",
-      width: "10%",
+      width: "8%",
     },
     {
       title: "Action",

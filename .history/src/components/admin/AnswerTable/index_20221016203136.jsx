@@ -9,8 +9,8 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import Url from "../../../Config";
 
-const QuestionTable = ({data, deleteSymptoms}) => {
-//   const [symptoms, setSymptoms] = useState([]);
+const AnswerTable = ({data, deleteAnswers}) => {
+//   const [Answers, setSymptoms] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [number, setNumber] = useState(false);
 
@@ -23,15 +23,14 @@ const QuestionTable = ({data, deleteSymptoms}) => {
       render: (text) => <a>G - {text}</a>,
     },
     {
-      title: "Gejala",
-      dataIndex: "symptoms_name",
-      key: "symptoms_name",
+      title: "Jawaban",
+      dataIndex: "answer_name",
+      key: "answer_name",
     },
     {
-      title: "CF Gejala",
-      dataIndex: "CF_symptom",
-      key: "CF_symptom",
-      width: "10%",
+      title: "CF User",
+      dataIndex: "CF_user",
+      key: "CF_user",
     },
     {
       title: "Action",
@@ -45,7 +44,7 @@ const QuestionTable = ({data, deleteSymptoms}) => {
               size="small"
               type="danger"
               icon={<DeleteOutlined />}
-              onClick={() => deleteSymptoms(record.id)}
+              onClick={() => deleteAnswers(record.id)}
             />
           </Space>
         </>
@@ -68,4 +67,4 @@ const QuestionTable = ({data, deleteSymptoms}) => {
   );
 };
 
-export default QuestionTable;
+export default AnswerTable;

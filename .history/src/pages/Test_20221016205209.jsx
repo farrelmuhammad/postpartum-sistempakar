@@ -8,7 +8,6 @@ import Url from "../Config";
 import "./test.css";
 
 const Test = () => {
-  // const [value, setValue] = useState([]);
   const [value1, setValue1] = useState([]);
   const [value2, setValue2] = useState([]);
   const auth = useSelector((state) => state.auth);
@@ -22,13 +21,6 @@ const Test = () => {
     getAnswer();
   }, []);
 
-  const arrValue = []
-
-  const value = (data) => {
-    console.log(data)
-    arrValue.push(data)
-  }
-
   const getSymptoms = async () => {
     await axios
       .get(`${Url}/symptoms`, {
@@ -41,7 +33,7 @@ const Test = () => {
         setLoading(true);
         setTimeout(() => {
           setLoading(false);
-        }, 2000);
+        }, 3000);
         setSymptoms(res.data);
         console.log(res.data);
       });
@@ -56,10 +48,7 @@ const Test = () => {
         },
       })
       .then((res) => {
-        setLoading(true);
-        setTimeout(() => {
-          setLoading(false);
-        }, 2000);
+        setLoading(false);
         setAnswers(res.data);
         console.log(res.data);
       });
@@ -68,15 +57,12 @@ const Test = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const userData = new URLSearchParams();
-    arrValue.map((item) => {
-      userData.append("value", item);
-    })
-    // userData.append("test1", value2);
+    userData.append("test", value1);
+    userData.append("test1", value2);
 
     for (var pair of userData.entries()) {
       console.log(pair[0] + ", " + pair[1]);
     }
-    // console.log(arrValue)
   };
 
   const showModal = () => {
@@ -100,13 +86,13 @@ const Test = () => {
             <h4 className="text-caption-up">Test Postpartum Depression</h4>
           </div>
           <div className="mt-3">
-            <TestCard symptoms={symptoms} answers={answers} loading={loading} value={value} />
+            <TestCard symptoms={symptoms} answers={answers} loading={loading} />
           </div>
           <div className="d-flex justify-content-center">
             <button
               className="btn btn-primary text-white d-block w-100 mt-3 mb-5"
               type="submit"
-              onClick={handleSubmit}
+              // onClick={showModal}
             >
               Submit
             </button>

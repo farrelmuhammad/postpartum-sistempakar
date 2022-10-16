@@ -58,8 +58,7 @@ const items = [
 const Question = () => {
   const [collapsed, setCollapsed] = useState(false);
   const [symptoms, setSymptoms] = useState([]);
-  const [symptoms_name, setSymptoms_name] = useState('');
-  const [CFsymptom, setCFSymptom] = useState('');
+  const [symptoms_name, setSymptoms_name] = useState([]);
   const auth = useSelector((state) => state.auth);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -118,7 +117,6 @@ const Question = () => {
     });
     const userData = new URLSearchParams();
     userData.append("symptoms_name", symptoms_name);
-    userData.append("CF_symptom", CFsymptom);
     // userData.append("password", password);
     axios({
       method: "post",
@@ -304,7 +302,7 @@ const Question = () => {
                       <div className="col-sm-9">
                         <Input
                           placeholder="Type Question"
-                          onChange={(e) => setCFSymptom(e.target.value)}
+                          onChange={(e) => setSymptoms_name(e.target.value)}
                         />
                       </div>
                     </div>

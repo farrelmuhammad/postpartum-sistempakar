@@ -8,7 +8,7 @@ import Url from "../Config";
 import "./test.css";
 
 const Test = () => {
-  // const [value, setValue] = useState([]);
+  const [value, setValue] = useState([]);
   const [value1, setValue1] = useState([]);
   const [value2, setValue2] = useState([]);
   const auth = useSelector((state) => state.auth);
@@ -21,13 +21,6 @@ const Test = () => {
     getSymptoms();
     getAnswer();
   }, []);
-
-  const arrValue = []
-
-  const value = (data) => {
-    console.log(data)
-    arrValue.push(data)
-  }
 
   const getSymptoms = async () => {
     await axios
@@ -68,15 +61,12 @@ const Test = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const userData = new URLSearchParams();
-    arrValue.map((item) => {
-      userData.append("value", item);
-    })
+    userData.append("test", value);
     // userData.append("test1", value2);
 
     for (var pair of userData.entries()) {
       console.log(pair[0] + ", " + pair[1]);
     }
-    // console.log(arrValue)
   };
 
   const showModal = () => {

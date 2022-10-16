@@ -1,4 +1,4 @@
-import { Card, Divider, Modal, Radio } from "antd";
+import { Button, Card, Divider, Modal, Radio } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
@@ -8,26 +8,19 @@ import Url from "../Config";
 import "./test.css";
 
 const Test = () => {
-  // const [value, setValue] = useState([]);
   const [value1, setValue1] = useState([]);
   const [value2, setValue2] = useState([]);
   const auth = useSelector((state) => state.auth);
   const [symptoms, setSymptoms] = useState([]);
   const [answers, setAnswers] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     getSymptoms();
     getAnswer();
   }, []);
-
-  const arrValue = []
-
-  const value = (data) => {
-    console.log(data)
-    arrValue.push(data)
-  }
 
   const getSymptoms = async () => {
     await axios
@@ -38,10 +31,7 @@ const Test = () => {
         },
       })
       .then((res) => {
-        setLoading(true);
-        setTimeout(() => {
-          setLoading(false);
-        }, 2000);
+        setLoading(false);
         setSymptoms(res.data);
         console.log(res.data);
       });
@@ -56,10 +46,7 @@ const Test = () => {
         },
       })
       .then((res) => {
-        setLoading(true);
-        setTimeout(() => {
-          setLoading(false);
-        }, 2000);
+        setLoading(false);
         setAnswers(res.data);
         console.log(res.data);
       });
@@ -68,25 +55,26 @@ const Test = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const userData = new URLSearchParams();
-    arrValue.map((item) => {
-      userData.append("value", item);
-    })
-    // userData.append("test1", value2);
+    userData.append("test", value1);
+    userData.append("test1", value2);
 
     for (var pair of userData.entries()) {
       console.log(pair[0] + ", " + pair[1]);
     }
-    // console.log(arrValue)
   };
 
   const showModal = () => {
-    setIsModalOpen(true);
+    setOpen(true);
   };
   const handleOk = () => {
-    setIsModalOpen(false);
+    setIsLoading(true);
+    setTimeout(() => {
+      setIsLoading(false);
+      setOpen(false);
+    }, 3000);
   };
   const handleCancel = () => {
-    setIsModalOpen(false);
+    setOpen(false);
   };
 
   return (
@@ -100,23 +88,47 @@ const Test = () => {
             <h4 className="text-caption-up">Test Postpartum Depression</h4>
           </div>
           <div className="mt-3">
-            <TestCard symptoms={symptoms} answers={answers} loading={loading} value={value} />
+            <TestCard symptoms={symptoms} answers={answers} loading={loading} />
           </div>
           <div className="d-flex justify-content-center">
             <button
               className="btn btn-primary text-white d-block w-100 mt-3 mb-5"
               type="submit"
-              onClick={handleSubmit}
+              onClick={showModal}
             >
               Submit
             </button>
           </div>
           <Modal
-            title="Basic Modal"
-            open={isModalOpen}
+            open={open}
+            title="Title"
             onOk={handleOk}
             onCancel={handleCancel}
+            footer={[
+              <Button key="back" onClick={handleCancel}>
+                Return
+              </Button>,
+              <Button
+                key="submit"
+                type="primary"
+                loading={loading}
+                onClick={handleOk}
+              >
+                Submit
+              </Button>,
+              <Button
+                key="link"
+                href="https://google.com"
+                type="primary"
+                loading={loading}
+                onClick={handleOk}
+              >
+                Search on Google
+              </Button>,
+            ]}
           >
+            <p>Some contents...</p>
+            <p>Some contents...</p>
             <p>Some contents...</p>
             <p>Some contents...</p>
             <p>Some contents...</p>

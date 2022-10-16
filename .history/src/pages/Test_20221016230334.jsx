@@ -67,16 +67,14 @@ const Test = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const userData = new URLSearchParams();
-    arrValue.map((item) => {
-      userData.append("value", item);
-    })
-    // userData.append("test1", value2);
+    // const userData = new URLSearchParams();
+    // userData.append("value", value);
+    // // userData.append("test1", value2);
 
-    for (var pair of userData.entries()) {
-      console.log(pair[0] + ", " + pair[1]);
-    }
-    // console.log(arrValue)
+    // for (var pair of userData.entries()) {
+    //   console.log(pair[0] + ", " + pair[1]);
+    // }
+    console.log(arrValue)
   };
 
   const showModal = () => {

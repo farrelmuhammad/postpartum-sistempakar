@@ -10,10 +10,14 @@ const TestCard = ({ symptoms, answers, loading, value }) => {
 
   console.log(symptoms);
 
+  const arrValue = [];
+
   const onChange = (e) => {
     // setLoading(!checked);
     e.preventDefault();
-    value(e.target.value)
+    console.log(e.target.value);
+    arrValue.push(e.target.value);
+    console.log(arrValue);
   };
 
   // if (loading) {

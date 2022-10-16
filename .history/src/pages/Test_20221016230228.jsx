@@ -68,9 +68,7 @@ const Test = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const userData = new URLSearchParams();
-    arrValue.map((item) => {
-      userData.append("value", item);
-    })
+    userData.append("value", value);
     // userData.append("test1", value2);
 
     for (var pair of userData.entries()) {
