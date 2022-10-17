@@ -1,5 +1,5 @@
 import { PoweroffOutlined } from "@ant-design/icons";
-import { Button, Card, Divider, Modal, Radio } from "antd";
+import { BackTop, Button, Card, Divider, Modal, Radio } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
@@ -167,10 +167,11 @@ const Test = () => {
               value={value}
             />
           </div>
+          <BackTop />
           <div className="d-flex justify-content-center">
             <Button
               type="primary"
-              className="d-block w-100 mt-3 mb-2"
+              className="d-block w-100 mt-3 mb-5"
               size="large"
               // icon={<PoweroffOutlined />}
               loading={loadings[1]}

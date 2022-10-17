@@ -25,6 +25,7 @@ const TestCard = ({ symptoms, answers, loading, value }) => {
     color: "#fff",
     textAlign: "center",
     fontSize: 14,
+    justifyContent: "right",
   };
 
   // if (loading) {

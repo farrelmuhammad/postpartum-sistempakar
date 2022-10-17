@@ -216,12 +216,12 @@ const Profile = () => {
         />
       </div>
       <div className="container mb-5">
-        {/* <div className="row justify-content-start mt-4">
+        <div className="row justify-content-start mt-4">
           <Link to="/admin">
-            <div className="col-sm-1 ps-5">
+            <div className="col-sm-4 ps-5">
               <PieChartOutlined style={{ fontSize: "140%" }} />
             </div>
-            <div className="col-sm-8 pe-auto" onClick={handleLogout}>
+            <div className="col-sm-2 pe-auto" onClick={handleLogout}>
               <h5>
                 <a className="text-black text-decoration-none pe-auto">
                   Dashboard
@@ -230,7 +230,7 @@ const Profile = () => {
             </div>
           </Link>
           <div className="border-bottom mt-3"></div>
-        </div> */}
+        </div>
         <div className="row justify-content-start mt-4">
           <div className="col-sm-1 ps-5">
             <SettingOutlined style={{ fontSize: "140%" }} />

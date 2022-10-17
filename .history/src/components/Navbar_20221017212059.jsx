@@ -109,6 +109,11 @@ const Navbar = () => {
                       Contact
                     </a>
                   </li>
+                  <li className="nav-item">
+                    <Link to="/admin" className="nav-link">
+                      Dashboard
+                    </Link>
+                  </li>
                 </ul>
               </div>
               {isLoggedIn ? (
@@ -152,6 +157,11 @@ const Navbar = () => {
               <a className="nav-link" href="#">
                 Contact
               </a>
+            </li>
+            <li className="nav-item">
+              <Link to="/admin" className="nav-link">
+                Dashboard
+              </Link>
             </li>
           </ul>
           {isLoggedIn ? (

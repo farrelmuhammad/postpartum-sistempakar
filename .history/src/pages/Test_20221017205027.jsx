@@ -170,7 +170,7 @@ const Test = () => {
           <div className="d-flex justify-content-center">
             <Button
               type="primary"
-              className="d-block w-100 mt-3 mb-2"
+              className="d-block w-100 mt-3 mb-5"
               size="large"
               // icon={<PoweroffOutlined />}
               loading={loadings[1]}
@@ -193,11 +193,14 @@ const Test = () => {
             onCancel={() => setModal2Visible(false)}
             width={1000}
             footer={[
+              <Button key="back" onClick={handleCancel}>
+                Return
+              </Button>,
               <Button
                 key="submit"
                 type="primary"
                 loading={loading}
-                // onClick={navigate("/")}
+                onClick={navigate("/")}
               >
                 Submit
               </Button>,
@@ -213,7 +216,6 @@ const Test = () => {
               onTabChange={(key) => {
                 onTab2Change(key);
               }}
-              defaultSelectedKeys={['Kategori']}
             >
               {contentListNoTitle[activeTabKey2]}
             </Card>

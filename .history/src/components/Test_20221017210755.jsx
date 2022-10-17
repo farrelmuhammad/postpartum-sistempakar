@@ -13,18 +13,7 @@ const TestCard = ({ symptoms, answers, loading, value }) => {
   const onChange = (e) => {
     // setLoading(!checked);
     e.preventDefault();
-    value(e.target.value);
-  };
-
-  const style = {
-    height: 40,
-    width: 40,
-    lineHeight: "40px",
-    borderRadius: 50,
-    backgroundColor: "#1088e9",
-    color: "#fff",
-    textAlign: "center",
-    fontSize: 14,
+    value(e.target.value)
   };
 
   // if (loading) {
@@ -53,9 +42,7 @@ const TestCard = ({ symptoms, answers, loading, value }) => {
               ))}
             </Radio.Group>
           </div>
-          <BackTop>
-            <div style={style}>UP</div>
-          </BackTop>
+          <BackTop />
         </Card>
       ))}
     </>

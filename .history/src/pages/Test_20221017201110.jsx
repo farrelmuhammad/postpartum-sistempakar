@@ -3,7 +3,6 @@ import { Button, Card, Divider, Modal, Radio } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import TestCard from "../components/Test";
 import Url from "../Config";
@@ -17,9 +16,7 @@ const Test = () => {
   const [symptoms, setSymptoms] = useState([]);
   const [answers, setAnswers] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [modal2Visible, setModal2Visible] = useState(false);
-
-  const navigate = useNavigate();
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     getSymptoms();
@@ -81,6 +78,9 @@ const Test = () => {
       console.log(pair[0] + ", " + pair[1]);
     }
 
+    setTimeout(() => {
+      showModal();
+    }, 2000);
     // console.log(arrValue)
   };
 
@@ -96,57 +96,19 @@ const Test = () => {
         const newLoadings = [...prevLoadings];
         newLoadings[index] = false;
         return newLoadings;
+        showModal()
       });
-      setModal2Visible(true);
-    }, 3000);
-    // .then(() => )
+    }, 6000);
   };
 
-  const [activeTabKey2, setActiveTabKey2] = useState("app");
-
-  const onTab2Change = (key) => {
-    setActiveTabKey2(key);
+  const showModal = () => {
+    setIsModalOpen(true);
   };
-
-  const tabListNoTitle = [
-    {
-      key: "Kategori",
-      tab: "Kategori",
-    },
-    {
-      key: "Deskripsi",
-      tab: "Deskripsi",
-    },
-    {
-      key: "Solusi",
-      tab: "Solusi",
-    },
-  ];
-  const contentListNoTitle = {
-    Kategori: (
-      <p>
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Vel alias
-        magni illum quos sunt velit similique voluptatibus minima, corporis
-        repudiandae vero officia nesciunt sit repellat deleniti sed ab tenetur
-        fugit?
-      </p>
-    ),
-    Deskripsi: (
-      <p>
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Fugiat
-        molestiae similique quisquam quaerat iste sequi sit impedit vero,
-        tempore assumenda quae reiciendis hic, adipisci dolorum maxime in dolore
-        temporibus unde?
-      </p>
-    ),
-    Solusi: (
-      <p>
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quisquam nisi
-        autem ullam! Consequuntur veniam libero error dolorum, nobis quibusdam.
-        Nam quaerat architecto omnis deserunt accusantium ipsam dolore,
-        voluptatibus molestias officiis!
-      </p>
-    ),
+  const handleOk = () => {
+    setIsModalOpen(false);
+  };
+  const handleCancel = () => {
+    setIsModalOpen(false);
   };
 
   return (
@@ -170,13 +132,11 @@ const Test = () => {
           <div className="d-flex justify-content-center">
             <Button
               type="primary"
-              className="d-block w-100 mt-3 mb-2"
-              size="large"
-              // icon={<PoweroffOutlined />}
+              icon={<PoweroffOutlined />}
               loading={loadings[1]}
               onClick={() => enterLoading(1)}
             >
-              Periksa
+              Click me!
             </Button>
             {/* <button
               className="btn btn-primary text-white d-block w-100 mt-3 mb-5"
@@ -187,36 +147,14 @@ const Test = () => {
             </button> */}
           </div>
           <Modal
-            title="Hasil Tes"
-            centered
-            visible={modal2Visible}
-            onCancel={() => setModal2Visible(false)}
-            width={1000}
-            footer={[
-              <Button
-                key="submit"
-                type="primary"
-                loading={loading}
-                // onClick={navigate("/")}
-              >
-                Submit
-              </Button>,
-            ]}
+            title="Basic Modal"
+            open={isModalOpen}
+            onOk={handleOk}
+            onCancel={handleCancel}
           >
-            <Card
-              style={{
-                width: "100%",
-              }}
-              tabList={tabListNoTitle}
-              activeTabKey={activeTabKey2}
-              // tabBarExtraContent={<a href="#">More</a>}
-              onTabChange={(key) => {
-                onTab2Change(key);
-              }}
-              defaultSelectedKeys={['Kategori']}
-            >
-              {contentListNoTitle[activeTabKey2]}
-            </Card>
+            <p>Some contents...</p>
+            <p>Some contents...</p>
+            <p>Some contents...</p>
           </Modal>
           {/* <button className="btn btn-test text-white">
             Periksa
