@@ -7,12 +7,13 @@ import TextScroller from "../components/TextScroller";
 const Home = () => {
   return (
     <>
-      <div className="container-xxl mx-auto p-0 position-relative header-2-1">
+      <div className="container-xxl mx-auto p-0  position-relative header-2-1">
         <Navbar />
       </div>
-      <div className="container-xxl mx-auto p-0 position-relative header-2-1">
+      <div className="container-xxl mx-auto p-0  position-relative header-2-1">
         <Header />
       </div>
+      <TextScroller text="Long long text to scroll" />
       <Footer />
     </>
   );

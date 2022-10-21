@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import Banner1 from "../assets/image/banner1.svg";
+import Banner1 from '../assets/image/banner1.svg'
 import { FiPlay } from "react-icons/fi";
 import { Modal } from "antd";
 import ModalYoutube from "./ModalYoutube";
@@ -32,10 +32,7 @@ const Header = () => {
                   Coba Sekarang
                 </button>
               </Link>
-              <button
-                className="btn btn-outline-dark"
-                onClick={() => setModal2Open(true)}
-              >
+              <button className="btn btn-outline-dark" onClick={() => setModal2Open(true)}>
                 <div className="d-flex align-items-center">
                   {/* <svg
                     className="me-2"
@@ -78,6 +75,12 @@ const Header = () => {
             />
           </div>
         </div>
+      </div>
+      
+      <div className="disclaimer">
+        <h3>Disclaimer</h3>
+        <p>Jika Anda sedang mengalami krisis psikologis yang mengancam hidup anda, layanan ini tidak direkomendasikan.</p>
+        <p>Silahkan menghubungi 119.</p>
       </div>
     </>
   );

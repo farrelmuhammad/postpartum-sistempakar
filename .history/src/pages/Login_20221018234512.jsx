@@ -51,7 +51,7 @@ const Login = () => {
     const userData = new URLSearchParams();
     userData.append("username", username);
     userData.append("password", password);
-
+ 
     try {
       const res = await axios({
         method: "POST",
@@ -62,7 +62,7 @@ const Login = () => {
       dispatch(
         setData({
           accessToken: res.data.accessToken,
-          username: res.data.username,
+          username: res.data.username
         })
       );
       navigate("/");

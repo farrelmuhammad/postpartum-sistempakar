@@ -221,16 +221,13 @@ const Profile = () => {
           <div className="col-sm-1 ps-5">
             <PieChartOutlined style={{ fontSize: "140%" }} />
           </div>
-          <div className="col-sm-8 pe-auto">
-            <Link
-              to="/admin"
-              className="text-black text-decoration-none pe-auto"
-            >
+          <Link to="/admin" className="text-black text-decoration-none pe-auto">
+            <div className="col-sm-8 pe-auto">
               <h5>
                 <a>Dashboard</a>
               </h5>
-            </Link>
-          </div>
+            </div>
+          </Link>
           {/* </Link> */}
           <div className="border-bottom mt-3"></div>
         </div>

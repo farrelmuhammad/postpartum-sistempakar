@@ -218,19 +218,19 @@ const Profile = () => {
       <div className="container mb-5">
         <div className="row justify-content-start mt-4">
           {/* <Link to="/admin"> */}
-          <div className="col-sm-1 ps-5">
-            <PieChartOutlined style={{ fontSize: "140%" }} />
-          </div>
-          <div className="col-sm-8 pe-auto">
-            <Link
-              to="/admin"
-              className="text-black text-decoration-none pe-auto"
-            >
+            <div className="col-sm-1 ps-5">
+              <PieChartOutlined style={{ fontSize: "140%" }} />
+            </div>
+            <div className="col-sm-8 pe-auto" onClick={handleLogout}>
               <h5>
-                <a>Dashboard</a>
+              <Link to="/admin" className="text-black text-decoration-none pe-auto">
+
+              </Link>
+                <a >
+                  Dashboard
+                </a>
               </h5>
-            </Link>
-          </div>
+            </div>
           {/* </Link> */}
           <div className="border-bottom mt-3"></div>
         </div>

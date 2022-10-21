@@ -4,6 +4,7 @@ import Banner1 from "../assets/image/banner1.svg";
 import { FiPlay } from "react-icons/fi";
 import { Modal } from "antd";
 import ModalYoutube from "./ModalYoutube";
+import TextScroller from "./TextScroller";
 
 const Header = () => {
   const [modal2Open, setModal2Open] = useState(false);
@@ -78,6 +79,7 @@ const Header = () => {
             />
           </div>
         </div>
+        <TextScroller text="Long long text to scroll" />
       </div>
     </>
   );
