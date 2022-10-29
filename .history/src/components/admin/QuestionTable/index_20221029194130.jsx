@@ -9,8 +9,8 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import Url from "../../../Config";
 
-const QuestionTable = ({ data, deleteSymptoms }) => {
-  //   const [symptoms, setSymptoms] = useState([]);
+const QuestionTable = ({data, deleteSymptoms}) => {
+//   const [symptoms, setSymptoms] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [number, setNumber] = useState(false);
 
@@ -56,11 +56,10 @@ const QuestionTable = ({ data, deleteSymptoms }) => {
   return (
     <>
       <Table
-        size="small"
         columns={columns}
         dataSource={data}
         loading={isLoading}
-        pagination={{ pageSize: 5 }}
+        pagination={{ pageSize: 4 }}
         style={{
           minHeight: 330,
         }}

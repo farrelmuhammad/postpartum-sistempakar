@@ -49,7 +49,7 @@ const TestCard = ({ symptoms, answers, loading, value }) => {
             </div>
             <Radio.Group onChange={onChange}>
               {answers?.map((ans) => (
-                <Radio value={ans.md_user}>{ans.answer_name}</Radio>
+                <Radio value={ans.CF_user}>{ans.answer_name}</Radio>
               ))}
             </Radio.Group>
           </div>

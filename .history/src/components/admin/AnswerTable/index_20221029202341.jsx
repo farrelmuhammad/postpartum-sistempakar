@@ -9,8 +9,8 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import Url from "../../../Config";
 
-const QuestionTable = ({ data, deleteSymptoms }) => {
-  //   const [symptoms, setSymptoms] = useState([]);
+const AnswerTable = ({data, deleteAnswers}) => {
+//   const [Answers, setSymptoms] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [number, setNumber] = useState(false);
 
@@ -20,18 +20,17 @@ const QuestionTable = ({ data, deleteSymptoms }) => {
       dataIndex: "id",
       key: "id",
       width: "8%",
-      render: (text) => <a>G - {text}</a>,
+      render: (text) => <a>{text}</a>,
     },
     {
-      title: "Gejala",
-      dataIndex: "symptoms_name",
-      key: "symptoms_name",
+      title: "Jawaban",
+      dataIndex: "answer_name",
+      key: "answer_name",
     },
     {
-      title: "MB Gejala",
-      dataIndex: "mb_symptom",
-      key: "mb_symptom",
-      width: "10%",
+      title: "MD User",
+      dataIndex: "md_user",
+      key: "md_user",
     },
     {
       title: "Action",
@@ -45,7 +44,7 @@ const QuestionTable = ({ data, deleteSymptoms }) => {
               size="small"
               type="danger"
               icon={<DeleteOutlined />}
-              onClick={() => deleteSymptoms(record.id)}
+              onClick={() => deleteAnswers(record.id)}
             />
           </Space>
         </>
@@ -56,11 +55,10 @@ const QuestionTable = ({ data, deleteSymptoms }) => {
   return (
     <>
       <Table
-        size="small"
         columns={columns}
         dataSource={data}
         loading={isLoading}
-        pagination={{ pageSize: 5 }}
+        pagination={{ pageSize: 4 }}
         style={{
           minHeight: 330,
         }}
@@ -69,4 +67,4 @@ const QuestionTable = ({ data, deleteSymptoms }) => {
   );
 };
 
-export default QuestionTable;
+export default AnswerTable;

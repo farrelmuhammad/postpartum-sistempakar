@@ -70,7 +70,7 @@ const Test = () => {
   };
 
   const handleSubmit = (e) => {
-    // e.preventDefault();
+    e.preventDefault();
     const userData = new URLSearchParams();
     arrValue.map((item) => {
       userData.append("value", item);

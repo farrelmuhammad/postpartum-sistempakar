@@ -38,6 +38,7 @@ import Url from "../../Config";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
+import AnswerTable from "../../components/admin/AnswerTable";
 
 const { Header, Content, Sider } = Layout;
 const items = [
@@ -55,11 +56,11 @@ const items = [
   label: `nav ${index + 1}`,
 }));
 
-const Question = () => {
+const Answer = () => {
   const [collapsed, setCollapsed] = useState(false);
-  const [symptoms, setSymptoms] = useState([]);
-  const [symptoms_name, setSymptoms_name] = useState('');
-  const [mbSymptoms, setMBSymptoms] = useState('')
+  const [answers, setAnswers] = useState([]);
+  const [answer_name, setAnswer_name] = useState([]);
+  const [mdUser, setMDUser] = useState([]);
   const auth = useSelector((state) => state.auth);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -75,31 +76,31 @@ const Question = () => {
     setVisible(false);
   };
 
-  const deleteSymptoms = async (id) => {
-    await axios.delete(`${Url}/symptoms/${id}`, {
+  const deleteAnswers = async (id) => {
+    await axios.delete(`${Url}/answers/${id}`, {
       headers: {
         Accept: "application/json",
         Authorization: `Bearer ${auth.accessToken}`,
       },
     });
-    getSymptoms();
+    getAnswer();
     Swal.fire("Berhasil Dihapus!", `G - ${id} Berhasil hapus`, "success");
   };
 
   useEffect(() => {
-    getSymptoms();
+    getAnswer();
   }, []);
 
-  const getSymptoms = async () => {
+  const getAnswer = async () => {
     await axios
-      .get(`${Url}/symptoms`, {
+      .get(`${Url}/answers`, {
         headers: {
           Accept: "application/json",
           Authorization: `Bearer ${auth.accessToken}`,
         },
       })
       .then((res) => {
-        setSymptoms(res.data);
+        setAnswers(res.data);
         console.log(res.data);
       });
   };
@@ -112,43 +113,26 @@ const Question = () => {
       setConfirmLoading(false);
       // message.success('This is a success message');
     }, 2000);
-    message.loading("Added question in progress..", 2.5).then(() => {
-      message.success("Successfully Added", 2.5);
-      getSymptoms();
-    });
+    message.loading("Added question in progress..", 2.5);
     const userData = new URLSearchParams();
-    userData.append("symptoms_name", symptoms_name);
-    userData.append("mb_symptom", mbSymptoms);
-    // userData.append("password", password);
+    userData.append("answer_name", answer_name);
+    userData.append("md_user", mdUser);
     axios({
       method: "post",
-      url: `${Url}/symptoms`,
+      url: `${Url}/answers`,
       data: userData,
       headers: {
         Accept: "application/json",
         Authorization: `Bearer ${auth.accessToken}`,
       },
     })
-      .then(function (response) {
-        //handle success
-        // Swal.fire("Berhasil Ditambahkan", ` Masuk dalam list`, "success");
-        navigate("/admin/question");
+      .then(() => {
+        message.success("Successfully Added", 2.5);
+        getAnswer();
       })
       .catch((err) => {
-        if (err.response) {
-          console.log("err.response ", err.response);
-          Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: err.response.data.error,
-          });
-        } else if (err.request) {
-          console.log("err.request ", err.request);
-          Swal.fire("Gagal Ditambahkan", "Mohon Cek Dahulu..", "error");
-        } else if (err.message) {
-          // do something other than the other two
-          Swal.fire("Gagal Ditambahkan", "Mohon Cek Dahulu..", "error");
-        }
+        message.error("Failed Added", 2);
+        message.error("Please check your input", 2.5);
       });
   };
 
@@ -173,7 +157,7 @@ const Question = () => {
           <Menu
             mode="inline"
             theme="dark"
-            defaultSelectedKeys={["3"]}
+            defaultSelectedKeys={["5"]}
             // selectedKeys={[location.pathname]}
           >
             <Menu.Item key="1" icon={<PieChartOutlined />}>
@@ -257,7 +241,7 @@ const Question = () => {
               <div className="container p-3 mb-1 bg-body rounded d-flex flex-column">
                 <div className="row">
                   <div className="col text-title text-start">
-                    <h4 className="title fw-bold">Gejala</h4>
+                    <h4 className="title fw-bold">Jawaban</h4>
                   </div>
                   <div className="col button-add text-end me-3">
                     <Button
@@ -266,13 +250,10 @@ const Question = () => {
                       onClick={showModal}
                     />
                   </div>
-                  <QuestionTable
-                    data={symptoms}
-                    deleteSymptoms={deleteSymptoms}
-                  />
+                  <AnswerTable data={answers} deleteAnswers={deleteAnswers} />
                 </div>
                 <Modal
-                  title="Tambah Gejala"
+                  title="Tambah Jawaban"
                   centered
                   visible={visible}
                   onOk={handleSubmit}
@@ -285,12 +266,12 @@ const Question = () => {
                         htmlFor="inputNama3"
                         className="col-sm-3 col-form-label"
                       >
-                        Gejala
+                        Jawaban
                       </label>
                       <div className="col-sm-9">
                         <Input
-                          placeholder="Type Question"
-                          onChange={(e) => setSymptoms_name(e.target.value)}
+                          placeholder="Type Answer"
+                          onChange={(e) => setAnswer_name(e.target.value)}
                         />
                       </div>
                     </div>
@@ -299,12 +280,12 @@ const Question = () => {
                         htmlFor="inputNama3"
                         className="col-sm-3 col-form-label"
                       >
-                        MB Gejala
+                        Value
                       </label>
                       <div className="col-sm-9">
                         <Input
-                          placeholder="Type Question"
-                          onChange={(e) => setMBSymptoms(e.target.value)}
+                          placeholder="Type Value"
+                          onChange={(e) => setMDUser(e.target.value)}
                         />
                       </div>
                     </div>
@@ -324,4 +305,4 @@ const Question = () => {
   );
 };
 
-export default Question;
+export default Answer;

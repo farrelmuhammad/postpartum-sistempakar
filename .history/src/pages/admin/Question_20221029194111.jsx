@@ -299,7 +299,7 @@ const Question = () => {
                         htmlFor="inputNama3"
                         className="col-sm-3 col-form-label"
                       >
-                        MB Gejala
+                        CF Gejala
                       </label>
                       <div className="col-sm-9">
                         <Input

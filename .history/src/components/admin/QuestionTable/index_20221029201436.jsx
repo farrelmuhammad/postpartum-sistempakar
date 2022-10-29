@@ -60,10 +60,11 @@ const QuestionTable = ({ data, deleteSymptoms }) => {
         columns={columns}
         dataSource={data}
         loading={isLoading}
-        pagination={{ pageSize: 5 }}
+        pagination={{ pageSize: 10 }}
         style={{
           minHeight: 330,
         }}
+        scroll={{ y: 330 }}
       />
     </>
   );
