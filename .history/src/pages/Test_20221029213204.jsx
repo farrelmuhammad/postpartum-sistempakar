@@ -84,7 +84,7 @@ const Test = () => {
     let total = 0;
     let cf_he = [];
     for (let i = 0; i < symptomsMB.length; i++) {
-      total = symptomsMB[i] * arrValue[i];
+      total = symptomsMB[i] - arrValue[i];
       cf_he.push(total);
     }
 

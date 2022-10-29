@@ -49,7 +49,7 @@ const Test = () => {
         }, 2000);
         const getData = res.data;
         setSymptoms(getData);
-        setSymptomsMB(getData.map((d) => d.mb_symptom));
+        setSymptomsMB(getData.map((d) => d.mb_symptom))
         console.log(getData.map((d) => d.mb_symptom));
       });
   };
@@ -81,30 +81,18 @@ const Test = () => {
     });
     // userData.append("test1", value2);
 
-    let total = 0;
-    let cf_he = [];
-    for (let i = 0; i < symptomsMB.length; i++) {
-      total = symptomsMB[i] * arrValue[i];
-      cf_he.push(total);
-    }
-
-    console.log(cf_he);
-
-    let cf_old = 0;
-    cf_old = cf_he[0] + cf_he[1] * (1 - cf_he[0]);
-
-    for (let i = 2; i < cf_he.length; i++) {
-      cf_old = cf_old + cf_he[i] * (1 - cf_old);
-      // console.log(cf_old);
-    }
-
-    console.log((cf_old * 100)  / 100)
+    // let total = 0;
+    // let cf_he = [];
+    // for (let i = 0; i < mbAhli.length; i++) {
+    //   total = mbAhli[i] * mdUser[i];
+    //   cf_he.push(total);
+    // }
 
     // return cf_he;
 
-    // for (var pair of userData.entries()) {
-    //   console.log(pair[0] + ", " + pair[1]);
-    // }
+    for (var pair of userData.entries()) {
+      console.log(pair[0] + ", " + pair[1]);
+    }
 
     // console.log(arrValue)
   };

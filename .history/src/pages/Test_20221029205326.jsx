@@ -98,7 +98,7 @@ const Test = () => {
       // console.log(cf_old);
     }
 
-    console.log((cf_old * 100)  / 100)
+    console.log(cf_old)
 
     // return cf_he;
 

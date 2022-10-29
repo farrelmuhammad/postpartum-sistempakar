@@ -49,7 +49,7 @@ const Test = () => {
         }, 2000);
         const getData = res.data;
         setSymptoms(getData);
-        setSymptomsMB(getData.map((d) => d.mb_symptom));
+        setSymptomsMB(getData.map((d) => d.mb_symptom))
         console.log(getData.map((d) => d.mb_symptom));
       });
   };
@@ -89,16 +89,6 @@ const Test = () => {
     }
 
     console.log(cf_he);
-
-    let cf_old = 0;
-    cf_old = cf_he[0] + cf_he[1] * (1 - cf_he[0]);
-
-    for (let i = 2; i < cf_he.length; i++) {
-      cf_old = cf_old + cf_he[i] * (1 - cf_old);
-      // console.log(cf_old);
-    }
-
-    console.log((cf_old * 100)  / 100)
 
     // return cf_he;
 
