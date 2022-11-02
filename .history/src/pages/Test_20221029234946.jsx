@@ -76,11 +76,11 @@ const Test = () => {
   const babyblues = () => {
     let cf_he = []
 
-    for (let i = 0; i < symptomsMB.length; i++) {
+    for (let i = 0; i < symptomsMB[9].length; i++) {
       cf_he.push(symptomsMB[i] * arrValue[i])
     }
 
-    console.log(symptomsMB[9].length)
+    console.log(cf_he)
   }
 
   // const handleSubmit = (e) => {

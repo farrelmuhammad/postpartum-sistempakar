@@ -73,55 +73,41 @@ const Test = () => {
       });
   };
 
-  const babyblues = () => {
-    let cf_he = []
+  const handleSubmit = (e) => {
+    // e.preventDefault();
+    const userData = new URLSearchParams();
+    arrValue.map((item) => {
+      userData.append("value", item);
+    });
+    // userData.append("test1", value2);
 
+    let total = 0;
+    let cf_he = [];
     for (let i = 0; i < symptomsMB.length; i++) {
-      cf_he.push(symptomsMB[i] * arrValue[i])
+      total = symptomsMB[i] * arrValue[i];
+      cf_he.push(total);
     }
 
-    console.log(symptomsMB[9].length)
-  }
+    // console.log(cf_he);
 
-  // const handleSubmit = (e) => {
-  //   // e.preventDefault();
-  //   const userData = new URLSearchParams();
-  //   arrValue.map((item) => {
-  //     userData.append("value", item);
-  //   });
-  //   // userData.append("test1", value2);
+    let cf_old = 0;
+    cf_old = cf_he[0] + cf_he[1] * (1 - cf_he[0]);
 
-  //   let total = 0;
-  //   let cf_he = [];
-  //   for (let i = 0; i < symptomsMB.length; i++) {
-  //     total = symptomsMB[i] * arrValue[i];
-  //     cf_he.push(total);
-  //   }
+    for (let i = 2; i < cf_he.length; i++) {
+      cf_old = cf_old + cf_he[i] * (1 - cf_old);
+      // console.log(cf_old);
+    }
 
-  //   // console.log(cf_he);
+    console.log((cf_old * 100)  / 100)
 
-  //   let cf_old = 0;
-  //   cf_old = cf_he[0] + cf_he[1] * (1 - cf_he[0]);
+    // return cf_he;
 
-  //   for (let i = 2; i < cf_he.length; i++) {
-  //     cf_old = cf_old + cf_he[i] * (1 - cf_old);
-  //     // console.log(cf_old);
-  //   }
+    // for (var pair of userData.entries()) {
+    //   console.log(pair[0] + ", " + pair[1]);
+    // }
 
-  //   console.log((cf_old * 100)  / 100)
-
-  //   // return cf_he;
-
-  //   // for (var pair of userData.entries()) {
-  //   //   console.log(pair[0] + ", " + pair[1]);
-  //   // }
-
-  //   // console.log(arrValue)
-  // };
-
-  const handleSubmit = () => {
-    babyblues()
-  }
+    // console.log(arrValue)
+  };
 
   const [loadings, setLoadings] = useState([]);
   const enterLoading = (index) => {
