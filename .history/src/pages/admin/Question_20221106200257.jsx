@@ -162,40 +162,40 @@ const Question = () => {
     userData.append("mb_major", mbMajor);
     userData.append("mb_psychosis", mbPsychosis);
 
-    // for (var pair of userData.entries()) {
-    //   console.log(pair[0] + ", " + pair[1]);
-    // }
+    for (var pair of userData.entries()) {
+      console.log(pair[0] + ", " + pair[1]);
+    }
 
-    axios({
-      method: "post",
-      url: `${Url}/symptoms`,
-      data: userData,
-      headers: {
-        Accept: "application/json",
-        Authorization: `Bearer ${auth.accessToken}`,
-      },
-    })
-      .then(function (response) {
-        //handle success
-        // Swal.fire("Berhasil Ditambahkan", ` Masuk dalam list`, "success");
-        navigate("/admin/question");
-      })
-      .catch((err) => {
-        if (err.response) {
-          console.log("err.response ", err.response);
-          Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: err.response.data.message.map((d) => d),
-          });
-        } else if (err.request) {
-          console.log("err.request ", err.request);
-          Swal.fire("Gagal Ditambahkan", "Mohon Cek Dahulu..", "error");
-        } else if (err.message) {
-          // do something other than the other two
-          Swal.fire("Gagal Ditambahkan", "Mohon Cek Dahulu..", "error");
-        }
-      });
+    // axios({
+    //   method: "post",
+    //   url: `${Url}/symptoms`,
+    //   data: userData,
+    //   headers: {
+    //     Accept: "application/json",
+    //     Authorization: `Bearer ${auth.accessToken}`,
+    //   },
+    // })
+    //   .then(function (response) {
+    //     //handle success
+    //     // Swal.fire("Berhasil Ditambahkan", ` Masuk dalam list`, "success");
+    //     navigate("/admin/question");
+    //   })
+    //   .catch((err) => {
+    //     if (err.response) {
+    //       console.log("err.response ", err.response);
+    //       Swal.fire({
+    //         icon: "error",
+    //         title: "Oops...",
+    //         text: err.response.data.message.map(d => d),
+    //       });
+    //     } else if (err.request) {
+    //       console.log("err.request ", err.request);
+    //       Swal.fire("Gagal Ditambahkan", "Mohon Cek Dahulu..", "error");
+    //     } else if (err.message) {
+    //       // do something other than the other two
+    //       Swal.fire("Gagal Ditambahkan", "Mohon Cek Dahulu..", "error");
+    //     }
+    //   });
   };
 
   return (

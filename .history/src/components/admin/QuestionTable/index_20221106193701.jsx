@@ -30,20 +30,20 @@ const QuestionTable = ({ data, deleteSymptoms }) => {
     },
     {
       title: "MB Baby Blues",
-      dataIndex: "mb_baby",
-      key: "mb_baby",
+      dataIndex: "mb_symptom",
+      key: "mb_symptom",
       width: "10%",
     },
     {
-      title: "MB Major",
-      dataIndex: "mb_major",
-      key: "mb_major",
+      title: "MB Baby Blues",
+      dataIndex: "mb_symptom",
+      key: "mb_symptom",
       width: "10%",
     },
     {
-      title: "MB Psychosis",
-      dataIndex: "mb_psychosis",
-      key: "mb_psychosis",
+      title: "MB Baby Blues",
+      dataIndex: "mb_symptom",
+      key: "mb_symptom",
       width: "10%",
     },
     {

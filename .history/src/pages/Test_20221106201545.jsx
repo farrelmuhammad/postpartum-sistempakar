@@ -50,7 +50,7 @@ const Test = () => {
         const getData = res.data;
         setSymptoms(getData);
         setSymptomsMB(getData.map((d) => d.mb_baby));
-        console.log(getData.map((d) => d.mb_baby));
+        console.log(getData.map((d) => d.mb_symptom));
       });
   };
 

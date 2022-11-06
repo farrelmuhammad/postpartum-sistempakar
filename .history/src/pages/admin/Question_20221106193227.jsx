@@ -61,11 +61,8 @@ const items = [
 const Question = () => {
   const [collapsed, setCollapsed] = useState(false);
   const [symptoms, setSymptoms] = useState([]);
-  const [answers, setAnswers] = useState([]);
   const [symptoms_name, setSymptoms_name] = useState("");
-  const [mbBaby, setMbBaby] = useState("");
-  const [mbMajor, setMbMajor] = useState("");
-  const [mbPsychosis, setMbPsychosis] = useState("");
+  const [mbSymptoms, setMBSymptoms] = useState("");
   const auth = useSelector((state) => state.auth);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -94,26 +91,7 @@ const Question = () => {
 
   useEffect(() => {
     getSymptoms();
-    getAnswer();
   }, []);
-
-  const getAnswer = async () => {
-    await axios
-      .get(`${Url}/answers`, {
-        headers: {
-          Accept: "application/json",
-          Authorization: `Bearer ${auth.accessToken}`,
-        },
-      })
-      .then((res) => {
-        setAnswers(res.data);
-        console.log(res.data);
-      });
-  };
-
-  const options = answers?.map((d) => {
-    return { label: d.answer_name, value: d.md_user };
-  });
 
   const getSymptoms = async () => {
     await axios
@@ -127,21 +105,6 @@ const Question = () => {
         setSymptoms(res.data);
         console.log(res.data);
       });
-  };
-
-  const MbSymptoms1 = (value) => {
-    // console.log(value);
-    setMbBaby(value);
-  };
-
-  const MbSymptoms2 = (value) => {
-    // console.log(value);
-    setMbMajor(value);
-  };
-
-  const MbSymptoms3 = (value) => {
-    // console.log(value);
-    setMbPsychosis(value);
   };
 
   const handleSubmit = async (e) => {
@@ -158,14 +121,8 @@ const Question = () => {
     });
     const userData = new URLSearchParams();
     userData.append("symptoms_name", symptoms_name);
-    userData.append("mb_baby", mbBaby);
-    userData.append("mb_major", mbMajor);
-    userData.append("mb_psychosis", mbPsychosis);
-
-    // for (var pair of userData.entries()) {
-    //   console.log(pair[0] + ", " + pair[1]);
-    // }
-
+    userData.append("mb_symptom", mbSymptoms);
+    // userData.append("password", password);
     axios({
       method: "post",
       url: `${Url}/symptoms`,
@@ -186,7 +143,7 @@ const Question = () => {
           Swal.fire({
             icon: "error",
             title: "Oops...",
-            text: err.response.data.message.map((d) => d),
+            text: err.response.data.error,
           });
         } else if (err.request) {
           console.log("err.request ", err.request);
@@ -351,7 +308,7 @@ const Question = () => {
                       <div className="col-sm-9">
                         <Select
                           showSearch
-                          style={{ width: 558 }}
+                          style={{ width: 1000 }}
                           placeholder="Select a person"
                           optionFilterProp="children"
                           // onChange={onChange}
@@ -361,8 +318,20 @@ const Question = () => {
                               .toLowerCase()
                               .includes(input.toLowerCase())
                           }
-                          onChange={MbSymptoms1}
-                          options={options}
+                          options={[
+                            {
+                              value: "jack",
+                              label: "Jack",
+                            },
+                            {
+                              value: "lucy",
+                              label: "Lucy",
+                            },
+                            {
+                              value: "tom",
+                              label: "Tom",
+                            },
+                          ]}
                         />
                         {/* <Input
                           placeholder="Type Question"
@@ -378,19 +347,9 @@ const Question = () => {
                         MB Postpartum Major
                       </label>
                       <div className="col-sm-9">
-                        <Select
-                          showSearch
-                          style={{ width: 558 }}
-                          placeholder="Select a person"
-                          optionFilterProp="children"
-                          onChange={MbSymptoms2}
-                          // onSearch={onSearch}
-                          filterOption={(input, option) =>
-                            (option?.label ?? "")
-                              .toLowerCase()
-                              .includes(input.toLowerCase())
-                          }
-                          options={options}
+                        <Input
+                          placeholder="Type Question"
+                          onChange={(e) => setMBSymptoms(e.target.value)}
                         />
                       </div>
                     </div>
@@ -402,20 +361,9 @@ const Question = () => {
                         MB Postpartum Psychosis
                       </label>
                       <div className="col-sm-9">
-                        <Select
-                          showSearch
-                          style={{ width: 558 }}
-                          placeholder="Select a person"
-                          optionFilterProp="children"
-                          // onChange={onChange}
-                          // onSearch={onSearch}
-                          filterOption={(input, option) =>
-                            (option?.label ?? "")
-                              .toLowerCase()
-                              .includes(input.toLowerCase())
-                          }
-                          onChange={MbSymptoms3}
-                          options={options}
+                        <Input
+                          placeholder="Type Question"
+                          onChange={(e) => setMBSymptoms(e.target.value)}
                         />
                       </div>
                     </div>
