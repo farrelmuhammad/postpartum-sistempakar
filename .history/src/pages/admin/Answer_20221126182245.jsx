@@ -93,14 +93,14 @@ const Answer = () => {
 
   const getAnswer = async () => {
     await axios
-      .get(`${Url}/answer`, {
+      .get(`${Url}/answers`, {
         headers: {
           Accept: "application/json",
           Authorization: `Bearer ${auth.accessToken}`,
         },
       })
       .then((res) => {
-        setAnswers(res.data.data);
+        setAnswers(res.data);
         console.log(res.data);
       });
   };
@@ -118,11 +118,11 @@ const Answer = () => {
       getAnswer();
     });
     const userData = new URLSearchParams();
-    userData.append("answer", answer_name);
+    userData.append("answer_name", answer_name);
     userData.append("md_user", mdUser);
     axios({
       method: "post",
-      url: `${Url}/answer`,
+      url: `${Url}/answers`,
       data: userData,
       headers: {
         Accept: "application/json",

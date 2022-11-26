@@ -118,7 +118,7 @@ const Answer = () => {
       getAnswer();
     });
     const userData = new URLSearchParams();
-    userData.append("answer", answer_name);
+    userData.append("answer_name", answer_name);
     userData.append("md_user", mdUser);
     axios({
       method: "post",

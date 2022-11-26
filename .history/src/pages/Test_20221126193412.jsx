@@ -102,9 +102,10 @@ const Test = () => {
   }
 
   const handleSubmit = (e) => {
-    const probA = countProbA()
+    // jalankan 3 fn yang akan menghitung masing-masing probabilitas penyakit
+    // hasil 3 fungsi simpan di variable
     
-    console.log('probabilitas penyakit A: ' + probA)
+    
     // e.preventDefault();
     // const userData = new URLSearchParams();
     // arrValue.map((item) => {

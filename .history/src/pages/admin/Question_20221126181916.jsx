@@ -23,12 +23,15 @@ import {
 } from "@ant-design/icons";
 import {
   Button,
+  Col,
   Input,
   Layout,
   Menu,
   message,
   Modal,
   notification,
+  Row,
+  Select,
   Space,
 } from "antd";
 import Search from "antd/lib/transfer/search";
@@ -38,7 +41,6 @@ import Url from "../../Config";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
-import AnswerTable from "../../components/admin/AnswerTable";
 
 const { Header, Content, Sider } = Layout;
 const items = [
@@ -56,11 +58,14 @@ const items = [
   label: `nav ${index + 1}`,
 }));
 
-const Answer = () => {
+const Question = () => {
   const [collapsed, setCollapsed] = useState(false);
+  const [symptoms, setSymptoms] = useState([]);
   const [answers, setAnswers] = useState([]);
-  const [answer_name, setAnswer_name] = useState([]);
-  const [mdUser, setMDUser] = useState([]);
+  const [symptoms_name, setSymptoms_name] = useState("");
+  const [mbBaby, setMbBaby] = useState("");
+  const [mbMajor, setMbMajor] = useState("");
+  const [mbPsychosis, setMbPsychosis] = useState("");
   const auth = useSelector((state) => state.auth);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -76,18 +81,19 @@ const Answer = () => {
     setVisible(false);
   };
 
-  const deleteAnswers = async (id) => {
-    await axios.delete(`${Url}/answers/${id}`, {
+  const deleteSymptoms = async (id) => {
+    await axios.delete(`${Url}/symptoms/${id}`, {
       headers: {
         Accept: "application/json",
         Authorization: `Bearer ${auth.accessToken}`,
       },
     });
-    getAnswer();
+    getSymptoms();
     Swal.fire("Berhasil Dihapus!", `G - ${id} Berhasil hapus`, "success");
   };
 
   useEffect(() => {
+    getSymptoms();
     getAnswer();
   }, []);
 
@@ -100,9 +106,42 @@ const Answer = () => {
         },
       })
       .then((res) => {
-        setAnswers(res.data.data);
+        setAnswers(res.data);
         console.log(res.data);
       });
+  };
+
+  // const options = answers?.map((d) => {
+  //   return { label: d.answer_name, value: d.md_user };
+  // });
+
+  const getSymptoms = async () => {
+    await axios
+      .get(`${Url}/symptom`, {
+        headers: {
+          Accept: "application/json",
+          Authorization: `Bearer ${auth.accessToken}`,
+        },
+      })
+      .then((res) => {
+        setSymptoms(res.data);
+        console.log(res.data);
+      });
+  };
+
+  const MbSymptoms1 = (value) => {
+    // console.log(value);
+    setMbBaby(value);
+  };
+
+  const MbSymptoms2 = (value) => {
+    // console.log(value);
+    setMbMajor(value);
+  };
+
+  const MbSymptoms3 = (value) => {
+    // console.log(value);
+    setMbPsychosis(value);
   };
 
   const handleSubmit = async (e) => {
@@ -115,26 +154,47 @@ const Answer = () => {
     }, 2000);
     message.loading("Added question in progress..", 2.5).then(() => {
       message.success("Successfully Added", 2.5);
-      getAnswer();
+      getSymptoms();
     });
     const userData = new URLSearchParams();
-    userData.append("answer", answer_name);
-    userData.append("md_user", mdUser);
+    userData.append("symptoms_name", symptoms_name);
+    userData.append("mb_baby", mbBaby);
+    userData.append("mb_major", mbMajor);
+    userData.append("mb_psychosis", mbPsychosis);
+
+    // for (var pair of userData.entries()) {
+    //   console.log(pair[0] + ", " + pair[1]);
+    // }
+
     axios({
       method: "post",
-      url: `${Url}/answer`,
+      url: `${Url}/symptom`,
       data: userData,
       headers: {
         Accept: "application/json",
         Authorization: `Bearer ${auth.accessToken}`,
       },
     })
-      .then(() => {
-        navigate("/admin/answer");
+      .then(function (response) {
+        //handle success
+        // Swal.fire("Berhasil Ditambahkan", ` Masuk dalam list`, "success");
+        navigate("/admin/question");
       })
       .catch((err) => {
-        message.error("Failed Added", 2);
-        message.error("Please check your input", 2.5);
+        if (err.response) {
+          console.log("err.response ", err.response);
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: err.response.data.message.map((d) => d),
+          });
+        } else if (err.request) {
+          console.log("err.request ", err.request);
+          Swal.fire("Gagal Ditambahkan", "Mohon Cek Dahulu..", "error");
+        } else if (err.message) {
+          // do something other than the other two
+          Swal.fire("Gagal Ditambahkan", "Mohon Cek Dahulu..", "error");
+        }
       });
   };
 
@@ -159,7 +219,7 @@ const Answer = () => {
           <Menu
             mode="inline"
             theme="dark"
-            defaultSelectedKeys={["5"]}
+            defaultSelectedKeys={["3"]}
             // selectedKeys={[location.pathname]}
           >
             <Menu.Item key="1" icon={<PieChartOutlined />}>
@@ -243,7 +303,7 @@ const Answer = () => {
               <div className="container p-3 mb-1 bg-body rounded d-flex flex-column">
                 <div className="row">
                   <div className="col text-title text-start">
-                    <h4 className="title fw-bold">Jawaban</h4>
+                    <h4 className="title fw-bold">Gejala</h4>
                   </div>
                   <div className="col button-add text-end me-3">
                     <Button
@@ -252,15 +312,19 @@ const Answer = () => {
                       onClick={showModal}
                     />
                   </div>
-                  <AnswerTable data={answers} deleteAnswers={deleteAnswers} />
+                  <QuestionTable
+                    data={symptoms}
+                    deleteSymptoms={deleteSymptoms}
+                  />
                 </div>
                 <Modal
-                  title="Tambah Jawaban"
+                  title="Tambah Gejala"
                   centered
                   visible={visible}
                   onOk={handleSubmit}
                   confirmLoading={confirmLoading}
                   onCancel={handleCancel}
+                  width={800}
                 >
                   <div className="text-title text-start">
                     <div className="row">
@@ -268,12 +332,12 @@ const Answer = () => {
                         htmlFor="inputNama3"
                         className="col-sm-3 col-form-label"
                       >
-                        Jawaban
+                        Gejala
                       </label>
                       <div className="col-sm-9">
                         <Input
-                          placeholder="Type Answer"
-                          onChange={(e) => setAnswer_name(e.target.value)}
+                          placeholder="Type Question"
+                          onChange={(e) => setSymptoms_name(e.target.value)}
                         />
                       </div>
                     </div>
@@ -282,13 +346,77 @@ const Answer = () => {
                         htmlFor="inputNama3"
                         className="col-sm-3 col-form-label"
                       >
-                        MD User
+                        MB Baby Blues
                       </label>
                       <div className="col-sm-9">
-                        <Input
-                          placeholder="Type Value"
-                          onChange={(e) => setMDUser(e.target.value)}
-                        />
+                        {/* <Select
+                          showSearch
+                          style={{ width: 558 }}
+                          placeholder="Select a person"
+                          optionFilterProp="children"
+                          // onChange={onChange}
+                          // onSearch={onSearch}
+                          filterOption={(input, option) =>
+                            (option?.label ?? "")
+                              .toLowerCase()
+                              .includes(input.toLowerCase())
+                          }
+                          onChange={MbSymptoms1}
+                          options={options}
+                        /> */}
+                        {/* <Input
+                          placeholder="Type Question"
+                          onChange={(e) => setMBSymptoms(e.target.value)}
+                        /> */}
+                      </div>
+                    </div>
+                    <div className="row">
+                      <label
+                        htmlFor="inputNama3"
+                        className="col-sm-3 col-form-label"
+                      >
+                        MB Postpartum Major
+                      </label>
+                      <div className="col-sm-9">
+                        {/* <Select
+                          showSearch
+                          style={{ width: 558 }}
+                          placeholder="Select a person"
+                          optionFilterProp="children"
+                          onChange={MbSymptoms2}
+                          // onSearch={onSearch}
+                          filterOption={(input, option) =>
+                            (option?.label ?? "")
+                              .toLowerCase()
+                              .includes(input.toLowerCase())
+                          }
+                          options={options}
+                        /> */}
+                      </div>
+                    </div>
+                    <div className="row">
+                      <label
+                        htmlFor="inputNama3"
+                        className="col-sm-3 col-form-label"
+                      >
+                        MB Postpartum Psychosis
+                      </label>
+                      <div className="col-sm-9">
+                        {/* <Select
+                          showSearch
+                          style={{ width: 558 }}
+                          placeholder="Select a person"
+                          optionFilterProp="children"
+                          // onChange={onChange}
+                          // onSearch={onSearch}
+                          filterOption={(input, option) =>
+                            (option?.label ?? "")
+                              .toLowerCase()
+                              .includes(input.toLowerCase())
+                          }
+                          onChange={MbSymptoms3}
+                          options={options}
+                        /> */}
                       </div>
                     </div>
                   </div>
@@ -307,4 +435,4 @@ const Answer = () => {
   );
 };
 
-export default Answer;
+export default Question;

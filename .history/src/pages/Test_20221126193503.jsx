@@ -102,6 +102,8 @@ const Test = () => {
   }
 
   const handleSubmit = (e) => {
+    // jalankan 3 fn yang akan menghitung masing-masing probabilitas penyakit
+    // hasil 3 fungsi simpan di variable
     const probA = countProbA()
     
     console.log('probabilitas penyakit A: ' + probA)

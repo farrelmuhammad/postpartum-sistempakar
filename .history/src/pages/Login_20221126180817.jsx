@@ -55,7 +55,7 @@ const Login = () => {
     try {
       const res = await axios({
         method: "POST",
-        url: `${Url}/logi`,
+        url: `${Url}/login`,
         data: userData,
       });
       console.log(res);

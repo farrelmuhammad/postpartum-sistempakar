@@ -30,8 +30,8 @@ const QuestionTable = ({ data, deleteSymptoms }) => {
     },
     {
       title: "MB Baby Blues",
-      dataIndex: "mb_baby",
-      key: "mb_baby",
+      dataIndex: "mb_symptom",
+      key: "mb_symptom",
       width: "10%",
     },
     // {

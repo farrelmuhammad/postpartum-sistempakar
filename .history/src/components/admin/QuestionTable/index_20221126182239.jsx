@@ -24,8 +24,8 @@ const QuestionTable = ({ data, deleteSymptoms }) => {
     },
     {
       title: "Gejala",
-      dataIndex: "symptom_name",
-      key: "symptom_name",
+      dataIndex: "symptoms_name",
+      key: "symptoms_name",
       width: "35%",
     },
     {
@@ -34,18 +34,18 @@ const QuestionTable = ({ data, deleteSymptoms }) => {
       key: "mb_baby",
       width: "10%",
     },
-    // {
-    //   title: "MB Major",
-    //   dataIndex: "mb_major",
-    //   key: "mb_major",
-    //   width: "10%",
-    // },
-    // {
-    //   title: "MB Psychosis",
-    //   dataIndex: "mb_psychosis",
-    //   key: "mb_psychosis",
-    //   width: "10%",
-    // },
+    {
+      title: "MB Major",
+      dataIndex: "mb_major",
+      key: "mb_major",
+      width: "10%",
+    },
+    {
+      title: "MB Psychosis",
+      dataIndex: "mb_psychosis",
+      key: "mb_psychosis",
+      width: "10%",
+    },
     {
       title: "Action",
       key: "action",

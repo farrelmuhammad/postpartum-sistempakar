@@ -30,6 +30,7 @@ const Test = () => {
   const arrValue = [];
 
   const value = (data) => {
+    console.log(data);
     arrValue.push(data);
   };
 
@@ -82,56 +83,34 @@ const Test = () => {
   //   console.log(symptomsMB[9].length)
   // }
 
-  function countProbA () {
-    let cf_he = []
+  const handleSubmit = (e) => {
+    // e.preventDefault();
+    const userData = new URLSearchParams();
+    arrValue.map((item) => {
+      userData.append("value", item);
+    });
+    // userData.append("test1", value2);
 
-    for (let i = 0; i < 9; i++) {
-      cf_he.push(symptomsMB[i] * arrValue[i])
+    let total = 0;
+    let cf_he = [];
+    for (let i = 0; i < symptomsMB.length; i++) {
+      total = symptomsMB[i] * arrValue[i];
+      cf_he.push(total);
     }
+
+    // console.log(cf_he);
 
     let cf_old = 0;
     cf_old = cf_he[0] + cf_he[1] * (1 - cf_he[0]);
 
     for (let i = 2; i < cf_he.length; i++) {
-      cf_old += cf_he[i] * (1 - cf_old);
+      cf_old = cf_old + cf_he[i] * (1 - cf_old);
+      console.log(typeof cf_old);
+      // console.log(cf_old);
     }
 
-    const prob = (cf_old * 100)  / 100 
-    console.log(prob)
-    return prob
-  }
-
-  const handleSubmit = (e) => {
-    const probA = countProbA()
-    
-    console.log('probabilitas penyakit A: ' + probA)
-    // e.preventDefault();
-    // const userData = new URLSearchParams();
-    // arrValue.map((item) => {
-    //   userData.append("value", item);
-    // });
-    // userData.append("test1", value2);
-
-    // let total = 0;
-    // let cf_he = [];
-    // for (let i = 0; i < symptomsMB.length; i++) {
-    //   total = symptomsMB[i] * arrValue[i];
-    //   cf_he.push(total);
-    // }
-
-    // console.log(cf_he);
-
-    // let cf_old = 0;
-    // cf_old = cf_he[0] + cf_he[1] * (1 - cf_he[0]);
-
-    // for (let i = 2; i < cf_he.length; i++) {
-    //   cf_old += cf_he[i] * (1 - cf_old);
-      // console.log(cf_old);
-      // console.log(cf_old);
-    // }
-
     // console.log((cf_old * 100)  / 100)
-    // console.log(cf_old)
+    console.log(cf_old)
 
     // return cf_he;
 
