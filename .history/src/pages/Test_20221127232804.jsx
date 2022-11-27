@@ -1,5 +1,5 @@
 import { PoweroffOutlined } from "@ant-design/icons";
-import { Button, Card, Checkbox, Divider, Form, Modal, Radio } from "antd";
+import { Button, Card, Divider, Modal, Radio } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
@@ -7,7 +7,6 @@ import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import TestCard from "../components/Test";
 import Url from "../Config";
-import supabase from "../utils/supabase/client";
 import "./test.css";
 
 const Test = () => {
@@ -15,86 +14,133 @@ const Test = () => {
   const [value1, setValue1] = useState([]);
   const [value2, setValue2] = useState([]);
   const auth = useSelector((state) => state.auth);
+  const [symptoms, setSymptoms] = useState([]);
+  const [symptomsMB, setSymptomsMB] = useState([]);
+  const [answers, setAnswers] = useState([]);
   const [loading, setLoading] = useState(false);
   const [modal2Visible, setModal2Visible] = useState(false);
 
   const navigate = useNavigate();
 
-  const [symptoms, setSymptoms] = useState([]);
-  const [rules, setRules] = useState([]);
-  const [categories, setCategories] = useState([]);
-  const [answers, setAnswers] = useState([]);
-  const [certaintyFactors, setCertaintyFactors] = useState([]);
-
-  async function getSymptoms() {
-    let { data, error } = await supabase.from("symptom").select("*");
-
-    setSymptoms(data);
-  }
-
-  async function getRules() {
-    let { data, error } = await supabase.from("rule").select("*");
-
-    setRules(data);
-  }
-
-  async function getCategories() {
-    let { data, error } = await supabase.from("category").select("*");
-
-    setCategories(data);
-  }
-
-  function countCertaintyFactor(categoryId, neededRules) {
-    // menyimpan basis pengetahuan yang dibutuhkan (yang symptomsnya di checklist)
-    const rules = neededRules.filter((rule) => rule.categoryId === categoryId);
-
-    // menyimpan semua mb & md dari basis pengetahuan yang dibutuhkan
-    const mbmb = rules.map((rule) => rule.mb);
-    const mdmd = rules.map((rule) => rule.md);
-
-    // rumus menghitung mb md
-    const tempMb = mbmb.reduce((acc, curr) => acc + curr * (1 - acc), 0);
-    const tempMd = mdmd.reduce((acc, curr) => acc + curr * (1 - acc), 0);
-
-    // rumus menghitung cf
-    return tempMb - tempMd;
-  }
-
-  function submitHandler() {
-    const checkedSymtoms = answers.filter((a) => a !== false);
-    // get rules value for checked symtoms only
-    const rulesValue = rules.filter((r) =>
-      checkedSymtoms.includes(r.symptomId)
-    );
-
-    categories.forEach((category) => {
-      const cf = countCertaintyFactor(category.id, rulesValue);
-      setCertaintyFactors((prev) => [
-        ...prev,
-        { categoryId: category.id, cf: cf },
-      ]);
-    });
-  }
-
-  function clickHandler(id, e, idx) {
-    // ketika symptom diklik, ubah nilai default (false) menjadi symptomId
-    const newAnswers = [...answers];
-    newAnswers[idx] = e.target.checked ? id : false;
-    setAnswers(newAnswers);
-  }
-
   useEffect(() => {
-    // ambil semua data dari supabase (symptom, rule, category)
     getSymptoms();
-    getRules();
-    getCategories();
+    getAnswer();
   }, []);
 
-  useEffect(() => {
-    // ketika symptom sudah didapat dari DB, set nilai default untuk answers menjadi false
-    const defaultAnswers = symptoms.map(() => false);
-    setAnswers(defaultAnswers);
-  }, [symptoms]);
+  const arrValue = [];
+
+  const value = (data) => {
+    arrValue.push(data);
+  };
+
+  const getSymptoms = async () => {
+    await axios
+      .get(`${Url}/symptom`, {
+        headers: {
+          Accept: "application/json",
+          Authorization: `Bearer ${auth.accessToken}`,
+        },
+      })
+      .then((res) => {
+        setLoading(true);
+        setTimeout(() => {
+          setLoading(false);
+        }, 2000);
+        const getData = res.data.data;
+        setSymptoms(getData);
+        setSymptomsMB(getData.map((d) => d.mb_symptom));
+        console.log(getData.map((d) => d.mb_symptom));
+      });
+  };
+
+  const getAnswer = async () => {
+    await axios
+      .get(`${Url}/answer`, {
+        headers: {
+          Accept: "application/json",
+          Authorization: `Bearer ${auth.accessToken}`,
+        },
+      })
+      .then((res) => {
+        setLoading(true);
+        setTimeout(() => {
+          setLoading(false);
+        }, 2000);
+        const getData = res.data.data;
+        setAnswers(getData);
+        console.log(getData);
+      });
+  };
+
+  // const babyblues = () => {
+  //   let cf_he = []
+
+  //   for (let i = 0; i < symptomsMB.length; i++) {
+  //     cf_he.push(symptomsMB[i] * arrValue[i])
+  //   }
+
+  //   console.log(symptomsMB[9].length)
+  // }
+
+  function countProbA() {
+    let cf_he = [];
+
+    for (let i = 0; i < 9; i++) {
+      cf_he.push(symptomsMB[i] * arrValue[i]);
+    }
+
+    let cf_old = 0;
+    cf_old = cf_he[0] + cf_he[1] * (1 - cf_he[0]);
+
+    for (let i = 2; i < cf_he.length; i++) {
+      cf_old += cf_he[i] * (1 - cf_old);
+    }
+
+    const prob = (cf_old * 100) / 100;
+    console.log(prob);
+    return prob;
+  }
+
+  const handleSubmit = (e) => {
+    const probA = countProbA();
+
+    console.log("probabilitas penyakit A: " + probA);
+    // e.preventDefault();
+    // const userData = new URLSearchParams();
+    // arrValue.map((item) => {
+    //   userData.append("value", item);
+    // });
+    // userData.append("test1", value2);
+
+    // let total = 0;
+    // let cf_he = [];
+    // for (let i = 0; i < symptomsMB.length; i++) {
+    //   total = symptomsMB[i] * arrValue[i];
+    //   cf_he.push(total);
+    // }
+
+    // console.log(cf_he);
+
+    // let cf_old = 0;
+    // cf_old = cf_he[0] + cf_he[1] * (1 - cf_he[0]);
+
+    // for (let i = 2; i < cf_he.length; i++) {
+    //   cf_old += cf_he[i] * (1 - cf_old);
+    // console.log(cf_old);
+    // console.log(cf_old);
+    // }
+
+    // console.log((cf_old * 100)  / 100)
+    // console.log(cf_old)
+
+    // return cf_he;
+
+    // for (var pair of userData.entries()) {
+    //   console.log(pair[0] + ", " + pair[1]);
+    // }
+
+    // console.log(arrValue)
+  };
 
   // const handleSubmit = () => {
   //   babyblues()
@@ -113,8 +159,8 @@ const Test = () => {
         newLoadings[index] = false;
         return newLoadings;
       });
-      setModal2Visible(true);
-      submitHandler();
+      // setModal2Visible(true);
+      handleSubmit();
     }, 3000);
     // .then(() => )
   };
@@ -184,21 +230,7 @@ const Test = () => {
               }}
               // loading={loading}
             >
-              {symptoms.map((s, idx) => {
-                return (
-                  <div className="my-3" key={idx}>
-                    <Checkbox onChange={(e) => clickHandler(s.id, e, idx)}>
-                      {s.name}
-                    </Checkbox>
-
-                    {/* <input
-                      type="checkbox"
-                      onChange={(e) => clickHandler(s.id, e, idx)}
-                    />
-                    <label>{s.name}</label> */}
-                  </div>
-                );
-              })}
+              adsadasd
             </Card>
             {/* <TestCard
               symptoms={symptoms}
@@ -219,7 +251,6 @@ const Test = () => {
               Periksa
             </Button>
           </div>
-
           <Modal
             title="Hasil Tes"
             centered
@@ -237,18 +268,7 @@ const Test = () => {
               </Button>,
             ]}
           >
-            {certaintyFactors.length > 0 && (
-              <div>
-                <h1>Hasil</h1>
-                {certaintyFactors.map((cf) => (
-                  <div key={cf.categoryId}>
-                    <span>penyakit {cf.categoryId} : </span>
-                    <span>{cf.cf}</span>
-                  </div>
-                ))}
-              </div>
-            )}
-            {/* <Card
+            <Card
               style={{
                 width: "100%",
               }}
@@ -261,7 +281,7 @@ const Test = () => {
               defaultSelectedKeys={["Kategori"]}
             >
               {contentListNoTitle[activeTabKey2]}
-            </Card> */}
+            </Card>
           </Modal>
           {/* <button className="btn btn-test text-white">
             Periksa

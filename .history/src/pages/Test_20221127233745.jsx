@@ -184,6 +184,17 @@ const Test = () => {
               }}
               // loading={loading}
             >
+              <Form.Item
+                label="Username"
+                name="username"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please input your username!",
+                  },
+                ]}
+              >
+              </Form.Item>
               {symptoms.map((s, idx) => {
                 return (
                   <div className="my-3" key={idx}>

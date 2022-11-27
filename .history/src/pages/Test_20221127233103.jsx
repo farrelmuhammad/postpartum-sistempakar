@@ -1,5 +1,5 @@
 import { PoweroffOutlined } from "@ant-design/icons";
-import { Button, Card, Checkbox, Divider, Form, Modal, Radio } from "antd";
+import { Button, Card, Checkbox, Divider, Modal, Radio } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
@@ -113,8 +113,8 @@ const Test = () => {
         newLoadings[index] = false;
         return newLoadings;
       });
-      setModal2Visible(true);
-      submitHandler();
+      // setModal2Visible(true);
+      // handleSubmit();
     }, 3000);
     // .then(() => )
   };
@@ -184,21 +184,7 @@ const Test = () => {
               }}
               // loading={loading}
             >
-              {symptoms.map((s, idx) => {
-                return (
-                  <div className="my-3" key={idx}>
-                    <Checkbox onChange={(e) => clickHandler(s.id, e, idx)}>
-                      {s.name}
-                    </Checkbox>
-
-                    {/* <input
-                      type="checkbox"
-                      onChange={(e) => clickHandler(s.id, e, idx)}
-                    />
-                    <label>{s.name}</label> */}
-                  </div>
-                );
-              })}
+              <Checkbox>Checkbox</Checkbox>
             </Card>
             {/* <TestCard
               symptoms={symptoms}
@@ -219,7 +205,6 @@ const Test = () => {
               Periksa
             </Button>
           </div>
-
           <Modal
             title="Hasil Tes"
             centered
@@ -237,18 +222,7 @@ const Test = () => {
               </Button>,
             ]}
           >
-            {certaintyFactors.length > 0 && (
-              <div>
-                <h1>Hasil</h1>
-                {certaintyFactors.map((cf) => (
-                  <div key={cf.categoryId}>
-                    <span>penyakit {cf.categoryId} : </span>
-                    <span>{cf.cf}</span>
-                  </div>
-                ))}
-              </div>
-            )}
-            {/* <Card
+            <Card
               style={{
                 width: "100%",
               }}
@@ -261,7 +235,7 @@ const Test = () => {
               defaultSelectedKeys={["Kategori"]}
             >
               {contentListNoTitle[activeTabKey2]}
-            </Card> */}
+            </Card>
           </Modal>
           {/* <button className="btn btn-test text-white">
             Periksa

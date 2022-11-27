@@ -242,7 +242,7 @@ const Test = () => {
                 <h1>Hasil</h1>
                 {certaintyFactors.map((cf) => (
                   <div key={cf.categoryId}>
-                    <span>penyakit {cf.categoryId} : </span>
+                    <span>penyakit {cf.name} : </span>
                     <span>{cf.cf}</span>
                   </div>
                 ))}

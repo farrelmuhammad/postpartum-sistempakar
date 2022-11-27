@@ -1,5 +1,5 @@
 import { PoweroffOutlined } from "@ant-design/icons";
-import { Button, Card, Checkbox, Divider, Form, Modal, Radio } from "antd";
+import { Button, Card, Checkbox, Divider, Modal, Radio } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
@@ -220,6 +220,7 @@ const Test = () => {
             </Button>
           </div>
 
+          
           <Modal
             title="Hasil Tes"
             centered
@@ -237,18 +238,7 @@ const Test = () => {
               </Button>,
             ]}
           >
-            {certaintyFactors.length > 0 && (
-              <div>
-                <h1>Hasil</h1>
-                {certaintyFactors.map((cf) => (
-                  <div key={cf.categoryId}>
-                    <span>penyakit {cf.categoryId} : </span>
-                    <span>{cf.cf}</span>
-                  </div>
-                ))}
-              </div>
-            )}
-            {/* <Card
+            <Card
               style={{
                 width: "100%",
               }}
@@ -261,7 +251,7 @@ const Test = () => {
               defaultSelectedKeys={["Kategori"]}
             >
               {contentListNoTitle[activeTabKey2]}
-            </Card> */}
+            </Card>
           </Modal>
           {/* <button className="btn btn-test text-white">
             Periksa
