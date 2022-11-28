@@ -22,7 +22,6 @@ const Ujian = () => {
             .select('*')
             
         setRules(data)
-        console.log(data.map(d => d.md))
     }
 
     async function getCategories() {

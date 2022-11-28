@@ -249,7 +249,7 @@ const Test = () => {
                     <span>penyakit {cf.categoryId} : </span>
                     <span>{cf.cf}</span>
                   </div>
-                ))}
+                )).sort()}
               </div>
             )}
             {/* <Card

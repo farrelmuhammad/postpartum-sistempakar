@@ -10,25 +10,27 @@ const Ujian = () => {
 
     async function getSymptoms() {
         let { data, error } = await supabase
-            .from('symptom')
+            .from('symptoms')
             .select('*')
+            console.log(error)
             
         setSymptoms(data)
     }
 
     async function getRules() {
         let { data, error } = await supabase
-            .from('rule')
+            .from('rules')
             .select('*')
+            console.log(error)
             
         setRules(data)
-        console.log(data.map(d => d.md))
     }
 
     async function getCategories() {
         let { data, error } = await supabase
-            .from('category')
+            .from('categories')
             .select('*')
+            console.log(error)
             
         setCategories(data)
     }

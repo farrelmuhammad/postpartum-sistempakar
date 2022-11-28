@@ -57,7 +57,7 @@ const Test = () => {
     // const tempMb = mbmb.reduce((acc, curr) => acc + curr * (1 - acc), 0);
     // const tempMd = mdmd.reduce((acc, curr) => acc + curr * (1 - acc), 0);
     const tempCf = cf.reduce((acc, curr) => acc + curr * (1 - acc), 0);
-    // console.log(tempCf)
+    console.log(tempCf)
 
     // rumus menghitung cf
     // return tempMb - tempMd;

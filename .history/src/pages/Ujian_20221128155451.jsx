@@ -22,7 +22,6 @@ const Ujian = () => {
             .select('*')
             
         setRules(data)
-        console.log(data.map(d => d.md))
     }
 
     async function getCategories() {
@@ -55,8 +54,8 @@ const Ujian = () => {
         const rulesValue = rules.filter(r => checkedSymtoms.includes(r.symptomId))
 
         categories.forEach(category => {
-            const cf = countCertaintyFactor(category.id, rulesValue)
-            setCertaintyFactors(prev => [...prev, {categoryId: category.id, cf: cf}])
+            const cf = countCertaintyFactor(category.name, rulesValue)
+            setCertaintyFactors(prev => [...prev, {categoryId: category.name, cf: cf}])
         })
     }
 

@@ -18,11 +18,11 @@ const Ujian = () => {
 
     async function getRules() {
         let { data, error } = await supabase
-            .from('rule')
+            .from('rules')
             .select('*')
             
         setRules(data)
-        console.log(data.map(d => d.md))
+        console.log(data.mb)
     }
 
     async function getCategories() {

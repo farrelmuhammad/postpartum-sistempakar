@@ -102,7 +102,7 @@ const Ujian = () => {
                                     <span>{cf.cf}</span>
                                 </div>
                             )
-                        )}
+                        ).sort()}
                     </div>
                 ) }
             </>

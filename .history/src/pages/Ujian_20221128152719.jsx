@@ -22,7 +22,6 @@ const Ujian = () => {
             .select('*')
             
         setRules(data)
-        console.log(data.map(d => d.md))
     }
 
     async function getCategories() {
@@ -97,8 +96,8 @@ const Ujian = () => {
                     <div>
                         <h1>Hasil</h1>
                         { certaintyFactors.map(cf => (
-                                <div key={cf.categoryId}>
-                                    <span>penyakit {cf.categoryId} : </span>
+                                <div key={cf.name}>
+                                    <span>penyakit {cf.name} : </span>
                                     <span>{cf.cf}</span>
                                 </div>
                             )
