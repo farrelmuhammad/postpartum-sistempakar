@@ -150,7 +150,7 @@ const Test = () => {
         <div className="row content">
           <div className="col-12">
             <h4 className="text-caption-up">Test Postpartum Depression</h4>
-            {/* <p className="text-caption">Pilih yang sesuai :</p> */}
+            <h5 className="text-caption">Test Postpartum Depression</h5>
           </div>
           <div className="">
             <Card

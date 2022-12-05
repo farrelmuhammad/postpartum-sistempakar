@@ -9,7 +9,7 @@ import {
   Radio,
   Tabs,
   Tag,
-  Typography,
+  Typography
 } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
@@ -150,31 +150,44 @@ const Test = () => {
         <div className="row content">
           <div className="col-12">
             <h4 className="text-caption-up">Test Postpartum Depression</h4>
-            {/* <p className="text-caption">Pilih yang sesuai :</p> */}
           </div>
-          <div className="">
+          <div className="mt-3">
             <Card
               style={{
+                // width: 300,
                 marginTop: 10,
               }}
               // loading={loading}
             >
               {symptoms.map((s, idx) => {
                 return (
-                  <div className="m-3" key={idx}>
+                  <div className="my-3" key={idx}>
                     <Checkbox onChange={(e) => clickHandler(s.id, e, idx)}>
                       {s.name}
                     </Checkbox>
+
+                    {/* <input
+                      type="checkbox"
+                      onChange={(e) => clickHandler(s.id, e, idx)}
+                    />
+                    <label>{s.name}</label> */}
                   </div>
                 );
               })}
             </Card>
+            {/* <TestCard
+              symptoms={symptoms}
+              answers={answers}
+              loading={loading}
+              value={value}
+            /> */}
           </div>
           <div className="d-flex justify-content-center">
             <Button
               type="primary"
               className="d-block w-100 mt-3 mb-2"
               size="large"
+              // icon={<PoweroffOutlined />}
               loading={loadings[1]}
               onClick={() => enterLoading(1)}
             >
@@ -186,25 +199,23 @@ const Test = () => {
             title="Hasil Tes"
             centered
             visible={modal2Visible}
-            // onCancel={() => setModal2Visible(false)}
-            closable={false}
+            onCancel={() => setModal2Visible(false)}
             width={1000}
             footer={[
               <Button
                 key="submit"
                 type="primary"
                 loading={loading}
-                onClick={() => navigate("/")}
+                // onClick={navigate("/")}
               >
-                Kembali ke Beranda
+                Submit
               </Button>,
             ]}
           >
             {certaintyFactors.sort((a, b) => b.cf - a.cf).length > 0 && (
               <div>
                 <div key={certaintyFactors[0].categoryId}>
-                  <Title level={2}>{certaintyFactors[0].name}</Title>
-                  {/* <span>{certaintyFactors[0].name}</span> */}
+                  <span>{certaintyFactors[0].name}</span>
                 </div>
                 <Tabs>
                   <Tabs.TabPane tab="Deskripsi" key="item-1">
@@ -214,20 +225,8 @@ const Test = () => {
                     {certaintyFactors[0].solution}
                   </Tabs.TabPane>
                 </Tabs>
-                <Tag
-                  color="#FF0000"
-                  style={{
-                    textAlign: "center",
-                    width: "100%",
-                    marginTop: "20px",
-                  }}
-                >
-                  <Title
-                    level={5}
-                    style={{ color: "white", textAlign: "center" }}
-                  >
-                    DISCLAIMER
-                  </Title>
+                <Tag color="#FF0000" style={{ textAlign: 'center', width: '100%' }}>
+                  <Title level={5} style={{ color: 'white', textAlign: 'center' }}>DISCLAIMER</Title>
                   Jika Anda sedang mengalami krisis psikologis yang mengancam
                   hidup Anda, layanan ini tidak direkomendasikan. Silakan
                   menghubungi 119.

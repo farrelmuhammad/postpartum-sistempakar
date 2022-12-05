@@ -150,7 +150,6 @@ const Test = () => {
         <div className="row content">
           <div className="col-12">
             <h4 className="text-caption-up">Test Postpartum Depression</h4>
-            {/* <p className="text-caption">Pilih yang sesuai :</p> */}
           </div>
           <div className="">
             <Card
@@ -159,12 +158,19 @@ const Test = () => {
               }}
               // loading={loading}
             >
+            <h5 className="text-caption-up">Test Postpartum Depression</h5>
               {symptoms.map((s, idx) => {
                 return (
                   <div className="m-3" key={idx}>
                     <Checkbox onChange={(e) => clickHandler(s.id, e, idx)}>
                       {s.name}
                     </Checkbox>
+
+                    {/* <input
+                      type="checkbox"
+                      onChange={(e) => clickHandler(s.id, e, idx)}
+                    />
+                    <label>{s.name}</label> */}
                   </div>
                 );
               })}
@@ -175,6 +181,7 @@ const Test = () => {
               type="primary"
               className="d-block w-100 mt-3 mb-2"
               size="large"
+              // icon={<PoweroffOutlined />}
               loading={loadings[1]}
               onClick={() => enterLoading(1)}
             >

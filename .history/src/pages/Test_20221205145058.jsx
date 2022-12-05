@@ -8,8 +8,6 @@ import {
   Modal,
   Radio,
   Tabs,
-  Tag,
-  Typography,
 } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
@@ -20,7 +18,6 @@ import TestCard from "../components/Test";
 import Url from "../Config";
 import supabase from "../utils/supabase/client";
 import "./test.css";
-const { Title } = Typography;
 
 const Test = () => {
   // const [value, setValue] = useState([]);
@@ -87,13 +84,7 @@ const Test = () => {
       const cf = countCertaintyFactor(category.id, rulesValue);
       setCertaintyFactors((prev) => [
         ...prev,
-        {
-          categoryId: category.id,
-          cf: cf,
-          description: category.description,
-          name: category.name,
-          solution: category.solution,
-        },
+        { categoryId: category.id, cf: cf, description: category.description, name: category.name},
       ]);
     });
   }
@@ -141,6 +132,53 @@ const Test = () => {
     // .then(() => )
   };
 
+  const [activeTabKey2, setActiveTabKey2] = useState("Kategori");
+
+  const onTab2Change = (key) => {
+    setActiveTabKey2(key);
+  };
+
+  const tabListNoTitle = [
+    {
+      key: "Kategori",
+      tab: "Kategori",
+    },
+    {
+      key: "Deskripsi",
+      tab: "Deskripsi",
+    },
+    {
+      key: "Solusi",
+      tab: "Solusi",
+    },
+  ];
+  const contentListNoTitle = {
+    Kategori: (
+      <p>
+        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Vel alias
+        magni illum quos sunt velit similique voluptatibus minima, corporis
+        repudiandae vero officia nesciunt sit repellat deleniti sed ab tenetur
+        fugit?
+      </p>
+    ),
+    Deskripsi: (
+      <p>
+        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Fugiat
+        molestiae similique quisquam quaerat iste sequi sit impedit vero,
+        tempore assumenda quae reiciendis hic, adipisci dolorum maxime in dolore
+        temporibus unde?
+      </p>
+    ),
+    Solusi: (
+      <p>
+        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quisquam nisi
+        autem ullam! Consequuntur veniam libero error dolorum, nobis quibusdam.
+        Nam quaerat architecto omnis deserunt accusantium ipsam dolore,
+        voluptatibus molestias officiis!
+      </p>
+    ),
+  };
+
   return (
     <>
       <div className="container-xxl mx-auto p-0  position-relative header-2-1">
@@ -150,31 +188,44 @@ const Test = () => {
         <div className="row content">
           <div className="col-12">
             <h4 className="text-caption-up">Test Postpartum Depression</h4>
-            {/* <p className="text-caption">Pilih yang sesuai :</p> */}
           </div>
-          <div className="">
+          <div className="mt-3">
             <Card
               style={{
+                // width: 300,
                 marginTop: 10,
               }}
               // loading={loading}
             >
               {symptoms.map((s, idx) => {
                 return (
-                  <div className="m-3" key={idx}>
+                  <div className="my-3" key={idx}>
                     <Checkbox onChange={(e) => clickHandler(s.id, e, idx)}>
                       {s.name}
                     </Checkbox>
+
+                    {/* <input
+                      type="checkbox"
+                      onChange={(e) => clickHandler(s.id, e, idx)}
+                    />
+                    <label>{s.name}</label> */}
                   </div>
                 );
               })}
             </Card>
+            {/* <TestCard
+              symptoms={symptoms}
+              answers={answers}
+              loading={loading}
+              value={value}
+            /> */}
           </div>
           <div className="d-flex justify-content-center">
             <Button
               type="primary"
               className="d-block w-100 mt-3 mb-2"
               size="large"
+              // icon={<PoweroffOutlined />}
               loading={loadings[1]}
               onClick={() => enterLoading(1)}
             >
@@ -186,54 +237,38 @@ const Test = () => {
             title="Hasil Tes"
             centered
             visible={modal2Visible}
-            // onCancel={() => setModal2Visible(false)}
-            closable={false}
+            onCancel={() => setModal2Visible(false)}
             width={1000}
             footer={[
               <Button
                 key="submit"
                 type="primary"
                 loading={loading}
-                onClick={() => navigate("/")}
+                // onClick={navigate("/")}
               >
-                Kembali ke Beranda
+                Submit
               </Button>,
             ]}
           >
             {certaintyFactors.sort((a, b) => b.cf - a.cf).length > 0 && (
               <div>
-                <div key={certaintyFactors[0].categoryId}>
-                  <Title level={2}>{certaintyFactors[0].name}</Title>
-                  {/* <span>{certaintyFactors[0].name}</span> */}
-                </div>
-                <Tabs>
-                  <Tabs.TabPane tab="Deskripsi" key="item-1">
-                    {certaintyFactors[0].description}
-                  </Tabs.TabPane>
-                  <Tabs.TabPane tab="Solusi" key="item-2">
-                    {certaintyFactors[0].solution}
-                  </Tabs.TabPane>
-                </Tabs>
-                <Tag
-                  color="#FF0000"
-                  style={{
-                    textAlign: "center",
-                    width: "100%",
-                    marginTop: "20px",
-                  }}
-                >
-                  <Title
-                    level={5}
-                    style={{ color: "white", textAlign: "center" }}
-                  >
-                    DISCLAIMER
-                  </Title>
-                  Jika Anda sedang mengalami krisis psikologis yang mengancam
-                  hidup Anda, layanan ini tidak direkomendasikan. Silakan
-                  menghubungi 119.
-                </Tag>
+                {certaintyFactors.map((cf) => (
+                  <div key={cf.categoryId}>
+                    <span>{cf.name}</span>
+                    {/* <span>{cf.cf}</span> */}
+                    {/* <span>{cf.description}</span> */}
+                  </div>
+                ))}
               </div>
             )}
+            {/* <Tabs>
+              <Tabs.TabPane tab="Tab 1" key="item-1">
+                Content 1
+              </Tabs.TabPane>
+              <Tabs.TabPane tab="Tab 2" key="item-2">
+                Content 2
+              </Tabs.TabPane>
+            </Tabs> */}
             {/* <Card
               style={{
                 width: "100%",
