@@ -20,7 +20,7 @@ import TestCard from "../components/Test";
 import Url from "../Config";
 import supabase from "../utils/supabase/client";
 import "./test.css";
-const { Title, Text } = Typography;
+const { Title } = Typography;
 
 const Test = () => {
   // const [value, setValue] = useState([]);
@@ -231,10 +231,9 @@ const Test = () => {
                   >
                     DISCLAIMER
                   </Title>
-                  {/* <Text>Ant Design (default)</Text> */}
-                  <p>Jika Anda sedang mengalami krisis psikologis yang mengancam
+                  Jika Anda sedang mengalami krisis psikologis yang mengancam
                   hidup Anda, layanan ini tidak direkomendasikan. Silakan
-                  menghubungi 119.</p>
+                  menghubungi 119.
                 </Tag>
               </div>
             )}
@@ -273,7 +272,7 @@ const Test = () => {
       </div>
 
       { fullname === null ? <Modal
-            title="Profile"
+            title="Hasil Tes"
             centered
             visible={modal3Visible}
             // onCancel={() => setModal2Visible(false)}

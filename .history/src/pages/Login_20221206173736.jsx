@@ -55,14 +55,14 @@ const Login = () => {
     try {
       const res = await axios({
         method: "POST",
-        url: `${Url}/login`,
+        url: `${Url}/logi`,
         data: userData,
       });
       console.log(res);
       dispatch(
         setData({
           accessToken: res.data.accessToken,
-          fullname: res.data.data.fullname
+          username: res.data.username,
         })
       );
       navigate("/");

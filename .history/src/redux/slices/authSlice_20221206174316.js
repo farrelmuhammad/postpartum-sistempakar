@@ -4,6 +4,7 @@ const initialState = {
     accessToken: localStorage.getItem("accessToken"),
     // isAdmin: false,
     fullname: "",
+    password: ""
 }
 
 export const authSlice = createSlice({

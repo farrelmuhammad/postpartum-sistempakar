@@ -62,7 +62,6 @@ const Login = () => {
       dispatch(
         setData({
           accessToken: res.data.accessToken,
-          fullname: res.data.data.fullname
         })
       );
       navigate("/");

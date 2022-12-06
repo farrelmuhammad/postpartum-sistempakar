@@ -43,7 +43,7 @@ const Test = () => {
 
   async function getSymptoms() {
     let { data, error } = await supabase.from("symptom").select("*");
-    setLoading(false)
+    setLoading(false);
     setSymptoms(data);
   }
 
@@ -231,10 +231,11 @@ const Test = () => {
                   >
                     DISCLAIMER
                   </Title>
-                  {/* <Text>Ant Design (default)</Text> */}
-                  <p>Jika Anda sedang mengalami krisis psikologis yang mengancam
-                  hidup Anda, layanan ini tidak direkomendasikan. Silakan
-                  menghubungi 119.</p>
+                  <Text>
+                    Jika Anda sedang mengalami krisis psikologis yang mengancam
+                    hidup Anda, layanan ini tidak direkomendasikan. Silakan
+                    menghubungi 119.
+                  </Text>
                 </Tag>
               </div>
             )}
@@ -272,23 +273,25 @@ const Test = () => {
         </div>
       </div>
 
-      { fullname === null ? <Modal
-            title="Profile"
-            centered
-            visible={modal3Visible}
-            // onCancel={() => setModal2Visible(false)}
-            width={1000}
-            footer={[
-              <Button
-                key="submit"
-                type="primary"
-                loading={loading}
-                onClick={() => navigate("/")}
-              >
-                Kembali ke Beranda
-              </Button>,
-            ]}
-          ></Modal> : null}
+      {fullname === null ? (
+        <Modal
+          title="Profile"
+          centered
+          visible={modal3Visible}
+          // onCancel={() => setModal2Visible(false)}
+          width={1000}
+          footer={[
+            <Button
+              key="submit"
+              type="primary"
+              loading={loading}
+              onClick={() => navigate("/")}
+            >
+              Kembali ke Beranda
+            </Button>,
+          ]}
+        ></Modal>
+      ) : null}
     </>
   );
 };

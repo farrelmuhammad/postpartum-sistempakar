@@ -20,7 +20,7 @@ import TestCard from "../components/Test";
 import Url from "../Config";
 import supabase from "../utils/supabase/client";
 import "./test.css";
-const { Title, Text } = Typography;
+const { Title } = Typography;
 
 const Test = () => {
   // const [value, setValue] = useState([]);
@@ -29,7 +29,6 @@ const Test = () => {
   const auth = useSelector((state) => state.auth);
   const [loading, setLoading] = useState(true);
   const [modal2Visible, setModal2Visible] = useState(false);
-  const [modal3Visible, setModal3Visible] = useState(true);
 
   const navigate = useNavigate();
 
@@ -231,10 +230,9 @@ const Test = () => {
                   >
                     DISCLAIMER
                   </Title>
-                  {/* <Text>Ant Design (default)</Text> */}
-                  <p>Jika Anda sedang mengalami krisis psikologis yang mengancam
+                  Jika Anda sedang mengalami krisis psikologis yang mengancam
                   hidup Anda, layanan ini tidak direkomendasikan. Silakan
-                  menghubungi 119.</p>
+                  menghubungi 119.
                 </Tag>
               </div>
             )}
@@ -273,10 +271,11 @@ const Test = () => {
       </div>
 
       { fullname === null ? <Modal
-            title="Profile"
+            title="Hasil Tes"
             centered
-            visible={modal3Visible}
+            visible={modal2Visible}
             // onCancel={() => setModal2Visible(false)}
+            closable={false}
             width={1000}
             footer={[
               <Button

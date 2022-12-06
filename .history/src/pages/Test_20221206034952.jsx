@@ -20,7 +20,7 @@ import TestCard from "../components/Test";
 import Url from "../Config";
 import supabase from "../utils/supabase/client";
 import "./test.css";
-const { Title, Text } = Typography;
+const { Title } = Typography;
 
 const Test = () => {
   // const [value, setValue] = useState([]);
@@ -29,7 +29,6 @@ const Test = () => {
   const auth = useSelector((state) => state.auth);
   const [loading, setLoading] = useState(true);
   const [modal2Visible, setModal2Visible] = useState(false);
-  const [modal3Visible, setModal3Visible] = useState(true);
 
   const navigate = useNavigate();
 
@@ -38,8 +37,6 @@ const Test = () => {
   const [categories, setCategories] = useState([]);
   const [answers, setAnswers] = useState([]);
   const [certaintyFactors, setCertaintyFactors] = useState([]);
-
-  const fullname = useSelector((state) => state.auth.fullname);
 
   async function getSymptoms() {
     let { data, error } = await supabase.from("symptom").select("*");
@@ -231,10 +228,9 @@ const Test = () => {
                   >
                     DISCLAIMER
                   </Title>
-                  {/* <Text>Ant Design (default)</Text> */}
-                  <p>Jika Anda sedang mengalami krisis psikologis yang mengancam
+                  Jika Anda sedang mengalami krisis psikologis yang mengancam
                   hidup Anda, layanan ini tidak direkomendasikan. Silakan
-                  menghubungi 119.</p>
+                  menghubungi 119.
                 </Tag>
               </div>
             )}
@@ -271,24 +267,6 @@ const Test = () => {
           </button> */}
         </div>
       </div>
-
-      { fullname === null ? <Modal
-            title="Profile"
-            centered
-            visible={modal3Visible}
-            // onCancel={() => setModal2Visible(false)}
-            width={1000}
-            footer={[
-              <Button
-                key="submit"
-                type="primary"
-                loading={loading}
-                onClick={() => navigate("/")}
-              >
-                Kembali ke Beranda
-              </Button>,
-            ]}
-          ></Modal> : null}
     </>
   );
 };
