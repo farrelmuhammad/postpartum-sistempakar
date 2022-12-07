@@ -234,7 +234,10 @@ const Test = () => {
                 type="primary"
                 loading={loading}
                 // onClick={() => navigate("/")}
-                onClick={() => console.log(formData)}
+                onClick={() => {
+                  setFormData({ ...formData, category: certaintyFactors[0].name});
+                  console.log(formData);
+                }}
               >
                 Kembali ke Beranda
               </Button>,

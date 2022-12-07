@@ -169,7 +169,7 @@ const Navbar = () => {
                         style={{
                           textDecoration: "none",
                         }}
-                        to="/admin"
+                        to="/profile"
                       >
                         <Menu.Item key="1">Dashboard</Menu.Item>
                       </Link>

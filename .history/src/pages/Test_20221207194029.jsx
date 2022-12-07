@@ -38,7 +38,7 @@ const Test = () => {
     gender: "",
     age: "",
     postnatal: "",
-    category: "",
+    category: certaintyFactors.sort((a, b) => b.cf - a.cf)[0].name,
   });
   const [value2, setValue2] = useState([]);
   const auth = useSelector((state) => state.auth);

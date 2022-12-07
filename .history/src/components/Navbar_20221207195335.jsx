@@ -18,7 +18,6 @@ import Swal from "sweetalert2";
 
 const Navbar = () => {
   const isLoggedIn = !!useSelector((state) => state.auth.accessToken);
-  const admin = useSelector((state) => state.auth.role);
 
   const navigate = useNavigate();
 
@@ -164,19 +163,18 @@ const Navbar = () => {
               <Dropdown
                 overlay={
                   <Menu>
-                    {admin === "admin" ? (
-                      <Link
+                    <Menu.Item>
+                      <Button
+                        size="large"
+                        shape="circle"
+                        // type="primary"
                         style={{
-                          textDecoration: "none",
+                          border: 0,
                         }}
-                        to="/admin"
-                      >
-                        <Menu.Item key="1">Dashboard</Menu.Item>
-                      </Link>
-                    ) : null}
-                    <Menu.Item key="2" onClick={handleLogout}>
-                      Logout
+                        icon={<UserOutlined />}
+                      />
                     </Menu.Item>
+                    <Menu.Item>Logout</Menu.Item>
                   </Menu>
                 }
                 placement="bottomRight"

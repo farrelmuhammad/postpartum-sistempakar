@@ -53,7 +53,6 @@ const Register = () => {
     userData.append("name", name);
     userData.append("email", email);
     userData.append("password", password);
-    userData.append("role", "member");
     // axios
     //   .post(`${Url}/user/login`, {
     //     data: userData,

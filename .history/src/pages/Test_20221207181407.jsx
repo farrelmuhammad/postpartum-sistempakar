@@ -3,13 +3,11 @@ import {
   Button,
   Card,
   Checkbox,
-  DatePicker,
   Divider,
   Form,
   Input,
   Modal,
   Radio,
-  Select,
   Tabs,
   Tag,
   Typography,
@@ -25,7 +23,6 @@ import Url from "../Config";
 import supabase from "../utils/supabase/client";
 import "./test.css";
 const { Title, Text } = Typography;
-const { TextArea } = Input;
 
 const Test = () => {
   // const [value, setValue] = useState([]);
@@ -58,22 +55,6 @@ const Test = () => {
   const isLoggedIn = useSelector((state) => state.auth.accessToken);
 
   // console.log(isLoggedIn);
-
-  const onChange = (date, dateString) => {
-    setFormData({ ...formData, birth_date: dateString });
-    console.log(date, dateString);
-  };
-
-  const [value, setValue] = useState("");
-  const onChangeRadio = (e) => {
-    console.log("radio checked", e.target.value);
-    setValue(e.target.value);
-  };
-
-  const handleChange = (value) => {
-    setFormData({ ...formData, postnatal: value });
-    console.log(`selected ${value}`);
-  };
 
   async function getSymptoms() {
     let { data, error } = await supabase.from("symptom").select("*");
@@ -233,8 +214,7 @@ const Test = () => {
                 key="submit"
                 type="primary"
                 loading={loading}
-                // onClick={() => navigate("/")}
-                onClick={() => console.log(formData)}
+                onClick={() => navigate("/")}
               >
                 Kembali ke Beranda
               </Button>,
@@ -287,170 +267,22 @@ const Test = () => {
           centered
           visible={modal3Visible}
           // onCancel={() => setModal2Visible(false)}
-          closable={false}
-          width={800}
+          width={1000}
           footer={[
-            <Button
-              key="submit"
-              type="primary"
-              onClick={() => {
-                console.log(formData);
-                setModal3Visible(false);
-              }}
-            >
+            <Button key="submit" type="primary" onClick={() => navigate("/")}>
               Submit
             </Button>,
           ]}
-        >
-          <div className="text-title text-start">
-            <div className="row">
-              <label htmlFor="inputNama3" className="col-sm-3 col-form-label">
-                Nama Lengkap
-              </label>
-              <div className="col-sm-9">
-                <Input
-                  placeholder="Type your name"
-                  onChange={(event) =>
-                    setFormData({ ...formData, fullname: event.target.value })
-                  }
-                />
-              </div>
-            </div>
-            <div className="row">
-              <label htmlFor="inputNama3" className="col-sm-3 col-form-label">
-                Tangal Lahir
-              </label>
-              <div className="col-sm-9">
-                <DatePicker
-                  style={{
-                    width: "100%",
-                  }}
-                  onChange={onChange}
-                />
-                {/* <Input
-                placeholder="Type your name"
-                // onChange={(e) => setName(e.target.value)}
-              /> */}
-              </div>
-            </div>
-            <div className="row">
-              <label htmlFor="inputNama3" className="col-sm-3 col-form-label">
-                Alamat
-              </label>
-              <div className="col-sm-9">
-                <TextArea
-                  rows={4}
-                  style={{
-                    marginBottom: 4,
-                  }}
-                  onChange={(event) =>
-                    setFormData({ ...formData, address: event.target.value })
-                  }
-                />
-              </div>
-            </div>
-            <div className="row">
-              <label htmlFor="inputNama3" className="col-sm-3 col-form-label">
-                Umur
-              </label>
-              <div className="col-sm-9">
-                <Input
-                  placeholder="Type your age"
-                  onChange={(event) =>
-                    setFormData({ ...formData, age: event.target.value })
-                  }
-                />
-              </div>
-            </div>
-            <div className="row">
-              <label htmlFor="inputNama3" className="col-sm-3 col-form-label">
-                Alamat Email
-              </label>
-              <div className="col-sm-9">
-                <Input
-                  placeholder="Type your email"
-                  onChange={(event) =>
-                    setFormData({ ...formData, email: event.target.value })
-                  }
-                />
-              </div>
-            </div>
-            <div className="row">
-              <label htmlFor="inputNama3" className="col-sm-3 col-form-label">
-                No. Telpon
-              </label>
-              <div className="col-sm-9">
-                <Input
-                  placeholder="Type your phone number"
-                  onChange={(event) =>
-                    setFormData({ ...formData, phone: event.target.value })
-                  }
-                />
-              </div>
-            </div>
-            <div className="row">
-              <label htmlFor="inputNama3" className="col-sm-3 col-form-label">
-                Kelamin
-              </label>
-              <div className="col-sm-9">
-                <Radio.Group
-                  // value={value}
-                  onChange={(event) =>
-                    setFormData({ ...formData, gender: event.target.value })
-                  }
-                >
-                  <Radio value="L">L</Radio>
-                  <Radio value="P">P</Radio>
-                </Radio.Group>
-              </div>
-            </div>
-            <div className="row">
-              <label htmlFor="inputNama3" className="col-sm-3 col-form-label">
-                Melahirkan Pekan Ke -
-              </label>
-              <div className="col-sm-9">
-                <Select
-                  defaultValue="Pilih pilihan"
-                  style={{
-                    width: "100%",
-                  }}
-                  onChange={handleChange}
-                  options={[
-                    {
-                      value: "Tidak Melahirkan",
-                      label: "Tidak Melahirkan",
-                    },
-                    {
-                      value: "1 - 2 Pekan",
-                      label: "1 - 2 Pekan",
-                    },
-                    {
-                      value: "< 2 Pekan",
-                      label: "< 2 Pekan",
-                    },
-                  ]}
-                />
-              </div>
-            </div>
-          </div>
-        </Modal>
+        ></Modal>
       ) : isLoggedIn === null ? (
         <Modal
           title="Profile"
           centered
           visible={modal3Visible}
           // onCancel={() => setModal2Visible(false)}
-          closable={false}
           width={800}
           footer={[
-            <Button
-              key="submit"
-              type="primary"
-              onClick={() => {
-                console.log(formData);
-                setModal3Visible(false);
-              }}
-            >
+            <Button key="submit" type="primary" onClick={() => navigate("/")}>
               Submit
             </Button>,
           ]}
@@ -463,9 +295,7 @@ const Test = () => {
               <div className="col-sm-9">
                 <Input
                   placeholder="Type your name"
-                  onChange={(event) =>
-                    setFormData({ ...formData, fullname: event.target.value })
-                  }
+                  // onChange={(e) => setName(e.target.value)}
                 />
               </div>
             </div>
@@ -474,31 +304,9 @@ const Test = () => {
                 Tangal Lahir
               </label>
               <div className="col-sm-9">
-                <DatePicker
-                  style={{
-                    width: "100%",
-                  }}
-                  onChange={onChange}
-                />
-                {/* <Input
+                <Input
                   placeholder="Type your name"
                   // onChange={(e) => setName(e.target.value)}
-                /> */}
-              </div>
-            </div>
-            <div className="row">
-              <label htmlFor="inputNama3" className="col-sm-3 col-form-label">
-                Alamat
-              </label>
-              <div className="col-sm-9">
-                <TextArea
-                  rows={4}
-                  style={{
-                    marginBottom: 4,
-                  }}
-                  onChange={(event) =>
-                    setFormData({ ...formData, address: event.target.value })
-                  }
                 />
               </div>
             </div>
@@ -508,10 +316,8 @@ const Test = () => {
               </label>
               <div className="col-sm-9">
                 <Input
-                  placeholder="Type your age"
-                  onChange={(event) =>
-                    setFormData({ ...formData, age: event.target.value })
-                  }
+                  placeholder="Type your name"
+                  // onChange={(e) => setName(e.target.value)}
                 />
               </div>
             </div>
@@ -521,10 +327,8 @@ const Test = () => {
               </label>
               <div className="col-sm-9">
                 <Input
-                  placeholder="Type your email"
-                  onChange={(event) =>
-                    setFormData({ ...formData, email: event.target.value })
-                  }
+                  placeholder="Type your name"
+                  // onChange={(e) => setName(e.target.value)}
                 />
               </div>
             </div>
@@ -534,10 +338,8 @@ const Test = () => {
               </label>
               <div className="col-sm-9">
                 <Input
-                  placeholder="Type your phone number"
-                  onChange={(event) =>
-                    setFormData({ ...formData, phone: event.target.value })
-                  }
+                  placeholder="Type your name"
+                  // onChange={(e) => setName(e.target.value)}
                 />
               </div>
             </div>
@@ -546,15 +348,22 @@ const Test = () => {
                 Kelamin
               </label>
               <div className="col-sm-9">
-                <Radio.Group
-                  // value={value}
-                  onChange={(event) =>
-                    setFormData({ ...formData, gender: event.target.value })
-                  }
-                >
-                  <Radio value="L">L</Radio>
-                  <Radio value="P">P</Radio>
-                </Radio.Group>
+                <Input
+                  // placeholder="Type your name"
+                  defaultValue="aaa"
+                  // onChange={(e) => setName(e.target.value)}
+                />
+              </div>
+            </div>
+            <div className="row">
+              <label htmlFor="inputNama3" className="col-sm-3 col-form-label">
+                Umur
+              </label>
+              <div className="col-sm-9">
+                <Input
+                  placeholder="Type your name"
+                  // onChange={(e) => setName(e.target.value)}
+                />
               </div>
             </div>
             <div className="row">
@@ -562,26 +371,9 @@ const Test = () => {
                 Melahirkan Pekan Ke -
               </label>
               <div className="col-sm-9">
-                <Select
-                  defaultValue="Pilih pilihan"
-                  style={{
-                    width: "100%",
-                  }}
-                  onChange={handleChange}
-                  options={[
-                    {
-                      value: "Tidak Melahirkan",
-                      label: "Tidak Melahirkan",
-                    },
-                    {
-                      value: "1 - 2 Pekan",
-                      label: "1 - 2 Pekan",
-                    },
-                    {
-                      value: "< 2 Pekan",
-                      label: "< 2 Pekan",
-                    },
-                  ]}
+                <Input
+                  placeholder="Type your name"
+                  // onChange={(e) => setName(e.target.value)}
                 />
               </div>
             </div>
