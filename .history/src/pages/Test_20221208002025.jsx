@@ -40,7 +40,7 @@ const Test = () => {
     postnatal: "",
     category: "",
   });
-  const [result, setResult] = useState("");
+  const [value2, setValue2] = useState([]);
   const auth = useSelector((state) => state.auth);
   const [loading, setLoading] = useState(true);
   const [modal2Visible, setModal2Visible] = useState(false);
@@ -133,6 +133,7 @@ const Test = () => {
         },
       ]);
     });
+    setFormData({ ...formData, category: certaintyFactors[0].name });
   }
 
   function clickHandler(id, e, idx) {
@@ -178,30 +179,21 @@ const Test = () => {
     // .then(() => )
   };
 
-  useEffect(() => {
-    const categoryName = certaintyFactors.sort((a, b) => b.cf - a.cf)[0];
-    setResult(categoryName);
-    // setFormData({ ...formData, category: categoryName });
-  }, [certaintyFactors]);
-
-  console.log(result)
-
   const handleSubmit = async (e) => {
     // e.preventDefault();
-    // console.log(certaintyFactors.sort((a, b) => b.cf - a.cf)[0]);
-    // axios({
-    //   method: "post",
-    //   url: `${Url}/activity`,
-    //   data: formData,
-    // })
-    //   .then((res) => {
-    //     console.log(res);
-    //     navigate("/")
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
-  };
+    axios({
+      method: "post",
+      url: `${Url}/activity`,
+      data: formData,
+    })
+      .then((res) => {
+        console.log(res);
+        navigate("/")
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
 
   return (
     <>

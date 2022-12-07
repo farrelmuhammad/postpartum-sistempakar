@@ -1,5 +1,5 @@
-import { Button, DatePicker, Dropdown, Input, Menu, Modal, Radio } from "antd";
-import React, { useState } from "react";
+import { Button, Dropdown, Menu } from "antd";
+import React from "react";
 import { FiLogIn, FiSettings } from "react-icons/fi";
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
@@ -15,44 +15,12 @@ import {
 } from "@ant-design/icons";
 import Logo from "../assets/image/Logo.svg";
 import Swal from "sweetalert2";
-import axios from "axios";
-import Url from "../Config";
-const { TextArea } = Input;
 
 const Navbar = () => {
   const isLoggedIn = !!useSelector((state) => state.auth.accessToken);
   const admin = useSelector((state) => state.auth.role);
 
-  const [modal3Visible, setModal3Visible] = useState(false);
-
-  const [formData, setFormData] = useState({
-    fullname: "",
-    phone: "",
-    address: "",
-    birth_date: "",
-    gender: "",
-    age: "",
-  });
-
   const navigate = useNavigate();
-
-  const onChange = (date, dateString) => {
-    setFormData({ ...formData, birth_date: dateString });
-    console.log(date, dateString);
-  };
-
-  const getProfileById = async () => {
-    await axios.get(`${Url}/user/profile`)
-    .then((res) => {
-      console.log(res.data.data);
-    })
-    
-  }
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-  }
 
   const handleLogout = () => {
     // jsCookie.remove('auth')
@@ -206,7 +174,7 @@ const Navbar = () => {
                         <Menu.Item key="1">Dashboard</Menu.Item>
                       </Link>
                     ) : null}
-                    <Menu.Item key="2" onClick={() => setModal3Visible(true)}>
+                    <Menu.Item key="2" onClick={handleLogout}>
                       Profile
                     </Menu.Item>
                     <Menu.Item key="3" onClick={handleLogout}>
@@ -227,6 +195,17 @@ const Navbar = () => {
                   icon={<UserOutlined style={{ fontSize: "140%" }} />}
                 />
               </Dropdown>
+              {/* <Link to="/profile">
+                <Button
+                  size="large"
+                  shape="circle"
+                  // type="primary"
+                  style={{
+                    border: 0,
+                  }}
+                  icon={<UserOutlined style={{ fontSize: "140%" }} />}
+                />
+              </Link> */}
             </div>
           ) : (
             <div className="modal-footer border-0 gap-3">
@@ -240,115 +219,6 @@ const Navbar = () => {
           )}
         </div>
       </nav>
-
-      {/* Modal Profile */}
-      <Modal
-        title="Profile User"
-        centered
-        visible={modal3Visible}
-        onCancel={() => setModal3Visible(false)}
-        width={800}
-        footer={[
-          <Button
-            key="submit"
-            type="primary"
-            onClick={() => console.log(formData)}
-          >
-            Submit
-          </Button>,
-        ]}
-      >
-        <div className="text-title text-start">
-          <div className="row">
-            <label htmlFor="inputNama3" className="col-sm-3 col-form-label">
-              Nama Lengkap
-            </label>
-            <div className="col-sm-9">
-              <Input
-                placeholder="Type your name"
-                onChange={(event) =>
-                  setFormData({ ...formData, fullname: event.target.value })
-                }
-              />
-            </div>
-          </div>
-          <div className="row">
-            <label htmlFor="inputNama3" className="col-sm-3 col-form-label">
-              Tangal Lahir
-            </label>
-            <div className="col-sm-9">
-              <DatePicker
-                style={{
-                  width: "100%",
-                }}
-                onChange={onChange}
-              />
-              {/* <Input
-                placeholder="Type your name"
-                // onChange={(e) => setName(e.target.value)}
-              /> */}
-            </div>
-          </div>
-          <div className="row">
-            <label htmlFor="inputNama3" className="col-sm-3 col-form-label">
-              Alamat
-            </label>
-            <div className="col-sm-9">
-              <TextArea
-                rows={4}
-                style={{
-                  marginBottom: 4,
-                }}
-                onChange={(event) =>
-                  setFormData({ ...formData, address: event.target.value })
-                }
-              />
-            </div>
-          </div>
-          <div className="row">
-            <label htmlFor="inputNama3" className="col-sm-3 col-form-label">
-              Umur
-            </label>
-            <div className="col-sm-9">
-              <Input
-                placeholder="Type your age"
-                onChange={(event) =>
-                  setFormData({ ...formData, age: event.target.value })
-                }
-              />
-            </div>
-          </div>
-          <div className="row">
-            <label htmlFor="inputNama3" className="col-sm-3 col-form-label">
-              No. Telpon
-            </label>
-            <div className="col-sm-9">
-              <Input
-                placeholder="Type your phone number"
-                onChange={(event) =>
-                  setFormData({ ...formData, phone: event.target.value })
-                }
-              />
-            </div>
-          </div>
-          <div className="row">
-            <label htmlFor="inputNama3" className="col-sm-3 col-form-label">
-              Kelamin
-            </label>
-            <div className="col-sm-9">
-              <Radio.Group
-                // value={value}
-                onChange={(event) =>
-                  setFormData({ ...formData, gender: event.target.value })
-                }
-              >
-                <Radio value="L">L</Radio>
-                <Radio value="P">P</Radio>
-              </Radio.Group>
-            </div>
-          </div>
-        </div>
-      </Modal>
     </>
   );
 };

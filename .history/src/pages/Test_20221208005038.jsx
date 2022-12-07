@@ -147,6 +147,8 @@ const Test = () => {
     getSymptoms();
     getRules();
     getCategories();
+
+    submitHandler();
   }, []);
 
   useEffect(() => {

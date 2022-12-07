@@ -15,8 +15,6 @@ import {
 } from "@ant-design/icons";
 import Logo from "../assets/image/Logo.svg";
 import Swal from "sweetalert2";
-import axios from "axios";
-import Url from "../Config";
 const { TextArea } = Input;
 
 const Navbar = () => {
@@ -27,32 +25,21 @@ const Navbar = () => {
 
   const [formData, setFormData] = useState({
     fullname: "",
+    email: "",
     phone: "",
     address: "",
     birth_date: "",
     gender: "",
     age: "",
+    postnatal: "",
+    category: "",
   });
-
-  const navigate = useNavigate();
-
   const onChange = (date, dateString) => {
     setFormData({ ...formData, birth_date: dateString });
     console.log(date, dateString);
   };
 
-  const getProfileById = async () => {
-    await axios.get(`${Url}/user/profile`)
-    .then((res) => {
-      console.log(res.data.data);
-    })
-    
-  }
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-  }
+  const navigate = useNavigate();
 
   const handleLogout = () => {
     // jsCookie.remove('auth')
@@ -243,7 +230,7 @@ const Navbar = () => {
 
       {/* Modal Profile */}
       <Modal
-        title="Profile User"
+        title="Profile"
         centered
         visible={modal3Visible}
         onCancel={() => setModal3Visible(false)}
@@ -252,7 +239,9 @@ const Navbar = () => {
           <Button
             key="submit"
             type="primary"
-            onClick={() => console.log(formData)}
+            onClick={() => {
+              setModal3Visible(false);
+            }}
           >
             Submit
           </Button>,
@@ -266,9 +255,9 @@ const Navbar = () => {
             <div className="col-sm-9">
               <Input
                 placeholder="Type your name"
-                onChange={(event) =>
-                  setFormData({ ...formData, fullname: event.target.value })
-                }
+                // onChange={(event) =>
+                //   setFormData({ ...formData, fullname: event.target.value })
+                // }
               />
             </div>
           </div>
@@ -314,6 +303,19 @@ const Navbar = () => {
                 placeholder="Type your age"
                 onChange={(event) =>
                   setFormData({ ...formData, age: event.target.value })
+                }
+              />
+            </div>
+          </div>
+          <div className="row">
+            <label htmlFor="inputNama3" className="col-sm-3 col-form-label">
+              Alamat Email
+            </label>
+            <div className="col-sm-9">
+              <Input
+                placeholder="Type your email"
+                onChange={(event) =>
+                  setFormData({ ...formData, email: event.target.value })
                 }
               />
             </div>

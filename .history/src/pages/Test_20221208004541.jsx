@@ -38,7 +38,7 @@ const Test = () => {
     gender: "",
     age: "",
     postnatal: "",
-    category: "",
+    category: result.name,
   });
   const [result, setResult] = useState("");
   const auth = useSelector((state) => state.auth);
@@ -183,8 +183,6 @@ const Test = () => {
     setResult(categoryName);
     // setFormData({ ...formData, category: categoryName });
   }, [certaintyFactors]);
-
-  console.log(result)
 
   const handleSubmit = async (e) => {
     // e.preventDefault();

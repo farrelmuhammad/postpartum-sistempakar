@@ -181,10 +181,9 @@ const Test = () => {
   useEffect(() => {
     const categoryName = certaintyFactors.sort((a, b) => b.cf - a.cf)[0];
     setResult(categoryName);
+    setFormData({ ...formData, category: result.name})
     // setFormData({ ...formData, category: categoryName });
   }, [certaintyFactors]);
-
-  console.log(result)
 
   const handleSubmit = async (e) => {
     // e.preventDefault();

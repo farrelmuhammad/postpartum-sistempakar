@@ -40,7 +40,7 @@ const Test = () => {
     postnatal: "",
     category: "",
   });
-  const [result, setResult] = useState("");
+  const [value2, setValue2] = useState([]);
   const auth = useSelector((state) => state.auth);
   const [loading, setLoading] = useState(true);
   const [modal2Visible, setModal2Visible] = useState(false);
@@ -179,15 +179,14 @@ const Test = () => {
   };
 
   useEffect(() => {
-    const categoryName = certaintyFactors.sort((a, b) => b.cf - a.cf)[0];
-    setResult(categoryName);
-    // setFormData({ ...formData, category: categoryName });
+    const categoryName = certaintyFactors.sort((a, b) => b.cf - a.cf)[0].name;
+    setFormData({ ...formData, category: categoryName });
   }, [certaintyFactors]);
-
-  console.log(result)
 
   const handleSubmit = async (e) => {
     // e.preventDefault();
+
+    console.log(formData);
     // console.log(certaintyFactors.sort((a, b) => b.cf - a.cf)[0]);
     // axios({
     //   method: "post",

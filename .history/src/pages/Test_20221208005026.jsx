@@ -147,6 +147,8 @@ const Test = () => {
     getSymptoms();
     getRules();
     getCategories();
+
+    submitHandler();
   }, []);
 
   useEffect(() => {
@@ -184,7 +186,7 @@ const Test = () => {
     // setFormData({ ...formData, category: categoryName });
   }, [certaintyFactors]);
 
-  console.log(result)
+  console.log(result.name)
 
   const handleSubmit = async (e) => {
     // e.preventDefault();

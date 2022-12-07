@@ -184,10 +184,9 @@ const Test = () => {
     // setFormData({ ...formData, category: categoryName });
   }, [certaintyFactors]);
 
-  console.log(result)
-
   const handleSubmit = async (e) => {
     // e.preventDefault();
+    console.log(result);
     // console.log(certaintyFactors.sort((a, b) => b.cf - a.cf)[0]);
     // axios({
     //   method: "post",
