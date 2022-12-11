@@ -206,17 +206,8 @@ const Test = () => {
   };
 
   const notificationTitle = () => {
-    if (
-      !formData.fullname ||
-      !formData.address ||
-      !formData.age ||
-      !formData.birth_date ||
-      !formData.gender ||
-      !formData.postnatal ||
-      !formData.phone ||
-      !formData.email
-    ) {
-      message.error("Mohon isi lengkap profil anda", 1.5);
+    if (!formData.fullname) {
+      message.error("Mohon isi lengkap profil anda!", 1.5);
     } else {
       console.log(formData);
       message.success("Profil ditambahkan!", 1.5);

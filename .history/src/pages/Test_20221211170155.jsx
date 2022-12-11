@@ -206,28 +206,15 @@ const Test = () => {
   };
 
   const notificationTitle = () => {
-    if (
-      !formData.fullname ||
-      !formData.address ||
-      !formData.age ||
-      !formData.birth_date ||
-      !formData.gender ||
-      !formData.postnatal ||
-      !formData.phone ||
-      !formData.email
-    ) {
-      message.error("Mohon isi lengkap profil anda", 1.5);
-    } else {
-      console.log(formData);
-      message.success("Profil ditambahkan!", 1.5);
-      setModal3Visible(false);
-      notification.open({
-        message: "Notifikasi Pengisian Tes",
-        description:
-          "Pilih gejala sesuai dengan kondisi anda. Minimal 6 gejala yang dipilih.",
-        duration: 3,
-      });
-    }
+    console.log(formData);
+    message.success("Profil ditambahkan!", 1.5);
+    setModal3Visible(false);
+    notification.open({
+      message: "Notifikasi Pengisian Tes",
+      description:
+        "Pilih gejala sesuai dengan kondisi anda. Minimal 6 gejala yang dipilih.",
+      duration: 3,
+    });
   };
 
   return (

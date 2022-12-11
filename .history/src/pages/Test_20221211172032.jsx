@@ -144,6 +144,8 @@ const Test = () => {
     setAnswers(newAnswers);
   }
 
+  console.log(answers);
+
   useEffect(() => {
     // ambil semua data dari supabase (symptom, rule, category)
     getSymptoms();

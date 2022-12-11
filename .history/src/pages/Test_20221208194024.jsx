@@ -7,9 +7,7 @@ import {
   Divider,
   Form,
   Input,
-  message,
   Modal,
-  notification,
   Radio,
   Select,
   Tabs,
@@ -185,49 +183,21 @@ const Test = () => {
   }, [certaintyFactors]);
 
   const handleSubmit = async (e) => {
-    // console.log(formData);
+    console.log(formData);
     // e.preventDefault();
-    console.log(certaintyFactors.sort((a, b) => b.cf - a.cf)[0]);
-    axios({
-      method: "post",
-      url: `${Url}/activity`,
-      data: formData,
-    })
-      .then((res) => {
-        console.log(res);
-        message.loading("Riwayat sedang direkam...", 2.5).then(() => {
-          message.success("Riwayat berhasil direkam!", 2.5);
-          navigate("/");
-        });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
-  const notificationTitle = () => {
-    if (
-      !formData.fullname ||
-      !formData.address ||
-      !formData.age ||
-      !formData.birth_date ||
-      !formData.gender ||
-      !formData.postnatal ||
-      !formData.phone ||
-      !formData.email
-    ) {
-      message.error("Mohon isi lengkap profil anda", 1.5);
-    } else {
-      console.log(formData);
-      message.success("Profil ditambahkan!", 1.5);
-      setModal3Visible(false);
-      notification.open({
-        message: "Notifikasi Pengisian Tes",
-        description:
-          "Pilih gejala sesuai dengan kondisi anda. Minimal 6 gejala yang dipilih.",
-        duration: 3,
-      });
-    }
+    // console.log(certaintyFactors.sort((a, b) => b.cf - a.cf)[0]);
+    // axios({
+    //   method: "post",
+    //   url: `${Url}/activity`,
+    //   data: formData,
+    // })
+    //   .then((res) => {
+    //     console.log(res);
+    //     navigate("/")
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
   };
 
   return (
@@ -356,7 +326,10 @@ const Test = () => {
           <Button
             key="submit"
             type="primary"
-            onClick={() => notificationTitle()}
+            onClick={() => {
+              console.log(formData);
+              setModal3Visible(false);
+            }}
           >
             Submit
           </Button>,
@@ -371,7 +344,6 @@ const Test = () => {
               <Input
                 placeholder="Type your name"
                 defaultValue={fullname}
-                // value={fullname}
                 onChange={(event) =>
                   setFormData({ ...formData, fullname: event.target.value })
                 }
@@ -443,8 +415,7 @@ const Test = () => {
             </label>
             <div className="col-sm-9">
               <Input
-                addonBefore="+62"
-                placeholder="8xxxxxxxxx"
+                placeholder="Type your phone number"
                 onChange={(event) =>
                   setFormData({ ...formData, phone: event.target.value })
                 }

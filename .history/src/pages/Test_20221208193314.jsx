@@ -7,9 +7,7 @@ import {
   Divider,
   Form,
   Input,
-  message,
   Modal,
-  notification,
   Radio,
   Select,
   Tabs,
@@ -185,49 +183,21 @@ const Test = () => {
   }, [certaintyFactors]);
 
   const handleSubmit = async (e) => {
-    // console.log(formData);
+    console.log(formData);
     // e.preventDefault();
-    console.log(certaintyFactors.sort((a, b) => b.cf - a.cf)[0]);
-    axios({
-      method: "post",
-      url: `${Url}/activity`,
-      data: formData,
-    })
-      .then((res) => {
-        console.log(res);
-        message.loading("Riwayat sedang direkam...", 2.5).then(() => {
-          message.success("Riwayat berhasil direkam!", 2.5);
-          navigate("/");
-        });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
-  const notificationTitle = () => {
-    if (
-      !formData.fullname ||
-      !formData.address ||
-      !formData.age ||
-      !formData.birth_date ||
-      !formData.gender ||
-      !formData.postnatal ||
-      !formData.phone ||
-      !formData.email
-    ) {
-      message.error("Mohon isi lengkap profil anda", 1.5);
-    } else {
-      console.log(formData);
-      message.success("Profil ditambahkan!", 1.5);
-      setModal3Visible(false);
-      notification.open({
-        message: "Notifikasi Pengisian Tes",
-        description:
-          "Pilih gejala sesuai dengan kondisi anda. Minimal 6 gejala yang dipilih.",
-        duration: 3,
-      });
-    }
+    // console.log(certaintyFactors.sort((a, b) => b.cf - a.cf)[0]);
+    // axios({
+    //   method: "post",
+    //   url: `${Url}/activity`,
+    //   data: formData,
+    // })
+    //   .then((res) => {
+    //     console.log(res);
+    //     navigate("/")
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
   };
 
   return (
@@ -345,159 +315,160 @@ const Test = () => {
         </div>
       </div>
 
-      <Modal
-        title="Profile"
-        centered
-        visible={modal3Visible}
-        // onCancel={() => setModal2Visible(false)}
-        closable={false}
-        width={800}
-        footer={[
-          <Button
-            key="submit"
-            type="primary"
-            onClick={() => notificationTitle()}
-          >
-            Submit
-          </Button>,
-        ]}
-      >
-        <div className="text-title text-start">
-          <div className="row">
-            <label htmlFor="inputNama3" className="col-sm-3 col-form-label">
-              Nama Lengkap
-            </label>
-            <div className="col-sm-9">
-              <Input
-                placeholder="Type your name"
-                defaultValue={fullname}
-                // value={fullname}
-                onChange={(event) =>
-                  setFormData({ ...formData, fullname: event.target.value })
-                }
-              />
+      {fullname === null ? (
+        <Modal
+          title="Profile"
+          centered
+          visible={modal3Visible}
+          // onCancel={() => setModal2Visible(false)}
+          closable={false}
+          width={800}
+          footer={[
+            <Button
+              key="submit"
+              type="primary"
+              onClick={() => {
+                console.log(formData);
+                setModal3Visible(false);
+              }}
+            >
+              Submit
+            </Button>,
+          ]}
+        >
+          <div className="text-title text-start">
+            <div className="row">
+              <label htmlFor="inputNama3" className="col-sm-3 col-form-label">
+                Nama Lengkap
+              </label>
+              <div className="col-sm-9">
+                <Input
+                  placeholder="Type your name"
+                  onChange={(event) =>
+                    setFormData({ ...formData, fullname: event.target.value })
+                  }
+                />
+              </div>
             </div>
-          </div>
-          <div className="row">
-            <label htmlFor="inputNama3" className="col-sm-3 col-form-label">
-              Tangal Lahir
-            </label>
-            <div className="col-sm-9">
-              <DatePicker
-                style={{
-                  width: "100%",
-                }}
-                onChange={onChange}
-              />
-              {/* <Input
+            <div className="row">
+              <label htmlFor="inputNama3" className="col-sm-3 col-form-label">
+                Tangal Lahir
+              </label>
+              <div className="col-sm-9">
+                <DatePicker
+                  style={{
+                    width: "100%",
+                  }}
+                  onChange={onChange}
+                />
+                {/* <Input
                 placeholder="Type your name"
                 // onChange={(e) => setName(e.target.value)}
               /> */}
+              </div>
+            </div>
+            <div className="row">
+              <label htmlFor="inputNama3" className="col-sm-3 col-form-label">
+                Alamat
+              </label>
+              <div className="col-sm-9">
+                <TextArea
+                  rows={4}
+                  style={{
+                    marginBottom: 4,
+                  }}
+                  onChange={(event) =>
+                    setFormData({ ...formData, address: event.target.value })
+                  }
+                />
+              </div>
+            </div>
+            <div className="row">
+              <label htmlFor="inputNama3" className="col-sm-3 col-form-label">
+                Umur
+              </label>
+              <div className="col-sm-9">
+                <Input
+                  placeholder="Type your age"
+                  onChange={(event) =>
+                    setFormData({ ...formData, age: event.target.value })
+                  }
+                />
+              </div>
+            </div>
+            <div className="row">
+              <label htmlFor="inputNama3" className="col-sm-3 col-form-label">
+                Alamat Email
+              </label>
+              <div className="col-sm-9">
+                <Input
+                  placeholder="Type your email"
+                  onChange={(event) =>
+                    setFormData({ ...formData, email: event.target.value })
+                  }
+                />
+              </div>
+            </div>
+            <div className="row">
+              <label htmlFor="inputNama3" className="col-sm-3 col-form-label">
+                No. Telpon
+              </label>
+              <div className="col-sm-9">
+                <Input
+                  placeholder="Type your phone number"
+                  onChange={(event) =>
+                    setFormData({ ...formData, phone: event.target.value })
+                  }
+                />
+              </div>
+            </div>
+            <div className="row">
+              <label htmlFor="inputNama3" className="col-sm-3 col-form-label">
+                Kelamin
+              </label>
+              <div className="col-sm-9">
+                <Radio.Group
+                  // value={value}
+                  onChange={(event) =>
+                    setFormData({ ...formData, gender: event.target.value })
+                  }
+                >
+                  <Radio value="L">L</Radio>
+                  <Radio value="P">P</Radio>
+                </Radio.Group>
+              </div>
+            </div>
+            <div className="row">
+              <label htmlFor="inputNama3" className="col-sm-3 col-form-label">
+                Melahirkan Pekan Ke -
+              </label>
+              <div className="col-sm-9">
+                <Select
+                  defaultValue="Pilih pilihan"
+                  style={{
+                    width: "100%",
+                  }}
+                  onChange={handleChange}
+                  options={[
+                    {
+                      value: "Tidak Melahirkan",
+                      label: "Tidak Melahirkan",
+                    },
+                    {
+                      value: "1 - 2 Pekan",
+                      label: "1 - 2 Pekan",
+                    },
+                    {
+                      value: "< 2 Pekan",
+                      label: "< 2 Pekan",
+                    },
+                  ]}
+                />
+              </div>
             </div>
           </div>
-          <div className="row">
-            <label htmlFor="inputNama3" className="col-sm-3 col-form-label">
-              Alamat
-            </label>
-            <div className="col-sm-9">
-              <TextArea
-                rows={4}
-                style={{
-                  marginBottom: 4,
-                }}
-                onChange={(event) =>
-                  setFormData({ ...formData, address: event.target.value })
-                }
-              />
-            </div>
-          </div>
-          <div className="row">
-            <label htmlFor="inputNama3" className="col-sm-3 col-form-label">
-              Umur
-            </label>
-            <div className="col-sm-9">
-              <Input
-                placeholder="Type your age"
-                onChange={(event) =>
-                  setFormData({ ...formData, age: event.target.value })
-                }
-              />
-            </div>
-          </div>
-          <div className="row">
-            <label htmlFor="inputNama3" className="col-sm-3 col-form-label">
-              Alamat Email
-            </label>
-            <div className="col-sm-9">
-              <Input
-                placeholder="Type your email"
-                onChange={(event) =>
-                  setFormData({ ...formData, email: event.target.value })
-                }
-              />
-            </div>
-          </div>
-          <div className="row">
-            <label htmlFor="inputNama3" className="col-sm-3 col-form-label">
-              No. Telpon
-            </label>
-            <div className="col-sm-9">
-              <Input
-                addonBefore="+62"
-                placeholder="8xxxxxxxxx"
-                onChange={(event) =>
-                  setFormData({ ...formData, phone: event.target.value })
-                }
-              />
-            </div>
-          </div>
-          <div className="row">
-            <label htmlFor="inputNama3" className="col-sm-3 col-form-label">
-              Kelamin
-            </label>
-            <div className="col-sm-9">
-              <Radio.Group
-                // value={value}
-                onChange={(event) =>
-                  setFormData({ ...formData, gender: event.target.value })
-                }
-              >
-                <Radio value="L">L</Radio>
-                <Radio value="P">P</Radio>
-              </Radio.Group>
-            </div>
-          </div>
-          <div className="row">
-            <label htmlFor="inputNama3" className="col-sm-3 col-form-label">
-              Melahirkan Pekan Ke -
-            </label>
-            <div className="col-sm-9">
-              <Select
-                defaultValue="Pilih pilihan"
-                style={{
-                  width: "100%",
-                }}
-                onChange={handleChange}
-                options={[
-                  {
-                    value: "Tidak Melahirkan",
-                    label: "Tidak Melahirkan",
-                  },
-                  {
-                    value: "1 - 2 Pekan",
-                    label: "1 - 2 Pekan",
-                  },
-                  {
-                    value: "< 2 Pekan",
-                    label: "< 2 Pekan",
-                  },
-                ]}
-              />
-            </div>
-          </div>
-        </div>
-      </Modal>
-      {isLoggedIn === null ? (
+        </Modal>
+      ) : isLoggedIn === null ? (
         <Modal
           title="Profile"
           centered
