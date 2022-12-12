@@ -9,8 +9,8 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import Url from "../../../Config";
 
-const QuestionTable = ({ data, deleteSymptoms, loading }) => {
-  //   const [symptoms, setSymptoms] = useState([]);
+const RuleTable = ({ data, deleteAnswers }) => {
+  //   const [Answers, setSymptoms] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [number, setNumber] = useState(false);
 
@@ -20,13 +20,17 @@ const QuestionTable = ({ data, deleteSymptoms, loading }) => {
       dataIndex: "id",
       key: "id",
       width: "8%",
-      render: (text) => <a>G - {text}</a>,
+      render: (text) => <a>{text}</a>,
     },
     {
-      title: "Gejala",
-      dataIndex: "name",
-      key: "name",
-      width: "35%",
+      title: "Jawaban",
+      dataIndex: "answer",
+      key: "answer",
+    },
+    {
+      title: "MD User",
+      dataIndex: "md_user",
+      key: "md_user",
     },
     {
       title: "Action",
@@ -40,7 +44,7 @@ const QuestionTable = ({ data, deleteSymptoms, loading }) => {
               size="small"
               type="danger"
               icon={<DeleteOutlined />}
-              onClick={() => deleteSymptoms(record.id)}
+              onClick={() => deleteAnswers(record.id)}
             />
           </Space>
         </>
@@ -54,7 +58,7 @@ const QuestionTable = ({ data, deleteSymptoms, loading }) => {
         size="small"
         columns={columns}
         dataSource={data}
-        loading={loading}
+        loading={isLoading}
         pagination={{ pageSize: 5 }}
         style={{
           minHeight: 330,
@@ -64,4 +68,4 @@ const QuestionTable = ({ data, deleteSymptoms, loading }) => {
   );
 };
 
-export default QuestionTable;
+export default RuleTable;

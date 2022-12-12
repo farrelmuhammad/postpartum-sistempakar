@@ -29,6 +29,24 @@ const QuestionTable = ({ data, deleteSymptoms, loading }) => {
       width: "35%",
     },
     {
+      title: "MB Baby Blues",
+      dataIndex: "mb_baby",
+      key: "mb_baby",
+      width: "10%",
+    },
+    // {
+    //   title: "MB Major",
+    //   dataIndex: "mb_major",
+    //   key: "mb_major",
+    //   width: "10%",
+    // },
+    // {
+    //   title: "MB Psychosis",
+    //   dataIndex: "mb_psychosis",
+    //   key: "mb_psychosis",
+    //   width: "10%",
+    // },
+    {
       title: "Action",
       key: "action",
       width: "5%",

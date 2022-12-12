@@ -176,8 +176,8 @@ const Answer = () => {
               Category
             </Menu.Item>
             <Menu.Item key="5" icon={<SnippetsOutlined />}>
-              <Link to="/admin/answer" />
-              Answer
+              <Link to="/admin/rule" />
+              Rule
             </Menu.Item>
             <Menu.SubMenu key="SubMenu" title="User" icon={<UserOutlined />}>
               <Menu.Item key="two" icon={<SettingOutlined />}>

@@ -33,12 +33,11 @@ import {
 } from "antd";
 import Search from "antd/lib/transfer/search";
 import { Link, useNavigate } from "react-router-dom";
-import QuestionTable from "../../components/admin/QuestionTable";
 import Url from "../../Config";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
-import AnswerTable from "../../components/admin/AnswerTable";
+import RuleTable from "../../components/admin/RuleTable";
 
 const { Header, Content, Sider } = Layout;
 const items = [
@@ -56,8 +55,8 @@ const items = [
   label: `nav ${index + 1}`,
 }));
 
-const Answer = () => {
-  const [collapsed, setCollapsed] = useState(false);
+const Rule = () => {
+  const [loading, setLoading] = useState(true);
   const [answers, setAnswers] = useState([]);
   const [answer_name, setAnswer_name] = useState([]);
   const [mdUser, setMDUser] = useState([]);
@@ -92,17 +91,10 @@ const Answer = () => {
   }, []);
 
   const getAnswer = async () => {
-    await axios
-      .get(`${Url}/answers`, {
-        headers: {
-          Accept: "application/json",
-          Authorization: `Bearer ${auth.accessToken}`,
-        },
-      })
-      .then((res) => {
-        setAnswers(res.data);
-        console.log(res.data);
-      });
+    let { data, error } = await supabase.from("rule").select("*");
+
+    setLoading(false);
+    setAnswers(data);
   };
 
   const handleSubmit = async (e) => {
@@ -113,13 +105,16 @@ const Answer = () => {
       setConfirmLoading(false);
       // message.success('This is a success message');
     }, 2000);
-    message.loading("Added question in progress..", 2.5);
+    message.loading("Added question in progress..", 2.5).then(() => {
+      message.success("Successfully Added", 2.5);
+      getAnswer();
+    });
     const userData = new URLSearchParams();
-    userData.append("answer_name", answer_name);
+    userData.append("answer", answer_name);
     userData.append("md_user", mdUser);
     axios({
       method: "post",
-      url: `${Url}/answers`,
+      url: `${Url}/answer`,
       data: userData,
       headers: {
         Accept: "application/json",
@@ -127,8 +122,7 @@ const Answer = () => {
       },
     })
       .then(() => {
-        message.success("Successfully Added", 2.5);
-        getAnswer();
+        navigate("/admin/answer");
       })
       .catch((err) => {
         message.error("Failed Added", 2);
@@ -241,7 +235,7 @@ const Answer = () => {
               <div className="container p-3 mb-1 bg-body rounded d-flex flex-column">
                 <div className="row">
                   <div className="col text-title text-start">
-                    <h4 className="title fw-bold">Jawaban</h4>
+                    <h4 className="title fw-bold">Rule</h4>
                   </div>
                   <div className="col button-add text-end me-3">
                     <Button
@@ -250,7 +244,7 @@ const Answer = () => {
                       onClick={showModal}
                     />
                   </div>
-                  <AnswerTable data={answers} deleteAnswers={deleteAnswers} />
+                  <RuleTable data={answers} deleteAnswers={deleteAnswers} />
                 </div>
                 <Modal
                   title="Tambah Jawaban"
@@ -280,7 +274,7 @@ const Answer = () => {
                         htmlFor="inputNama3"
                         className="col-sm-3 col-form-label"
                       >
-                        Value
+                        MD User
                       </label>
                       <div className="col-sm-9">
                         <Input
@@ -305,4 +299,4 @@ const Answer = () => {
   );
 };
 
-export default Answer;
+export default Rule;

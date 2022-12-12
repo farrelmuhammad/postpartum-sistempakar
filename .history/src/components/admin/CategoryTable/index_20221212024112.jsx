@@ -1,11 +1,8 @@
-import { Table, Typography } from "antd";
+import { Table } from "antd";
 import React, { useState } from "react";
-const { Text } = Typography;
-
 
 const CategoryTable = ({data, loading}) => {
   const [isLoading, setIsLoading] = useState(false);
-  const [ellipsis, setEllipsis] = useState(true);
 
   const columns = [
     {
@@ -24,26 +21,6 @@ const CategoryTable = ({data, loading}) => {
       title: "Deskripsi",
       dataIndex: "description",
       key: "description",
-      render: (text) => (
-        <Text
-          style={
-            ellipsis
-              ? {
-                width: 500,
-              }
-              : undefined
-          }
-          ellipsis={
-            ellipsis
-              ? {
-                tooltip: text,
-              }
-              : false
-          }
-        >
-          {text}
-        </Text>
-      )
     },
     {
       title: "Solusi",

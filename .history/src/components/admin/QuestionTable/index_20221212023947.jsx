@@ -29,6 +29,18 @@ const QuestionTable = ({ data, deleteSymptoms, loading }) => {
       width: "35%",
     },
     {
+      title: "Deskripsi",
+      dataIndex: "description",
+      key: "description",
+      width: "35%",
+    },
+    {
+      title: "Solusi",
+      dataIndex: "solution",
+      key: "solution",
+      width: "35%",
+    },
+    {
       title: "Action",
       key: "action",
       width: "5%",
