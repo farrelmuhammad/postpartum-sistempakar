@@ -161,6 +161,7 @@ const Answer = () => {
             // selectedKeys={[location.pathname]}
           >
             <Menu.Item key="1" icon={<PieChartOutlined />}>
+              <Link to="/admin" />
               Dashboard
             </Menu.Item>
             <Menu.Item key="2" icon={<UsergroupAddOutlined />}>
