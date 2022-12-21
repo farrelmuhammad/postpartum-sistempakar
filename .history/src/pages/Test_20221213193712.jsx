@@ -26,7 +26,7 @@ import TestCard from "../components/Test";
 import Url from "../Config";
 import supabase from "../utils/supabase/client";
 import "./test.css";
-const { Title, Text, Link } = Typography;
+const { Title, Text } = Typography;
 const { TextArea } = Input;
 
 const Test = () => {
@@ -334,6 +334,12 @@ const Test = () => {
           >
             {certaintyFactors.sort((a, b) => b.cf - a.cf).length > 0 && (
               <div>
+                {certaintyFactors.map((cf) => (
+                  <div key={cf.categoryId}>
+                    <span>penyakit {cf.name} : </span>
+                    <span>{cf.cf}</span>
+                  </div>
+                ))}
                 <div key={certaintyFactors[0].categoryId}>
                   <Title level={2}>{certaintyFactors[0].name}</Title>
                   {/* <span>{certaintyFactors[0].name}</span> */}
@@ -344,9 +350,6 @@ const Test = () => {
                   </Tabs.TabPane>
                   <Tabs.TabPane tab="Solusi" key="item-2">
                     {certaintyFactors[0].solution}
-                    <Link href="https://www.notion.so/2707a1dc95b4463592dd48ff97b00b40?v=5282f81c54954b34af66df52c8479ada" target="_blank">
-                      Notion Task Management
-                    </Link>
                   </Tabs.TabPane>
                 </Tabs>
                 <Tag
@@ -676,8 +679,8 @@ const Test = () => {
                       label: "1 - 2 Pekan",
                     },
                     {
-                      value: "> 2 Pekan",
-                      label: "> 2 Pekan",
+                      value: "< 2 Pekan",
+                      label: "< 2 Pekan",
                     },
                   ]}
                 />

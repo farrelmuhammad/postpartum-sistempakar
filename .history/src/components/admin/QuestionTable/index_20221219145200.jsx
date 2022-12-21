@@ -38,7 +38,7 @@ const QuestionTable = ({ data, deleteSymptoms, loading }) => {
           <Space size="middle">
             <Button
               size="small"
-              // type="danger"
+              type="danger"
               icon={<EditOutlined />}
               // onClick={() => deleteSymptoms(record.id)}
             />

@@ -344,8 +344,8 @@ const Test = () => {
                   </Tabs.TabPane>
                   <Tabs.TabPane tab="Solusi" key="item-2">
                     {certaintyFactors[0].solution}
-                    <Link href="https://www.notion.so/2707a1dc95b4463592dd48ff97b00b40?v=5282f81c54954b34af66df52c8479ada" target="_blank">
-                      Notion Task Management
+                    <Link href="https://ant.design" target="_blank">
+                      Ant Design (Link)
                     </Link>
                   </Tabs.TabPane>
                 </Tabs>
@@ -676,8 +676,8 @@ const Test = () => {
                       label: "1 - 2 Pekan",
                     },
                     {
-                      value: "> 2 Pekan",
-                      label: "> 2 Pekan",
+                      value: "< 2 Pekan",
+                      label: "< 2 Pekan",
                     },
                   ]}
                 />

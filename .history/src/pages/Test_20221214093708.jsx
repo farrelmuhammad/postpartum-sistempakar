@@ -676,8 +676,8 @@ const Test = () => {
                       label: "1 - 2 Pekan",
                     },
                     {
-                      value: "> 2 Pekan",
-                      label: "> 2 Pekan",
+                      value: "< 2 Pekan",
+                      label: "< 2 Pekan",
                     },
                   ]}
                 />
