@@ -15,7 +15,6 @@ import Dashboard from "./pages/admin/Dashboard";
 import Question from "./pages/admin/Question";
 import Category from "./pages/admin/Category";
 import Rule from "./pages/admin/Rule";
-import Testimonials from "./pages/Testimonials";
 
 function App() {
   // const isLoggedIn = !!useSelector(state => state.auth.token);
@@ -40,7 +39,6 @@ function App() {
         <Route path="/admin/question" exact element={<Question />} />
         <Route path="/admin/category" exact element={<Category />} />
         <Route path="/admin/rule" exact element={<Rule />} />
-        <Route path="/testimonials" exact element={<Testimonials />} />
         {/* <Route path="*" exact element={<NotFound />} /> */}
       </Routes>
     </>

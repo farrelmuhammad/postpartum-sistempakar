@@ -182,13 +182,11 @@ const Navbar = () => {
                 </a>
               </li>
             </Link>
-            <Link to="/testimonials" className="text-decoration-none">
-              <li className="nav-item">
-                <a className="nav-link" >
-                  Testimonials
-                </a>
-              </li>
-            </Link>
+            <li className="nav-item">
+              <a className="nav-link" >
+                Testimonials
+              </a>
+            </li>
           </ul>
           {/* {isLoggedIn ? (
             <div className="gap-3">

@@ -122,25 +122,17 @@ const Navbar = () => {
                 <ul className="navbar-nav responsive me-auto mt-2 mt-lg-0">
                   <Link to="/" className="text-decoration-none">
                     <li className="nav-item active">
-                      <a className="nav-link" >
-                        Home
-                      </a>
+                      Home
                     </li>
                   </Link>
                   <Link to="/about" className="text-decoration-none">
                     <li className="nav-item">
-                      <a className="nav-link" >
-                        About Us
-                      </a>
+                      About Us
                     </li>
                   </Link>
-                  <Link to="/testimonials" className="text-decoration-none">
-                    <li className="nav-item">
-                      <a className="nav-link" >
-                        Testimonials
-                      </a>
-                    </li>
-                  </Link>
+                  <li className="nav-item">
+                    Testimonials
+                  </li>
                 </ul>
               </div>
               {/* {isLoggedIn ? (
@@ -170,25 +162,23 @@ const Navbar = () => {
           <ul className="navbar-nav me-auto mt-2 mt-lg-0">
             <Link to="/" className="text-decoration-none">
               <li className="nav-item active">
-                <a className="nav-link" >
+                <a className="nav-link" href="#">
                   Home
                 </a>
               </li>
             </Link>
             <Link to="/about" className="text-decoration-none">
               <li className="nav-item">
-                <a className="nav-link" >
+                <a className="nav-link" href="#">
                   About Us
                 </a>
               </li>
             </Link>
-            <Link to="/testimonials" className="text-decoration-none">
-              <li className="nav-item">
-                <a className="nav-link" >
-                  Testimonials
-                </a>
-              </li>
-            </Link>
+            <li className="nav-item">
+              <a className="nav-link" href="#">
+                Testimonials
+              </a>
+            </li>
           </ul>
           {/* {isLoggedIn ? (
             <div className="gap-3">

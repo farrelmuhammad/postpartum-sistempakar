@@ -43,10 +43,10 @@ const Navbar = () => {
 
   const getProfileById = async () => {
     await axios.get(`${Url}/user/profile`)
-      .then((res) => {
-        console.log(res.data.data);
-      })
-
+    .then((res) => {
+      console.log(res.data.data);
+    })
+    
   }
 
   const handleSubmit = async (e) => {
@@ -82,9 +82,9 @@ const Navbar = () => {
   return (
     <>
       <nav className="navbar navbar-expand-lg navbar-light">
-        <Link to="/" className="text-decoration-none">
+        <a href="#">
           <img src={Logo} alt="" />
-        </Link>
+        </a>
         <button
           className="navbar-toggler border-0"
           type="button"
@@ -107,7 +107,7 @@ const Navbar = () => {
               <div className="modal-header border-0">
                 <a className="modal-title" id="targetModalLabel">
                   <img
-                    src={Logo}
+                    src="http://api.elements.buildwithangga.com/storage/files/2/assets/Header/Header2/Header-2-2.png"
                     alt=""
                   />
                 </a>
@@ -122,25 +122,28 @@ const Navbar = () => {
                 <ul className="navbar-nav responsive me-auto mt-2 mt-lg-0">
                   <Link to="/" className="text-decoration-none">
                     <li className="nav-item active">
-                      <a className="nav-link" >
+                      <a className="nav-link" href="#">
                         Home
                       </a>
                     </li>
                   </Link>
                   <Link to="/about" className="text-decoration-none">
                     <li className="nav-item">
-                      <a className="nav-link" >
+                      <a className="nav-link" href="#">
                         About Us
                       </a>
                     </li>
                   </Link>
-                  <Link to="/testimonials" className="text-decoration-none">
-                    <li className="nav-item">
-                      <a className="nav-link" >
-                        Testimonials
-                      </a>
-                    </li>
-                  </Link>
+                  <li className="nav-item">
+                    <a className="nav-link" href="#">
+                      About Us
+                    </a>
+                  </li>
+                  <li className="nav-item">
+                    <a className="nav-link" href="#">
+                      Contact
+                    </a>
+                  </li>
                 </ul>
               </div>
               {/* {isLoggedIn ? (
@@ -170,27 +173,25 @@ const Navbar = () => {
           <ul className="navbar-nav me-auto mt-2 mt-lg-0">
             <Link to="/" className="text-decoration-none">
               <li className="nav-item active">
-                <a className="nav-link" >
+                <a className="nav-link" href="#">
                   Home
                 </a>
               </li>
             </Link>
             <Link to="/about" className="text-decoration-none">
               <li className="nav-item">
-                <a className="nav-link" >
+                <a className="nav-link" href="#">
                   About Us
                 </a>
               </li>
             </Link>
-            <Link to="/testimonials" className="text-decoration-none">
-              <li className="nav-item">
-                <a className="nav-link" >
-                  Testimonials
-                </a>
-              </li>
-            </Link>
+            <li className="nav-item">
+              <a className="nav-link" href="#">
+                Contact
+              </a>
+            </li>
           </ul>
-          {/* {isLoggedIn ? (
+          {isLoggedIn ? (
             <div className="gap-3">
               <Dropdown
                 overlay={
@@ -236,7 +237,7 @@ const Navbar = () => {
                 </button>
               </Link>
             </div>
-          )} */}
+          )}
         </div>
       </nav>
 
