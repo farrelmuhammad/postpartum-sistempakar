@@ -166,7 +166,7 @@ const Test = () => {
 
   useEffect(() => {
     // ketika symptom sudah didapat dari DB, set nilai default untuk answers menjadi false
-    const defaultAnswers = symptoms.map(() => false);
+    const defaultAnswers = symptoms?.map(() => false);
     setAnswers(defaultAnswers);
   }, [symptoms]);
 
@@ -288,7 +288,7 @@ const Test = () => {
               }}
               loading={loading}
             >
-              {symptoms.map((s, idx) => {
+              {symptoms?.map((s, idx) => {
                 return (
                   <div className="m-3" key={idx}>
                     <Checkbox onChange={(e) => clickHandler(s.id, e, idx)}>

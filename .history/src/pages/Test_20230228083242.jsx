@@ -7,8 +7,11 @@ import {
   Divider,
   Form,
   Input,
+  message,
   Modal,
+  notification,
   Radio,
+  Select,
   Tabs,
   Tag,
   Typography,
@@ -23,7 +26,7 @@ import TestCard from "../components/Test";
 import Url from "../Config";
 import supabase from "../utils/supabase/client";
 import "./test.css";
-const { Title, Text } = Typography;
+const { Title, Text, Link } = Typography;
 const { TextArea } = Input;
 
 const Test = () => {
@@ -39,7 +42,20 @@ const Test = () => {
     postnatal: "",
     category: "",
   });
-  const [value2, setValue2] = useState([]);
+
+  const {
+    fullname,
+    email,
+    phone,
+    address,
+    birth_date,
+    gender,
+    age,
+    postnatal,
+    category,
+  } = formData;
+
+  const [result, setResult] = useState("");
   const auth = useSelector((state) => state.auth);
   const [loading, setLoading] = useState(true);
   const [modal2Visible, setModal2Visible] = useState(false);
@@ -53,12 +69,13 @@ const Test = () => {
   const [answers, setAnswers] = useState([]);
   const [certaintyFactors, setCertaintyFactors] = useState([]);
 
-  const fullname = useSelector((state) => state.auth.fullname);
+  // const fullname = useSelector((state) => state.auth.fullname);
   const isLoggedIn = useSelector((state) => state.auth.accessToken);
 
   // console.log(isLoggedIn);
 
   const onChange = (date, dateString) => {
+    setFormData({ ...formData, birth_date: dateString });
     console.log(date, dateString);
   };
 
@@ -66,6 +83,11 @@ const Test = () => {
   const onChangeRadio = (e) => {
     console.log("radio checked", e.target.value);
     setValue(e.target.value);
+  };
+
+  const handleChange = (value) => {
+    setFormData({ ...formData, postnatal: value });
+    console.log(`selected ${value}`);
   };
 
   async function getSymptoms() {
@@ -171,6 +193,83 @@ const Test = () => {
     // .then(() => )
   };
 
+  useEffect(() => {
+    setFormData({ ...formData, category: certaintyFactors[0]?.name });
+  }, [certaintyFactors]);
+
+  const handleSubmit = async (e) => {
+    // console.log(formData);
+    // e.preventDefault();
+    // console.log(certaintyFactors.sort((a, b) => b.cf - a.cf)[0]);
+    const { data, error } = await supabase
+      .from("history")
+      .insert([
+        {
+          fullname,
+          email,
+          phone,
+          address,
+          birth_date,
+          gender,
+          age,
+          postnatal,
+          category,
+        },
+      ])
+
+      // setFormData({
+      //   fullname: "",
+      //   email: "",
+      //   phone: "",
+      //   address: "",
+      //   birth_date: "",
+      //   gender: "",
+      //   age: "",
+      //   postnatal: "",
+      //   category: "",
+      // })
+      // axios({
+      //   method: "post",
+      //   url: `${Url}/activity`,
+      //   data: formData,
+      // })
+      .then((res) => {
+        console.log(res);
+        message.loading("Riwayat sedang direkam...", 2.5).then(() => {
+          message.success("Riwayat berhasil direkam!", 2.5);
+          navigate("/");
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const notificationTitle = () => {
+    if (
+      !formData.fullname ||
+      !formData.address ||
+      !formData.age ||
+      !formData.birth_date ||
+      !formData.gender ||
+      !formData.postnatal ||
+      !formData.phone ||
+      !formData.email
+    ) {
+      message.error("Mohon isi lengkap profil anda", 1.5);
+    } else {
+      console.log(formData);
+      message.success("Profil ditambahkan!", 1.5);
+      setModal3Visible(false);
+      notification.open({
+        message: "Notifikasi Pengisian Tes",
+        description:
+          "Pilih gejala sesuai dengan kondisi anda. Minimal 6 gejala yang dipilih.",
+        duration: 3,
+      });
+    }
+  };
+
   return (
     <>
       <div className="container-xxl mx-auto p-0  position-relative header-2-1">
@@ -189,7 +288,7 @@ const Test = () => {
               }}
               loading={loading}
             >
-              {symptoms.map((s, idx) => {
+              {symptoms?.map((s, idx) => {
                 return (
                   <div className="m-3" key={idx}>
                     <Checkbox onChange={(e) => clickHandler(s.id, e, idx)}>
@@ -226,7 +325,8 @@ const Test = () => {
                 key="submit"
                 type="primary"
                 loading={loading}
-                onClick={() => navigate("/")}
+                // onClick={() => navigate("/")}
+                onClick={handleSubmit}
               >
                 Kembali ke Beranda
               </Button>,
@@ -244,6 +344,12 @@ const Test = () => {
                   </Tabs.TabPane>
                   <Tabs.TabPane tab="Solusi" key="item-2">
                     {certaintyFactors[0].solution}
+                    <Link
+                      href="https://www.notion.so/2707a1dc95b4463592dd48ff97b00b40?v=5282f81c54954b34af66df52c8479ada"
+                      target="_blank"
+                    >
+                      Notion Task Management
+                    </Link>
                   </Tabs.TabPane>
                 </Tabs>
                 <Tag
@@ -260,12 +366,24 @@ const Test = () => {
                   >
                     DISCLAIMER
                   </Title>
-                  {/* <Text>Ant Design (default)</Text> */}
-                  <p>
+                  <Text
+                    style={{
+                      color: "white",
+                      textAlign: "center",
+                    }}
+                  >
                     Jika Anda sedang mengalami krisis psikologis yang mengancam
-                    hidup Anda, layanan ini tidak direkomendasikan. Silakan
-                    menghubungi 119.
-                  </p>
+                    hidup Anda, layanan ini tidak direkomendasikan.
+                  </Text>
+                  <Text
+                    style={{
+                      color: "white",
+                      textAlign: "center",
+                    }}
+                    strong
+                  >
+                    Silakan menghubungi 119.
+                  </Text>
                 </Tag>
               </div>
             )}
@@ -273,28 +391,164 @@ const Test = () => {
         </div>
       </div>
 
-      {fullname === null ? (
+      <Modal
+        title="Profile"
+        centered
+        visible={modal3Visible}
+        // onCancel={() => setModal2Visible(false)}
+        closable={false}
+        width={800}
+        footer={[
+          <Button key="submit" type="primary" onClick={notificationTitle}>
+            Submit
+          </Button>,
+        ]}
+      >
+        <div className="text-title text-start">
+          <div className="row">
+            <label htmlFor="inputNama3" className="col-sm-3 col-form-label">
+              Nama Lengkap
+            </label>
+            <div className="col-sm-9">
+              <Input
+                placeholder="Type your name"
+                defaultValue={fullname}
+                // value={fullname}
+                onChange={(event) =>
+                  setFormData({ ...formData, fullname: event.target.value })
+                }
+              />
+            </div>
+          </div>
+          <div className="row">
+            <label htmlFor="inputNama3" className="col-sm-3 col-form-label">
+              Tangal Lahir
+            </label>
+            <div className="col-sm-9">
+              <DatePicker
+                style={{
+                  width: "100%",
+                }}
+                onChange={onChange}
+              />
+              {/* <Input
+                placeholder="Type your name"
+                // onChange={(e) => setName(e.target.value)}
+              /> */}
+            </div>
+          </div>
+          <div className="row">
+            <label htmlFor="inputNama3" className="col-sm-3 col-form-label">
+              Alamat
+            </label>
+            <div className="col-sm-9">
+              <TextArea
+                rows={4}
+                style={{
+                  marginBottom: 4,
+                }}
+                onChange={(event) =>
+                  setFormData({ ...formData, address: event.target.value })
+                }
+              />
+            </div>
+          </div>
+          <div className="row">
+            <label htmlFor="inputNama3" className="col-sm-3 col-form-label">
+              Umur
+            </label>
+            <div className="col-sm-9">
+              <Input
+                placeholder="Type your age"
+                onChange={(event) =>
+                  setFormData({ ...formData, age: event.target.value })
+                }
+              />
+            </div>
+          </div>
+          <div className="row">
+            <label htmlFor="inputNama3" className="col-sm-3 col-form-label">
+              Alamat Email
+            </label>
+            <div className="col-sm-9">
+              <Input
+                placeholder="Type your email"
+                onChange={(event) =>
+                  setFormData({ ...formData, email: event.target.value })
+                }
+              />
+            </div>
+          </div>
+          <div className="row">
+            <label htmlFor="inputNama3" className="col-sm-3 col-form-label">
+              No. Telpon
+            </label>
+            <div className="col-sm-9">
+              <Input
+                addonBefore="+62"
+                placeholder="8xxxxxxxxx"
+                onChange={(event) =>
+                  setFormData({ ...formData, phone: event.target.value })
+                }
+              />
+            </div>
+          </div>
+          <div className="row">
+            <label htmlFor="inputNama3" className="col-sm-3 col-form-label">
+              Kelamin
+            </label>
+            <div className="col-sm-9">
+              <Radio.Group
+                // value={value}
+                onChange={(event) =>
+                  setFormData({ ...formData, gender: event.target.value })
+                }
+              >
+                <Radio value="L">L</Radio>
+                <Radio value="P">P</Radio>
+              </Radio.Group>
+            </div>
+          </div>
+          <div className="row">
+            <label htmlFor="inputNama3" className="col-sm-3 col-form-label">
+              Melahirkan Pekan Ke -
+            </label>
+            <div className="col-sm-9">
+              <Select
+                defaultValue="Pilih pilihan"
+                style={{
+                  width: "100%",
+                }}
+                onChange={handleChange}
+                options={[
+                  {
+                    value: "Tidak Melahirkan",
+                    label: "Tidak Melahirkan",
+                  },
+                  {
+                    value: "1 - 2 Pekan",
+                    label: "1 - 2 Pekan",
+                  },
+                  {
+                    value: "< 2 Pekan",
+                    label: "< 2 Pekan",
+                  },
+                ]}
+              />
+            </div>
+          </div>
+        </div>
+      </Modal>
+      {isLoggedIn === null ? (
         <Modal
           title="Profile"
           centered
           visible={modal3Visible}
           // onCancel={() => setModal2Visible(false)}
-          width={1000}
-          footer={[
-            <Button key="submit" type="primary" onClick={() => navigate("/")}>
-              Submit
-            </Button>,
-          ]}
-        ></Modal>
-      ) : isLoggedIn === null ? (
-        <Modal
-          title="Profile"
-          centered
-          visible={modal3Visible}
-          // onCancel={() => setModal2Visible(false)}
+          closable={false}
           width={800}
           footer={[
-            <Button key="submit" type="primary" onClick={() => navigate("/")}>
+            <Button key="submit" type="primary" onClick={notificationTitle}>
               Submit
             </Button>,
           ]}
@@ -307,7 +561,11 @@ const Test = () => {
               <div className="col-sm-9">
                 <Input
                   placeholder="Type your name"
-                  // onChange={(e) => setName(e.target.value)}
+                  // defaultValue={fullname}
+                  // value={fullname}
+                  onChange={(event) =>
+                    setFormData({ ...formData, fullname: event.target.value })
+                  }
                 />
               </div>
             </div>
@@ -318,14 +576,14 @@ const Test = () => {
               <div className="col-sm-9">
                 <DatePicker
                   style={{
-                    width: "40%",
+                    width: "100%",
                   }}
                   onChange={onChange}
                 />
                 {/* <Input
-                  placeholder="Type your name"
-                  // onChange={(e) => setName(e.target.value)}
-                /> */}
+                placeholder="Type your name"
+                // onChange={(e) => setName(e.target.value)}
+              /> */}
               </div>
             </div>
             <div className="row">
@@ -333,7 +591,15 @@ const Test = () => {
                 Alamat
               </label>
               <div className="col-sm-9">
-                <TextArea rows={4} />
+                <TextArea
+                  rows={4}
+                  style={{
+                    marginBottom: 4,
+                  }}
+                  onChange={(event) =>
+                    setFormData({ ...formData, address: event.target.value })
+                  }
+                />
               </div>
             </div>
             <div className="row">
@@ -342,8 +608,10 @@ const Test = () => {
               </label>
               <div className="col-sm-9">
                 <Input
-                  placeholder="Type your name"
-                  // onChange={(e) => setName(e.target.value)}
+                  placeholder="Type your age"
+                  onChange={(event) =>
+                    setFormData({ ...formData, age: event.target.value })
+                  }
                 />
               </div>
             </div>
@@ -353,8 +621,10 @@ const Test = () => {
               </label>
               <div className="col-sm-9">
                 <Input
-                  placeholder="Type your name"
-                  // onChange={(e) => setName(e.target.value)}
+                  placeholder="Type your email"
+                  onChange={(event) =>
+                    setFormData({ ...formData, email: event.target.value })
+                  }
                 />
               </div>
             </div>
@@ -364,8 +634,11 @@ const Test = () => {
               </label>
               <div className="col-sm-9">
                 <Input
-                  placeholder="Type your name"
-                  // onChange={(e) => setName(e.target.value)}
+                  addonBefore="+62"
+                  placeholder="8xxxxxxxxx"
+                  onChange={(event) =>
+                    setFormData({ ...formData, phone: event.target.value })
+                  }
                 />
               </div>
             </div>
@@ -374,7 +647,12 @@ const Test = () => {
                 Kelamin
               </label>
               <div className="col-sm-9">
-                <Radio.Group onChange={onChangeRadio} value={value}>
+                <Radio.Group
+                  // value={value}
+                  onChange={(event) =>
+                    setFormData({ ...formData, gender: event.target.value })
+                  }
+                >
                   <Radio value="L">L</Radio>
                   <Radio value="P">P</Radio>
                 </Radio.Group>
@@ -382,23 +660,29 @@ const Test = () => {
             </div>
             <div className="row">
               <label htmlFor="inputNama3" className="col-sm-3 col-form-label">
-                Umur
-              </label>
-              <div className="col-sm-9">
-                <Input
-                  placeholder="Type your name"
-                  // onChange={(e) => setName(e.target.value)}
-                />
-              </div>
-            </div>
-            <div className="row">
-              <label htmlFor="inputNama3" className="col-sm-3 col-form-label">
                 Melahirkan Pekan Ke -
               </label>
               <div className="col-sm-9">
-                <Input
-                  placeholder="Type your name"
-                  // onChange={(e) => setName(e.target.value)}
+                <Select
+                  defaultValue="Pilih pilihan"
+                  style={{
+                    width: "100%",
+                  }}
+                  onChange={handleChange}
+                  options={[
+                    {
+                      value: "Tidak Melahirkan",
+                      label: "Tidak Melahirkan",
+                    },
+                    {
+                      value: "1 - 2 Pekan",
+                      label: "1 - 2 Pekan",
+                    },
+                    {
+                      value: "> 2 Pekan",
+                      label: "> 2 Pekan",
+                    },
+                  ]}
                 />
               </div>
             </div>
